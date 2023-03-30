@@ -1,0 +1,9 @@
+.links {
+    color: red;
+    display: flex;
+    gap: 20px;
+    list-style-type: none;
+    margin: 0;
+    padding: 20px 0;
+    justify-content: center;
+}

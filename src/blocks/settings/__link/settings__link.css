@@ -1,0 +1,15 @@
+.settings__link {
+    border: none;
+    border-bottom: 1px solid #999999;
+    font-size: 13px;
+    line-height: 13px;
+    width: 510px;
+    height: 33px;
+    color: #3369F3;
+    display: flex;
+    align-items: center;
+}
+
+.settings__link:last-of-type {
+    border: none;
+}

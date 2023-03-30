@@ -1,0 +1,10 @@
+.chat__unread-messages {
+    background-color: #3369F3;
+    border-radius: 50%;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+}

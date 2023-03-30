@@ -1,0 +1,8 @@
+.link{
+    text-decoration: none;
+}
+
+.link_type_active{
+    color: darkslateblue;
+    text-decoration: underline;
+}

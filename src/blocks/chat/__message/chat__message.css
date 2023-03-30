@@ -1,0 +1,13 @@
+.chat__message {
+    display: grid;
+    grid-template-columns: 47px 1fr 23px;
+    padding: 12px 0;
+    border-top: 1px solid #EAEAEA;
+    border-bottom: 1px solid #EAEAEA;
+    gap: 10px;
+}
+
+.chat__message:hover {
+    background-color: #eee;
+    cursor: pointer;
+}
