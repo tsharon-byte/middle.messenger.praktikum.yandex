@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Задание включат верстку следующих страниц: 1. Авторизация 2. Регистрация 3. Страница со списком чатов 4. Страница профиля 5. Страница 404 6. Страница 5хх ошибок",
   "scripts": {
-    "start": "node src/server.js",
+    "start": "parcel build index.html && node src/server.js",
     "serve": "parcel index.html --open",
     "build": "parcel build index.html"
   },
