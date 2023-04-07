@@ -1,0 +1,8 @@
+.chat__navigation {
+    border-right: 1px solid #EAEAEA;;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-sizing: border-box;
+    padding: 0 10px;
+}

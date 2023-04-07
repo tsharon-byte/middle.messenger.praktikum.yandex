@@ -1,0 +1,6 @@
+.form__input-group {
+    box-sizing: border-box;
+    display: flex;
+    gap: 8px;
+    flex-direction: column;
+}

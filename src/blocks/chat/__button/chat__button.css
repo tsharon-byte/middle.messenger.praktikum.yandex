@@ -1,0 +1,7 @@
+.chat__button {
+    background: url(/src/images/arrow.svg);
+    width: 6px;
+    height: 10px;
+    border: none;
+    padding: 0;
+}

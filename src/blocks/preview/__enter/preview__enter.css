@@ -1,0 +1,6 @@
+.preview__enter {
+    background-image: url(/src/images/enter.svg);
+    background-size: cover;
+    width: 28px;
+    height: 28px;
+}

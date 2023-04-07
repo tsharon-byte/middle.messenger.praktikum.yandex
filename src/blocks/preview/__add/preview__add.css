@@ -1,0 +1,6 @@
+.preview__add {
+    background-image: url(/src/images/add.svg);
+    background-size: cover;
+    width: 28px;
+    height: 28px;
+}

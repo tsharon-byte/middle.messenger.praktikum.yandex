@@ -1,0 +1,10 @@
+.chat__profile {
+    min-height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    font-size: 12px;
+    line-height: 12px;
+    color: #999999;
+    width: 100%;
+}
