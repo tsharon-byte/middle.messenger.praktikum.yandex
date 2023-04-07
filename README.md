@@ -60,7 +60,7 @@
 ### Этап 2: Роутинг
 
 Делаю маршрутизацию с помощью Vanilla JavaScript
-(How to Create a SPA Router with JavaScript)[https://blog.bitsrc.io/creating-a-spa-router-using-vanilla-js-95caf348ee4]
+[How to Create a SPA Router with JavaScript](https://blog.bitsrc.io/creating-a-spa-router-using-vanilla-js-95caf348ee4)
 
 Экраны и пути:
 
@@ -74,4 +74,4 @@
 ### Этап 3: Верстка основных страниц
 
 ### Этап 4: Настраиваю Netlify
-(Ссылка на задеплоенное приложение)[https://sparkling-scone-234971.netlify.app]
+[Ссылка на задеплоенное приложение](https://sparkling-scone-234971.netlify.app)
