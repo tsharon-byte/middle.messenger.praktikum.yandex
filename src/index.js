@@ -35,7 +35,6 @@ const routers = [
 function renderAll(url) {
     const content = document.querySelector('.content');
     const component = routers.find(item => item.path === url);
-    console.log('component', component);
     let componentToRender;
     let props;
     if (undefined === component) {
@@ -55,7 +54,6 @@ function router(event) {
 }
 
 window.addEventListener('DOMContentLoaded', function () {
-    console.log('DOMContentLoaded');
     let path = location.pathname;
     renderAll(path);
 });
