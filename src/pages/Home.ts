@@ -1,12 +1,32 @@
-import Chats from '../components/Chats';
+import Chats from '../components/Chats/Chats';
 import {chats} from '../utils/mockData';
+import messages from '../utils/messages';
+import MessageList from '../components/MessageList/MessageList';
+import MessageForm from '../components/MessageForm/MessageForm';
+import Block from '../utils/Block';
+import Button from '../components/Button/Button';
 
-const Home = {
-	render() {
-		const current = localStorage.getItem('id') || '1';
-		const currentItem = chats.find(item => item.id === current) || {};
-		return `<section class="chat">
-                    <nav class="chat__navigation">
+const messageList = new MessageList({messages});
+const current = localStorage.getItem('id') || '1';
+const chatList = new Chats({chats});
+const messageForm = new MessageForm({button: new Button({className:'button preview__enter'})});
+const currentItem = chats.find(item => item.id === current) || {};
+
+class Home extends Block {
+    constructor(props) {
+        super('section', {
+            ...props,
+            attrs: {
+                'class': 'chat'
+            },
+            chats: chatList,
+            messages: messageList,
+            messageForm: messageForm
+        });
+    }
+
+    render() {
+        const template = `<nav class="chat__navigation">
                         <div class="chat__profile">
                             <a href="/settings" class="link chat__link">
                                 <span>Профиль</span>
@@ -14,7 +34,7 @@ const Home = {
                             </a>
                         </div>
                         <input class="search" type="text" placeholder="Поиск"/>
-                        ${Chats.render({chats})}
+                        <div id="chats"></div>
                     </nav>
                     <div class="preview">
                         <div class="preview__header">
@@ -29,15 +49,11 @@ const Home = {
                             </button>                        
                         </div>
                         <div class="preview__main">
-                        main
+                        <div id="messages"></div>
                         </div>
-                        <form class="preview__footer">
-                            <button class="button preview__add"></button>
-                            <input class="preview__input" placeholder="Сообщение" name="message"/>
-                            <button class="button preview__enter" type="submit"></button>
-                        </form>
-                    </div>
-                </section>`;
-	},
-};
+                       <div id="messageForm"></div>
+                    </div>`;
+        return this.compile(template);
+    }
+}
 export default Home;

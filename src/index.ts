@@ -2,53 +2,50 @@ import './index.css';
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Settings from "./pages/Settings";
-import Home from "./pages/Home";
 import Error from "./pages/Error";
+import Home from "./pages/Home";
+import Block from "./utils/Block";
 
-const routers = [
+const routers: { path: string, component: Block }[] = [
     {
         path: '/signin',
-        component: Login
+        component: new Login({})
     },
     {
         path: '/signup',
-        component: Register
+        component: new Register({})
     },
     {
         path: '/settings',
-        component: Settings
+        component: new Settings({})
     },
     {
         path: '/error',
-        component: Error,
-        props: {error: '500', description: 'Мы уже фиксим'}
+        component: new Error({error: '500', description: 'Мы уже фиксим'}),
     },
     {
         path: '/not-found',
-        component: Error,
-        props: {error: '404', description: 'Не туда попали'}
+        component: new Error({error: '404', description: 'Не туда попали'}),
     }, {
         path: '/',
-        component: Home,
+        component: new Home({}),
     }];
 
-function renderAll(url) {
+function renderAll(url: string): void {
     const content = document.querySelector('.content');
     const component = routers.find(item => item.path === url);
     let componentToRender;
-    let props;
     if (undefined === component) {
-        componentToRender = Error;
+        componentToRender = new Error({});
     } else {
         componentToRender = component.component
-        props = component.props;
     }
-    content.innerHTML = componentToRender.render(props);
+    content.appendChild(componentToRender.getElement());
     history.pushState({}, 'newUrl', undefined === component ? '/not-found' : url);
     navColorLink();
 }
 
-function router(event) {
+function router(event): void {
     event.preventDefault();
     renderAll('/' + event.target.href.split('/').reverse()[0]);
 }
@@ -58,7 +55,7 @@ window.addEventListener('DOMContentLoaded', function () {
     renderAll(path);
 });
 
-function navColorLink() {
+function navColorLink(): void {
     const links = document.querySelectorAll('.link');
     links.forEach(link => {
         if (link.href === window.location.href) {

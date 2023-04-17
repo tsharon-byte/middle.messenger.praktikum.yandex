@@ -1,0 +1,9 @@
+.message-list {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+    list-style-type: none;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0 20px;
+}

@@ -4,5 +4,5 @@
     grid-template-rows: 54px 1fr 54px;
     height: 100vh;
     box-sizing: border-box;
-    padding: 0 20px;
+    padding: 0 0 11px 0;
 }

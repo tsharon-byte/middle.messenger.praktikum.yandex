@@ -1,0 +1,36 @@
+.message {
+    border: 1px solid black;
+    box-sizing: border-box;
+    padding: 11px;
+    max-width: 49%;
+    background: #F8F8F8;
+    font-size: 12px;
+    line-height: 15px;
+    color: #1E1E1E;
+    border-radius: 3px;
+    display: grid;
+    place-self: start;
+}
+
+.message_type_mine {
+    background-color: #7ce8e8;
+    align-self: end;
+    justify-self: end;
+}
+
+.message__footer {
+    font-style: normal;
+    font-weight: 500;
+    font-size: 9px;
+    display: flex;
+    gap: 4px;
+    align-items: center;
+    line-height: 9px;
+    /* identical to box height, or 100% */
+
+    text-align: right;
+
+    color: #999999;
+    align-self: end;
+    justify-self: end;
+}

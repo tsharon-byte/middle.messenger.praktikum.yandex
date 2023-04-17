@@ -1,4 +1,4 @@
-const chats = [{
+const chats: ChatType[] = [{
     id: '1',
     avatar: 'https://images.unsplash.com/photo-1675645387065-f66030ecd8bd?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=985&q=80',
     name: 'Андрей',

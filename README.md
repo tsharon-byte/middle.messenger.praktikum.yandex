@@ -87,7 +87,8 @@ Typescript доступен в Parcel 'из коробки', поэтому сп
 
 ### Этап 6: Настраиваю статический анализ кода с помощью eslint
 
-Устанавливаю и конфигурирую eslint с помощью команды `npm init @eslint/config`
+Устанавливаю и конфигурирую eslint с помощью команды `npm install --save-dev eslint `
+`npm install --save-dev eslint-config-airbnb `
 
 ### Этап 7: Создаю основные компоненты приложения
 

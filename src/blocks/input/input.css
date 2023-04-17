@@ -7,3 +7,7 @@
     line-height: 13px;
     padding: 0 0 7px;
 }
+
+.input_type_invalid {
+    border-bottom: 1px solid red;
+}
