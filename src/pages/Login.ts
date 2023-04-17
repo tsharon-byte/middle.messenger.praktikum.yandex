@@ -1,6 +1,5 @@
 const Login = {
-    render: () => {
-        return `<section>
+	render: () => `<section>
                     <div class="login">
                             <h1 class="login__header">Вход</h1>
                             <form class="form">
@@ -20,7 +19,6 @@ const Login = {
                                 </div>
                             </form>
                     </div>
-                </section>`
-    }
-}
+                </section>`,
+};
 export default Login;

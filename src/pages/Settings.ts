@@ -1,11 +1,11 @@
-import {messages} from "../utils/mockData";
+import {chats} from '../utils/mockData';
 
 const Settings = {
-    render: () => {
-        const current = localStorage.getItem('id') || '1';
-        const currentItem = messages.find(item => item.id === current) || {};
-        const mockString = '-';
-        return `<section class="settings">
+	render() {
+		const current = localStorage.getItem('id') || '1';
+		const currentItem = chats.find(item => item.id === current) || {};
+		const mockString = '-';
+		return `<section class="settings">
                     <a class="link settings__back" href="/" onclick="router(event)">
                         <button class="button settings__button">
                         </button>
@@ -47,8 +47,8 @@ const Settings = {
                             <div class="settings__link"><a class="link" href="/" onclick="router(event)">Выйти</a></div>
                         </div>
                     </div>
-                </section>`
-    }
-}
+                </section>`;
+	},
+};
 
 export default Settings;

@@ -1,4 +1,4 @@
-const Message = {
+const Chat = {
     render({name, avatar, lastMessage, time, unreadMessages, id}) {
         const currentIx = localStorage.getItem('id') || '1';
         const unread = unreadMessages > 0
@@ -17,4 +17,4 @@ const Message = {
                             </li>`
     }
 }
-export default Message;
+export default Chat;

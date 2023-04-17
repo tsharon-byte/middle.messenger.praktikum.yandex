@@ -1,6 +1,5 @@
 const Register = {
-    render: () => {
-        return `<section>
+	render: () => `<section>
                     <div class="login register">
                             <h1 class="login__header">Регистрация</h1>
                             <form class="form">
@@ -40,7 +39,6 @@ const Register = {
                                 </div>
                             </form>
                     </div>
-               </section>`
-    }
-}
+               </section>`,
+};
 export default Register;
