@@ -75,7 +75,7 @@
 
 ### Этап 4: Настраиваю Netlify
 
-[Ссылка на задеплоенное приложение](https://sparkling-scone-234971.netlify.app)
+[Ссылка на задеплоенное приложение](https://jocular-kringle-df365b.netlify.app/)
 
 ### Этап 5: Внедряю Typescript
 
