@@ -1,17 +1,19 @@
 import {chats} from '../utils/mockData';
 import Block from '../utils/Block';
 
-class Settings extends Block{
+class Settings extends Block {
     constructor(props) {
         super('section', {
             ...props,
             attrs: {
                 'class': 'settings'
-            }});
+            }
+        });
     }
+
     render() {
         const current = localStorage.getItem('id') || '1';
-        const currentItem = chats.find(item => item.id === current) || {};
+        const currentItem: ChatType = chats.find(item => item.id === current);
         const mockString = '-';
         const template = `<a class="link settings__back" href="/" onclick="router(event)">
                         <button class="button settings__button">

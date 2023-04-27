@@ -1,10 +1,10 @@
 import './index.css';
-import Login from "./pages/Login";
-import Register from "./pages/Register";
-import Settings from "./pages/Settings";
-import Error from "./pages/Error";
-import Home from "./pages/Home";
-import Block from "./utils/Block";
+import Login from './pages/Login';
+import Register from './pages/Register';
+import Settings from './pages/Settings';
+import Error from './pages/Error';
+import Home from './pages/Home';
+import Block from './utils/Block';
 
 const routers: { path: string, component: Block }[] = [
     {
@@ -38,7 +38,7 @@ function renderAll(url: string): void {
     if (undefined === component) {
         componentToRender = new Error({});
     } else {
-        componentToRender = component.component
+        componentToRender = component.component;
     }
     content.appendChild(componentToRender.getElement());
     history.pushState({}, 'newUrl', undefined === component ? '/not-found' : url);
@@ -51,17 +51,17 @@ function router(event): void {
 }
 
 window.addEventListener('DOMContentLoaded', function () {
-    let path = location.pathname;
+    const path = location.pathname;
     renderAll(path);
 });
 
 function navColorLink(): void {
-    const links = document.querySelectorAll('.link');
+    const links:NodeListOf<HTMLLinkElement> | any[] = document.querySelectorAll('.link')||[];
     links.forEach(link => {
         if (link.href === window.location.href) {
             link.classList.add('link_type_active');
         } else {
             link.classList.remove('link_type_active');
         }
-    })
+    });
 }

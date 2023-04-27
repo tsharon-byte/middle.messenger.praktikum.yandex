@@ -20,19 +20,27 @@ function queryStringify(data) {
 }
 
 class HTTPTransport {
-    get = (url, options = {}) => {
+    get = (url, options = {
+        timeout: 0
+    }) => {
         return this.request(url, {...options, method: METHODS.GET}, options.timeout);
     };
 
-    post = (url, options = {}) => {
+    post = (url, options = {
+        timeout: 0
+    }) => {
         return this.request(url, {...options, method: METHODS.POST}, options.timeout);
     };
 
-    put = (url, options = {}) => {
+    put = (url, options = {
+        timeout: 0
+    }) => {
         return this.request(url, {...options, method: METHODS.PUT}, options.timeout);
     };
 
-    delete = (url, options = {}) => {
+    delete = (url, options = {
+        timeout: 0
+    }) => {
         return this.request(url, {...options, method: METHODS.DELETE}, options.timeout);
     };
 
