@@ -4,12 +4,11 @@ import messages from '../utils/messages';
 import MessageList from '../components/MessageList/MessageList';
 import MessageForm from '../components/MessageForm/MessageForm';
 import Block from '../utils/Block';
-import Button from '../components/Button/Button';
 
 const messageList = new MessageList({messages});
 const current = localStorage.getItem('id') || '1';
 const chatList = new Chats({chats});
-const messageForm = new MessageForm({button: new Button({className:'button preview__enter'})});
+const messageForm = new MessageForm();
 const currentItem = chats.find(item => item.id === current) || {};
 
 class Home extends Block {

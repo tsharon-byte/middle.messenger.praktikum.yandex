@@ -1,13 +1,14 @@
 import Block from '../../utils/Block';
 import Input from '../Input/Input';
 import {getFormValues, onInput} from '../../utils/validation';
+import Button from '../Button/Button';
 
 const FORM_NAME = 'sendMessageForm';
 
 class MessageForm extends Block {
-    constructor(props) {
+    constructor() {
+        const button = new Button({className: 'button preview__enter'});
         super('form', {
-            ...props,
             attrs: {'class': 'preview__footer', 'name': FORM_NAME, 'novalidate': true},
             events: {
                 'submit': (event) => {
@@ -15,15 +16,15 @@ class MessageForm extends Block {
                     console.log('submitted', getFormValues(FORM_NAME));
                 }
             },
+            button,
             messageInput: new Input({
                 className: 'preview__input',
                 placeholder: 'Сообщение',
                 name: 'message',
                 minlength: '1',
                 pattern: '.+',
-                'required': true,
                 events: {
-                    'input': (event) => onInput(event, 'message', props.button, FORM_NAME)
+                    'input': (event) => onInput(event, 'message', button, FORM_NAME)
                 }
             }),
         });

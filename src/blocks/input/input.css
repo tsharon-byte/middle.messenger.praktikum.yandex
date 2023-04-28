@@ -1,7 +1,7 @@
 .input {
     box-sizing: border-box;
     border: none;
-    border-bottom: 1px solid #3369F3;
+    border-bottom: 1px solid var(--primary);
     width: 100%;
     font-size: 13px;
     line-height: 13px;

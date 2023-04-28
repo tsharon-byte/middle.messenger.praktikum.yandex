@@ -5,7 +5,7 @@ class Register extends Block {
     constructor(props) {
         super('section', {
             ...props,
-            registerForm: new RegisterForm({})
+            registerForm: new RegisterForm()
         });
     }
 

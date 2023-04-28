@@ -2,5 +2,6 @@ type MessageType = {
     id: string,
     time: string,
     text: string,
-    isMine?: boolean
+    isMine?: boolean,
+    events?: object
 }

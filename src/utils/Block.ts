@@ -1,12 +1,12 @@
 import Events from './Events';
 import EventBus from './EventBus';
 
-class Block {
-    protected props: any;
+abstract class Block<Props extends Record<string, any> = unknown> {
+    protected props: Props;
     private readonly _eventBus: EventBus;
     private _el: HTMLElement | undefined;
     private readonly _tag: string;
-    private readonly _components: Block[];
+    private readonly _components: Props[];
 
     constructor(tag: string, propsAndComponents: any) {
         this._tag = tag;
@@ -52,9 +52,9 @@ class Block {
         this._eventBus.emit(Events.RENDER, {});
     }
 
-    extractPropsAndComponents(propsAndComponents: any[]) {
-        const props = {};
-        const components = [];
+    extractPropsAndComponents(propsAndComponents: Props[]): { props: Props, components: Props[] } {
+        const props = {} as Props;
+        const components: Props[] = [];
         Object.keys(propsAndComponents).forEach(key => {
             if (propsAndComponents[key] instanceof Block) {
                 components.push({[key]: propsAndComponents[key]});

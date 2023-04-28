@@ -12,3 +12,10 @@
     -moz-text-size-adjust: 100%;
     text-rendering: optimizeLegibility;
 }
+
+:root {
+    --primary: #3369f3;
+    --secondary: #fbfbfb;
+    --primary-text: #1e1e1e;
+    --secondaryText: #999;
+}

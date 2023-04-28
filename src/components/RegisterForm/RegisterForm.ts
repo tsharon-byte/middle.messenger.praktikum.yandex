@@ -6,10 +6,10 @@ import {checkPassword, getFormValues, onInput} from '../../utils/validation';
 const FORM_NAME = 'registerForm';
 
 class RegisterForm extends Block {
-    constructor(props) {
+    constructor() {
         const button = new Button({className: 'button form__button', text: 'Зарегистрироваться'});
         super('form', {
-            ...props, attrs: {'class': 'form', 'name': FORM_NAME, 'novalidate': true},
+            attrs: {'class': 'form', 'name': FORM_NAME, 'novalidate': true},
             events: {
                 'submit': (event) => {
                     event.preventDefault();
@@ -23,7 +23,6 @@ class RegisterForm extends Block {
                 name: 'login',
                 minlength: '3',
                 maxlength: '20',
-                'required': true,
                 pattern: '[a-zA-Z\\-_0-9]{3,20}',
                 events: {
                     'input': (event) => onInput(event, 'login', button, FORM_NAME)
@@ -34,7 +33,6 @@ class RegisterForm extends Block {
                 placeholder: 'Почта',
                 name: 'email',
                 pattern: '^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+$',
-                'required': true,
                 type: 'text',
                 events: {
                     'input': (event) => onInput(event, 'email', button, FORM_NAME)
@@ -44,7 +42,6 @@ class RegisterForm extends Block {
                 className: 'input',
                 placeholder: 'Имя',
                 name: 'first_name',
-                'required': true,
                 pattern: '^[А-ЯA-Z]{1}[a-zА-Яа-яA-Z\\-]*',
                 events: {
                     'input': (event) => onInput(event, 'first_name', button, FORM_NAME)
@@ -54,7 +51,6 @@ class RegisterForm extends Block {
                 className: 'input',
                 placeholder: 'Фамилия',
                 name: 'second_name',
-                'required': true,
                 pattern: '^[А-ЯA-Z]{1}[a-zА-Яа-яA-Z\\-]*',
                 events: {
                     'input': (event) => onInput(event, 'second_name', button, FORM_NAME)
@@ -67,7 +63,6 @@ class RegisterForm extends Block {
                 minlength: '10',
                 maxlength: '15',
                 pattern: '^\\+?[0-9]{10,15}',
-                'required': true,
                 events: {
                     'input': (event) => onInput(event, 'phone', button, FORM_NAME)
                 }
@@ -78,7 +73,6 @@ class RegisterForm extends Block {
                 name: 'password',
                 minlength: '8',
                 maxlength: '40',
-                'required': true,
                 type: 'password',
                 pattern: '^(?=.*\\d)(?=.*[A-Z])[a-zA-Z0-9]{8,40}$',
                 events: {
@@ -91,7 +85,6 @@ class RegisterForm extends Block {
                 name: 'password2',
                 minlength: '8',
                 maxlength: '40',
-                'required': true,
                 type: 'password',
                 pattern: '^(?=.*\\d)(?=.*[A-Z])[a-zA-Z0-9]{8,40}$',
                 events: {

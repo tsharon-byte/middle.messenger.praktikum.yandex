@@ -2,7 +2,7 @@ import Block from '../../utils/Block';
 import './Input.css';
 
 class Input extends Block {
-    constructor(props) {
+    constructor(props: InputProps) {
         super('div', {
             ...props,
             attrs: {'class': 'input-container'}

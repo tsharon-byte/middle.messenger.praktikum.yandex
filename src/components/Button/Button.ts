@@ -1,12 +1,13 @@
 import Block from '../../utils/Block';
 
 class Button extends Block {
-    constructor({className='button', ...rest}) {
+    constructor(props: ButtonProps) {
+        const {className = 'button', ...rest} = props;
         super('button', {...rest, attrs: {'class': className, type: 'submit', disabled: true}});
     }
 
     render() {
-        const template = this.props.text?this.props.text:'';
+        const template = this.props.text ? this.props.text : '';
         return this.compile(template);
     }
 }

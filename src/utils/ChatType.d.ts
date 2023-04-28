@@ -9,5 +9,6 @@ type ChatType = {
     time: string,
     email: string,
     login: string,
-    unreadMessages: number
+    unreadMessages: number,
+    events?: object
 }

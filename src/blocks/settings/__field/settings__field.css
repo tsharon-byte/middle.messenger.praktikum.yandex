@@ -1,6 +1,6 @@
 .settings__field {
     border: none;
-    border-bottom: 1px solid #999999;
+    border-bottom: 1px solid var(--secondaryText);
     font-size: 13px;
     line-height: 13px;
     width: 510px;

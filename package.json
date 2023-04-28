@@ -27,5 +27,8 @@
     "stylelint": "^15.6.0",
     "typescript": "^5.0.4",
     "stylelint-selector-bem-pattern": "^2.1.1"
+  },
+  "engines": {
+    "node": ">=12"
   }
 }

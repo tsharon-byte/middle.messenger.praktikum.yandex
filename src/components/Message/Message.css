@@ -6,7 +6,7 @@
     background: #F8F8F8;
     font-size: 12px;
     line-height: 15px;
-    color: #1E1E1E;
+    color: var(--primary-text);
     border-radius: 3px;
     display: grid;
     place-self: start;
@@ -30,7 +30,7 @@
 
     text-align: right;
 
-    color: #999999;
+    color: var(--secondaryText);
     align-self: end;
     justify-self: end;
 }

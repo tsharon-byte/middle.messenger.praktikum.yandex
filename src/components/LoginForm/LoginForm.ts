@@ -6,10 +6,10 @@ import Button from '../Button/Button';
 const FORM_NAME = 'loginForm';
 
 class LoginForm extends Block {
-    constructor(props) {
+    constructor() {
         const button = new Button({className: 'button form__button', text: 'Войти'});
         super('form', {
-            ...props, attrs: {'class': 'form', 'name': FORM_NAME, 'novalidate': true},
+            attrs: {'class': 'form', 'name': FORM_NAME, 'novalidate': true},
             events: {
                 'submit': (event) => {
                     event.preventDefault();
@@ -23,7 +23,6 @@ class LoginForm extends Block {
                 name: 'login',
                 minlength: '3',
                 maxlength: '20',
-                'required': true,
                 pattern: '[a-zA-Z\\-_0-9]{3,20}',
                 events: {
                     'input': (event) => onInput(event, 'login', button, FORM_NAME)
@@ -36,7 +35,6 @@ class LoginForm extends Block {
                 minlength: '8',
                 maxlength: '40',
                 pattern: '^(?=.*\\d)(?=.*[A-Z])[a-zA-Z0-9]{8,40}$',
-                'required': true,
                 events: {
                     'input': (event) => onInput(event, 'password', button, FORM_NAME)
                 }

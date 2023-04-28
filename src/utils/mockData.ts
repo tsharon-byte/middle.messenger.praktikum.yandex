@@ -34,4 +34,5 @@ const chats: ChatType[] = [{
     login: 'tsharon',
     unreadMessages: 8
 }];
+
 export {chats};

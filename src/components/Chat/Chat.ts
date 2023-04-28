@@ -1,9 +1,9 @@
 import Block from '../../utils/Block';
 
 class Chat extends Block {
-    constructor(props) {
+    constructor(props: ChatType) {
         const currentIx = localStorage.getItem('id') || '1';
-        const {id='1'} = props;
+        const {id = '1'} = props;
         super('li', {
             ...props, attrs: {
                 'class': `chat__message ${currentIx === id ? 'chat__message_type_active' : ''}`,

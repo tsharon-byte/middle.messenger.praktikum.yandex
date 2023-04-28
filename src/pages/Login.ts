@@ -5,7 +5,7 @@ class Login extends Block {
     constructor(props) {
         super('section', {
             ...props,
-            loginForm: new LoginForm({})
+            loginForm: new LoginForm()
         });
     }
 
