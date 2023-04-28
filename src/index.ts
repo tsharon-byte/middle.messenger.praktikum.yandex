@@ -5,19 +5,29 @@ import Settings from './pages/Settings';
 import Error from './pages/Error';
 import Home from './pages/Home';
 import Block from './utils/Block';
+import ChangePassword from './pages/ChangePassword';
+import ChangeProfile from './pages/ChangeProfile';
 
 const routers: { path: string, component: Block }[] = [
     {
         path: '/signin',
-        component: new Login({})
+        component: new Login()
     },
     {
         path: '/signup',
-        component: new Register({})
+        component: new Register()
     },
     {
         path: '/settings',
-        component: new Settings({})
+        component: new Settings()
+    },
+    {
+        path: '/change-profile',
+        component: new ChangeProfile()
+    },
+    {
+        path: '/change-password',
+        component: new ChangePassword()
     },
     {
         path: '/error',
@@ -28,7 +38,7 @@ const routers: { path: string, component: Block }[] = [
         component: new Error({error: '404', description: 'Не туда попали'}),
     }, {
         path: '/',
-        component: new Home({}),
+        component: new Home(),
     }];
 
 function renderAll(url: string): void {

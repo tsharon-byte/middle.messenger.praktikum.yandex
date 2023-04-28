@@ -2,9 +2,8 @@ import Block from '../utils/Block';
 import LoginForm from '../components/LoginForm/LoginForm';
 
 class Login extends Block {
-    constructor(props) {
+    constructor() {
         super('section', {
-            ...props,
             loginForm: new LoginForm()
         });
     }

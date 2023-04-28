@@ -2,5 +2,5 @@
     font-size: 13px;
     line-height: 13px;
     color: var(--primary-text);
-    width: 70px;
+    min-width: 200px;
 }

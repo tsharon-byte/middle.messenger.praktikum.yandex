@@ -12,9 +12,8 @@ const messageForm = new MessageForm();
 const currentItem = chats.find(item => item.id === current) || {};
 
 class Home extends Block {
-    constructor(props) {
+    constructor() {
         super('section', {
-            ...props,
             attrs: {
                 'class': 'chat'
             },

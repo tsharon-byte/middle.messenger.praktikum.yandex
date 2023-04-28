@@ -1,6 +1,6 @@
 import Block from '../../utils/Block';
 import Input from '../Input/Input';
-import {getFormValues, onInput} from '../../utils/validation';
+import {handleSubmit, onInput} from '../../utils/validation';
 import Button from '../Button/Button';
 
 const FORM_NAME = 'loginForm';
@@ -11,10 +11,7 @@ class LoginForm extends Block {
         super('form', {
             attrs: {'class': 'form', 'name': FORM_NAME, 'novalidate': true},
             events: {
-                'submit': (event) => {
-                    event.preventDefault();
-                    console.log('submitted', getFormValues(FORM_NAME));
-                }
+                'submit': (event) => handleSubmit(event, FORM_NAME, button)
             },
             button,
             loginInput: new Input({

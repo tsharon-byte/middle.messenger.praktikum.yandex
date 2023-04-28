@@ -2,9 +2,8 @@ import {chats} from '../utils/mockData';
 import Block from '../utils/Block';
 
 class Settings extends Block {
-    constructor(props) {
+    constructor() {
         super('section', {
-            ...props,
             attrs: {
                 'class': 'settings'
             }
@@ -46,14 +45,13 @@ class Settings extends Block {
                                 <input class="settings__input" type="text" name="display_name" readonly value=${currentItem.displayName || mockString}>
                             </div>
                             <div class="settings__field">
-                                <label class="settings__label">Телефон</lab
-                                el>
+                                <label class="settings__label">Телефон</label>
                                 <input class="settings__input" type="text" name="phone" readonly value=${currentItem.phone || mockString}>
                             </div>
                         </form>
                         <div class="settings__footer">
-                            <div class="settings__link"><a class="link" href="/" onclick="router(event)">Изменить данные</a></div>
-                            <div class="settings__link"><a class="link" href="/" onclick="router(event)">Изменить пароль</a></div>
+                            <div class="settings__link"><a class="link" href="/change-profile" onclick="router(event)">Изменить данные</a></div>
+                            <div class="settings__link"><a class="link" href="/change-password" onclick="router(event)">Изменить пароль</a></div>
                             <div class="settings__link"><a class="link" href="/" onclick="router(event)">Выйти</a></div>
                         </div>
                     </div>`;

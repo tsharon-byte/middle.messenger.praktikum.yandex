@@ -12,4 +12,6 @@
 
 .settings__field:last-of-type {
     border-bottom: none;
+    box-sizing: border-box;
+    margin-bottom: 20px;
 }

@@ -1,4 +1,6 @@
 .settings__input {
     border: none;
     text-align: right;
+    font-size: 13px;
+    line-height: 13px;
 }

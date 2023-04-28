@@ -41,6 +41,16 @@ export function getFormValues(name: string): object {
     return values;
 }
 
+export function handleSubmit(event, form:string,submitButton: Block){
+    event.preventDefault();
+    if (checkFormIsValidAndSetErrors(form)) {
+        submitButton.removeAttributes(['disabled']);
+        console.log('submitted', form, getFormValues(form));
+    } else {
+        submitButton.addAttributes({'disabled': true});
+    }
+}
+
 function checkFormIsValid(form: string): boolean {
     const formEl = document.getElementsByName(form)[0];
     const inputs = formEl.querySelectorAll('input');
@@ -50,4 +60,19 @@ function checkFormIsValid(form: string): boolean {
         }
     }
     return true;
+}
+
+function checkFormIsValidAndSetErrors(form: string): boolean {
+    const formEl = document.getElementsByName(form)[0];
+    const inputs = formEl.querySelectorAll('input');
+    let result = true;
+    for (const input of inputs) {
+        if (!input.validity.valid) {
+            result = false;
+            const selector = '#' + input.name + '-error';
+            const el = formEl.querySelector(selector);
+            el.textContent = input.validationMessage;
+        }
+    }
+    return result;
 }

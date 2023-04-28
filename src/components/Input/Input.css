@@ -2,6 +2,8 @@
     width: 100%;
     display: flex;
     flex-direction: column;
+    overflow: hidden;
+    align-items: start;
 }
 
 .input__error {
@@ -9,6 +11,6 @@
     font-size: 8px;
     line-height: 8px;
     box-sizing: border-box;
-    padding: 7px 0;
+    padding: 1px 0;
     color: #FF2F2F;
 }

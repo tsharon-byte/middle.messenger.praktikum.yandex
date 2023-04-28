@@ -2,9 +2,8 @@ import Block from '../utils/Block';
 import RegisterForm from '../components/RegisterForm/RegisterForm';
 
 class Register extends Block {
-    constructor(props) {
+    constructor() {
         super('section', {
-            ...props,
             registerForm: new RegisterForm()
         });
     }
