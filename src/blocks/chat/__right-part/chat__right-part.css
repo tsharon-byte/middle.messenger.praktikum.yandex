@@ -2,7 +2,7 @@
     justify-self: end;
     font-size: 9px;
     line-height: 13px;
-    color: #999999;
+    color: var(--secondaryText);
     display: flex;
     flex-direction: column;
     justify-content: space-between;

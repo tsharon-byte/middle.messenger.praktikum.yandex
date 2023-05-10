@@ -1,12 +1,20 @@
-import {messages} from "../utils/mockData";
+import {chats} from '../utils/mockData';
+import Block from '../utils/Block';
 
-const Settings = {
-    render: () => {
+class Settings extends Block {
+    constructor() {
+        super('section', {
+            attrs: {
+                'class': 'settings'
+            }
+        });
+    }
+
+    render() {
         const current = localStorage.getItem('id') || '1';
-        const currentItem = messages.find(item => item.id === current) || {};
+        const currentItem: ChatType = chats.find(item => item.id === current);
         const mockString = '-';
-        return `<section class="settings">
-                    <a class="link settings__back" href="/" onclick="router(event)">
+        const template = `<a class="link settings__back" href="/" onclick="router(event)">
                         <button class="button settings__button">
                         </button>
                     </a>
@@ -15,39 +23,39 @@ const Settings = {
                             <img class="settings__avatar" src=${currentItem.avatar}/>
                             <div class="settings__name">${currentItem.name || mockString}</div>
                         </div>
-                        <div class="settings__main">
+                        <form class="settings__main" name="settings">
                             <div class="settings__field">
                                 <label class="settings__label">Почта</label>
-                                <input class="settings__input" name="email" readonly value=${currentItem.email || mockString}>
+                                <input class="settings__input" type="email" name="email" readonly value=${currentItem.email || mockString}>
                             </div>                        
                             <div class="settings__field">
                                 <label class="settings__label">Логин</label>
-                                <input class="settings__input" name="login" readonly value=${currentItem.login || mockString}>
+                                <input class="settings__input" type="text" name="login" readonly value=${currentItem.login || mockString}>
                             </div>
                             <div class="settings__field">
                                 <label class="settings__label">Имя</label>
-                                <input class="settings__input" name="first_name" readonly value=${currentItem.name || mockString}>
+                                <input class="settings__input" type="text" name="first_name" readonly value=${currentItem.name || mockString}>
                             </div>
                             <div class="settings__field">
                                 <label class="settings__label">Фамилия</label>
-                                <input class="settings__input" name="second_name" readonly value=${currentItem.secondName || mockString}>
+                                <input class="settings__input" type="text" name="second_name" readonly value=${currentItem.secondName || mockString}>
                             </div>
                             <div class="settings__field">
                                 <label class="settings__label">Имя в чате</label>
-                                <input class="settings__input" name="display_name" readonly value=${currentItem.displayName || mockString}>
+                                <input class="settings__input" type="text" name="display_name" readonly value=${currentItem.displayName || mockString}>
                             </div>
                             <div class="settings__field">
                                 <label class="settings__label">Телефон</label>
-                                <input class="settings__input" name="phone" readonly value=${currentItem.phone || mockString}>
+                                <input class="settings__input" type="text" name="phone" readonly value=${currentItem.phone || mockString}>
                             </div>
-                        </div>
+                        </form>
                         <div class="settings__footer">
-                            <div class="settings__link"><a class="link" href="/" onclick="router(event)">Изменить данные</a></div>
-                            <div class="settings__link"><a class="link" href="/" onclick="router(event)">Изменить пароль</a></div>
+                            <div class="settings__link"><a class="link" href="/change-profile" onclick="router(event)">Изменить данные</a></div>
+                            <div class="settings__link"><a class="link" href="/change-password" onclick="router(event)">Изменить пароль</a></div>
                             <div class="settings__link"><a class="link" href="/" onclick="router(event)">Выйти</a></div>
                         </div>
-                    </div>
-                </section>`
+                    </div>`;
+        return this.compile(template);
     }
 }
 

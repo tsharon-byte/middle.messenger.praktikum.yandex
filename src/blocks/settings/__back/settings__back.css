@@ -1,5 +1,5 @@
 .settings__back {
-    background: #FBFBFB;
+    background: var(--secondary);
     border-right: 1px solid #EAEAEA;
     width: 64px;
     height: 100vh;

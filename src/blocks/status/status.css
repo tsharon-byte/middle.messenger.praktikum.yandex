@@ -1,0 +1,6 @@
+.status {
+    background-image: url("../../images/read.svg");
+    background-size: cover;
+    width: 10px;
+    height: 5px;
+}

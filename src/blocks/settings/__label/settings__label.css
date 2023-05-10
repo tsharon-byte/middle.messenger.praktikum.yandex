@@ -1,6 +1,6 @@
 .settings__label {
     font-size: 13px;
     line-height: 13px;
-    color: #1E1E1E;
-    width: 70px;
+    color: var(--primary-text);
+    min-width: 200px;
 }
