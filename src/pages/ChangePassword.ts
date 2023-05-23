@@ -16,7 +16,7 @@ class ChangePassword extends Block {
         const current = localStorage.getItem('id') || '1';
         const currentItem: ChatType = chats.find(item => item.id === current);
         const mockString = '-';
-        const template = `<a class="link settings__back" href="/" onclick="router(event)">
+        const template = `<a class="link settings__back" href="/messenger">
                         <button class="button settings__button">
                         </button>
                     </a>

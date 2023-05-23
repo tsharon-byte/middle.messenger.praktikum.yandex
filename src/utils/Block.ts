@@ -1,14 +1,14 @@
 import Events from './Events';
 import EventBus from './EventBus';
 
-abstract class Block<Props extends Record<string, any> = unknown> {
+class Block<Props extends Record<string, any> = unknown> {
     protected props: Props;
     private readonly _eventBus: EventBus;
-    private _el: HTMLElement | undefined;
+    private _el: HTMLElement;
     private readonly _tag: string;
     private readonly _components: Props[];
 
-    constructor(tag: string, propsAndComponents: any) {
+    constructor(tag = 'div', propsAndComponents: any = {}) {
         this._tag = tag;
         const {props, components} = this.extractPropsAndComponents(propsAndComponents);
         this.props = props;
@@ -145,6 +145,14 @@ abstract class Block<Props extends Record<string, any> = unknown> {
         Object.keys(events).forEach(eventName => {
             this._el.addEventListener(eventName, events[eventName]);
         });
+    }
+
+    show(): void {
+        console.log('show');
+    }
+
+    hide(): void {
+        console.log('hide');
     }
 }
 

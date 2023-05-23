@@ -127,7 +127,7 @@ class RegisterForm extends Block {
                                 </div>
                                 <div class="form__footer">
                                     <button id="button"></button>
-                                    <a class="link form__link" href="/signin" onclick="router(event)">Войти</a>
+                                    <a class="link form__link" href="/">Войти</a>
                                 </div>`;
         return this.compile(template);
     }

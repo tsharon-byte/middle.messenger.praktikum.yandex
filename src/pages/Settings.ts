@@ -14,7 +14,7 @@ class Settings extends Block {
         const current = localStorage.getItem('id') || '1';
         const currentItem: ChatType = chats.find(item => item.id === current);
         const mockString = '-';
-        const template = `<a class="link settings__back" href="/" onclick="router(event)">
+        const template = `<a class="link settings__back" href="/messenger">
                         <button class="button settings__button">
                         </button>
                     </a>
@@ -50,9 +50,9 @@ class Settings extends Block {
                             </div>
                         </form>
                         <div class="settings__footer">
-                            <div class="settings__link"><a class="link" href="/change-profile" onclick="router(event)">Изменить данные</a></div>
-                            <div class="settings__link"><a class="link" href="/change-password" onclick="router(event)">Изменить пароль</a></div>
-                            <div class="settings__link"><a class="link" href="/" onclick="router(event)">Выйти</a></div>
+                            <div class="settings__link"><a class="link" href="/change-profile">Изменить данные</a></div>
+                            <div class="settings__link"><a class="link" href="/change-password">Изменить пароль</a></div>
+                            <div class="settings__link"><a class="link" href="/messenger">Выйти</a></div>
                         </div>
                     </div>`;
         return this.compile(template);

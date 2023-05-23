@@ -52,7 +52,7 @@ class LoginForm extends Block {
                             </div>
                             <div class="form__footer">
                                 <button id="button"></button>
-                                <a class="link form__link" href="/signup" onclick="router(event)">Нет аккаунта?</a>
+                                <a class="link form__link" href="/sign-up">Нет аккаунта?</a>
                             </div>`;
         return this.compile(template);
     }
