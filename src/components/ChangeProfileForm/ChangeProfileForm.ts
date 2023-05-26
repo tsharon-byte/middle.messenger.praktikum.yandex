@@ -3,6 +3,7 @@ import {chats} from '../../utils/mockData';
 import Button from '../Button/Button';
 import Input from '../Input/Input';
 import {handleSubmit, onInput} from '../../utils/validation';
+import UserController from '../../controller/UserController';
 
 const FORM_NAME = 'changeProfileForm';
 const mockString = '-';
@@ -10,12 +11,14 @@ const current = localStorage.getItem('id') || '1';
 const currentItem: ChatType = chats.find(item => item.id === current);
 const button = new Button({className: 'button form__button', text: 'Сохранить'});
 
+const userController = new UserController();
+
 class ChangeProfileForm extends Block {
     constructor() {
         super('form', {
             attrs: {'class': 'settings__main', 'name': FORM_NAME, 'novalidate': true},
             events: {
-                'submit': (event) => handleSubmit(event, FORM_NAME, button)
+                'submit': (event) => handleSubmit(event, FORM_NAME, button, userController.changeUserProfile)
             },
             button,
             loginInput: new Input({
@@ -26,7 +29,7 @@ class ChangeProfileForm extends Block {
                 minlength: '3',
                 maxlength: '20',
                 pattern: '[a-zA-Z\\-_0-9]{3,20}',
-                value:currentItem.login || mockString,
+                value: currentItem.login || mockString,
                 events: {
                     'input': (event) => onInput(event, 'login', button, FORM_NAME)
                 }
@@ -38,7 +41,7 @@ class ChangeProfileForm extends Block {
                 name: 'email',
                 pattern: '^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+$',
                 type: 'text',
-                value:currentItem.email || mockString,
+                value: currentItem.email || mockString,
                 events: {
                     'input': (event) => onInput(event, 'email', button, FORM_NAME)
                 }
@@ -49,7 +52,7 @@ class ChangeProfileForm extends Block {
                 placeholder: 'Имя',
                 name: 'first_name',
                 pattern: '^[А-ЯA-Z]{1}[a-zА-Яа-яA-Z\\-]*',
-                value:currentItem.name || mockString,
+                value: currentItem.name || mockString,
                 events: {
                     'input': (event) => onInput(event, 'first_name', button, FORM_NAME)
                 }
@@ -60,7 +63,7 @@ class ChangeProfileForm extends Block {
                 placeholder: 'Фамилия',
                 name: 'second_name',
                 pattern: '^[А-ЯA-Z]{1}[a-zА-Яа-яA-Z\\-]*',
-                value:currentItem.secondName || mockString,
+                value: currentItem.secondName || mockString,
                 events: {
                     'input': (event) => onInput(event, 'second_name', button, FORM_NAME)
                 }
@@ -71,7 +74,7 @@ class ChangeProfileForm extends Block {
                 placeholder: 'Имя в чате',
                 name: 'display_name',
                 pattern: '^[А-ЯA-Z]{1}[a-zА-Яа-яA-Z\\-]*',
-                value:currentItem.displayName || mockString,
+                value: currentItem.displayName || mockString,
                 events: {
                     'input': (event) => onInput(event, 'second_name', button, FORM_NAME)
                 }
@@ -84,7 +87,7 @@ class ChangeProfileForm extends Block {
                 minlength: '10',
                 maxlength: '15',
                 pattern: '^\\+?[0-9]{10,15}',
-                value:currentItem.phone || mockString,
+                value: currentItem.phone || mockString,
                 events: {
                     'input': (event) => onInput(event, 'phone', button, FORM_NAME)
                 }
@@ -93,7 +96,7 @@ class ChangeProfileForm extends Block {
     }
 
     render() {
-        const template=`<div class="settings__field">
+        const template = `<div class="settings__field">
                                 <label class="settings__label" for="email">Почта</label>
                                 <input id="emailInput">
                             </div>                        

@@ -1,6 +1,13 @@
 import {chats} from '../utils/mockData';
 import Block from '../utils/Block';
 import ChangeProfileForm from '../components/ChangeProfileForm/ChangeProfileForm';
+import Link from '../components/Link/Link';
+
+const link = new Link({
+    href: '/messenger',
+    className: 'link settings__back',
+    children: '<button class="button settings__button"></button>'
+});
 
 class ChangeProfile extends Block {
     constructor() {
@@ -8,6 +15,7 @@ class ChangeProfile extends Block {
             attrs: {
                 'class': 'settings'
             },
+            link,
             changeProfileForm: new ChangeProfileForm()
         });
     }
@@ -16,10 +24,7 @@ class ChangeProfile extends Block {
         const current = localStorage.getItem('id') || '1';
         const currentItem: ChatType = chats.find(item => item.id === current);
         const mockString = '-';
-        const template = `<a class="link settings__back" href="/messenger">
-                        <button class="button settings__button">
-                        </button>
-                    </a>
+        const template = `<div id="link"></div>
                     <div class="settings__content">
                         <div class="settings__header">
                             <img class="settings__avatar" src=${currentItem.avatar}/>

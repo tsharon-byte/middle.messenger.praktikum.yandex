@@ -2,16 +2,19 @@ import Block from '../../utils/Block';
 import Button from '../Button/Button';
 import {handleSubmit, onInput} from '../../utils/validation';
 import Input from '../Input/Input';
+import UserController from '../../controller/UserController';
 
 const FORM_NAME = 'changePasswordForm';
 const button = new Button({className: 'button form__button', text: 'Сохранить'});
+
+const userController = new UserController();
 
 class ChangePasswordForm extends Block {
     constructor() {
         super('form', {
             attrs: {'class': 'settings__main', 'name': FORM_NAME, 'novalidate': true},
             events: {
-                'submit': (event) => handleSubmit(event, FORM_NAME, button)
+                'submit': (event) => handleSubmit(event, FORM_NAME, button, userController.changeUserPassword)
             },
             button,
             oldPasswordInput: new Input({
@@ -52,10 +55,12 @@ class ChangePasswordForm extends Block {
                 events: {
                     'input': (event) => onInput(event, 'new_password2', button, FORM_NAME)
                 }
-            }),});
+            }),
+        });
     }
-    render(){
-        const template=`<div class="settings__field">
+
+    render() {
+        const template = `<div class="settings__field">
                                 <label class="settings__label" for="old_password">Старый пароль</label>
                                 <input id="oldPasswordInput">
                             </div>
@@ -71,4 +76,5 @@ class ChangePasswordForm extends Block {
         return this.compile(template);
     }
 }
+
 export default ChangePasswordForm;

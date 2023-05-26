@@ -20,32 +20,37 @@ function queryStringify(data) {
 }
 
 class HTTPTransport {
-    get = (url, options = {
+    get = (url, options:Record<any, any> = {
         timeout: 0
     }) => {
         return this.request(url, {...options, method: METHODS.GET}, options.timeout);
     };
 
-    post = (url, options = {
+    post = (url, options:Record<any, any> = {
         timeout: 0
     }) => {
         return this.request(url, {...options, method: METHODS.POST}, options.timeout);
     };
 
-    put = (url, options = {
+    put = (url, options:Record<any, any> = {
         timeout: 0
     }) => {
         return this.request(url, {...options, method: METHODS.PUT}, options.timeout);
     };
 
-    delete = (url, options = {
+    delete = (url, options:Record<any, any> = {
         timeout: 0
     }) => {
         return this.request(url, {...options, method: METHODS.DELETE}, options.timeout);
     };
 
     request = (url, options = {}, timeout = 5000) => {
-        const {headers = {}, method, data} = options;
+        const {
+            method = METHODS.GET,
+            headers = {},
+            data,
+            withCredentials = false,
+        } = options;
 
         return new Promise(function(resolve, reject) {
             if (!method) {
@@ -62,6 +67,10 @@ class HTTPTransport {
                     ? `${url}${queryStringify(data)}`
                     : url,
             );
+
+            if (withCredentials) {
+                xhr.withCredentials = true;
+            }
 
             Object.keys(headers).forEach(key => {
                 xhr.setRequestHeader(key, headers[key]);

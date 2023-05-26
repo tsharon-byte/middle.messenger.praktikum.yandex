@@ -6,12 +6,10 @@ import Error from './pages/Error';
 import Home from './pages/Home';
 import ChangePassword from './pages/ChangePassword';
 import ChangeProfile from './pages/ChangeProfile';
-import Router from './utils/Router';
-
-const newRouter = new Router('.content');
+import {router} from './router';
 
 // Можно обновиться на /user и получить сразу пользователя
-newRouter.use('/', Login)
+router.use('/', Login)
     .use('/sign-up', Register)
     .use('/settings', Settings)
     .use('/change-profile', ChangeProfile)

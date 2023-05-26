@@ -4,32 +4,22 @@ import messages from '../utils/messages';
 import MessageList from '../components/MessageList/MessageList';
 import MessageForm from '../components/MessageForm/MessageForm';
 import Block from '../utils/Block';
+import store, {UPDATED} from '../utils/Store';
+import Link from '../components/Link/Link';
 
 const messageList = new MessageList({messages});
-const current = localStorage.getItem('id') || '1';
 const chatList = new Chats({chats});
 const messageForm = new MessageForm();
-const currentItem = chats.find(item => item.id === current) || {};
+const link = new Link({
+    href: '/settings',
+    className: 'link chat__link',
+    children: '<span>Профиль</span>\n' + '<span class="chat__button"></span>'
+});
 
-class Home extends Block {
-    constructor() {
-        super('section', {
-            attrs: {
-                'class': 'chat'
-            },
-            chats: chatList,
-            messages: messageList,
-            messageForm: messageForm
-        });
-    }
-
-    render() {
-        const template = `<nav class="chat__navigation">
+function getTemplate(user) {
+    return `<nav class="chat__navigation">
                         <div class="chat__profile">
-                            <a href="/settings" class="link chat__link">
-                                <span>Профиль</span>
-                                <span class="chat__button"></span>
-                            </a>
+                            <div id="link"></div>
                         </div>
                         <input class="search" type="text" placeholder="Поиск"/>
                         <div id="chats"></div>
@@ -37,21 +27,45 @@ class Home extends Block {
                     <div class="preview">
                         <div class="preview__header">
                             <div class="user">
-                                <img class="user__avatar" src=${currentItem.avatar}/>
-                                <span class="user__name">${currentItem.name}</span>
+                                <img class="user__avatar" src=${user.avatar}/>
+                                <span class="user__name">${user.firstName}</span>
                             </div>
                             <button class="button menu">
                                 <div class="dot"></div>
                                 <div class="dot"></div>
                                 <div class="dot"></div>
-                            </button>                        
+                            </button>
                         </div>
                         <div class="preview__main">
                         <div id="messages"></div>
                         </div>
                        <div id="messageForm"></div>
                     </div>`;
+}
+
+class Home extends Block {
+    constructor() {
+        super('section', {
+            attrs: {
+                'class': 'chat'
+            },
+            link,
+            chats: chatList,
+            messages: messageList,
+            messageForm: messageForm
+        });
+        store.on(UPDATED, () => {
+            this.setProps({user: store.getState().user});
+        });
+    }
+
+    render() {
+        const user: UserType | NonNullable<unknown> = this.props.user || {};
+        console.log('store', store.getState());
+        console.log('user', user);
+        const template = getTemplate(user);
         return this.compile(template);
     }
 }
+
 export default Home;

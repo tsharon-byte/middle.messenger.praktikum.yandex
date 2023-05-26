@@ -41,11 +41,12 @@ export function getFormValues(name: string): object {
     return values;
 }
 
-export function handleSubmit(event, form:string,submitButton: Block){
+export function handleSubmit(event, form: string, submitButton: Block, handler) {
     event.preventDefault();
     if (checkFormIsValidAndSetErrors(form)) {
         submitButton.removeAttributes(['disabled']);
         console.log('submitted', form, getFormValues(form));
+        handler(getFormValues(form));
     } else {
         submitButton.addAttributes({'disabled': true});
     }
@@ -62,7 +63,7 @@ function checkFormIsValid(form: string): boolean {
     return true;
 }
 
-function checkFormIsValidAndSetErrors(form: string): boolean {
+export function checkFormIsValidAndSetErrors(form: string): boolean {
     const formEl = document.getElementsByName(form)[0];
     const inputs = formEl.querySelectorAll('input');
     let result = true;

@@ -2,8 +2,18 @@ import Block from '../../utils/Block';
 import Button from '../Button/Button';
 import Input from '../Input/Input';
 import {checkPassword, handleSubmit, onInput} from '../../utils/validation';
+import AuthController from '../../controller/AuthController';
+import Link from '../Link/Link';
 
 const FORM_NAME = 'registerForm';
+
+const authController = new AuthController();
+
+const link = new Link({
+    href: '/',
+    className: 'link form__link',
+    children: 'Войти'
+});
 
 class RegisterForm extends Block {
     constructor() {
@@ -11,9 +21,10 @@ class RegisterForm extends Block {
         super('form', {
             attrs: {'class': 'form', 'name': FORM_NAME, 'novalidate': true},
             events: {
-                'submit': (event) => handleSubmit(event, FORM_NAME, button)
+                'submit': (event) => handleSubmit(event, FORM_NAME, button, authController.signup)
             },
             button,
+            link,
             loginInput: new Input({
                 className: 'input',
                 placeholder: 'Логин',
@@ -127,7 +138,7 @@ class RegisterForm extends Block {
                                 </div>
                                 <div class="form__footer">
                                     <button id="button"></button>
-                                    <a class="link form__link" href="/">Войти</a>
+                                    <div id="link"></div>
                                 </div>`;
         return this.compile(template);
     }

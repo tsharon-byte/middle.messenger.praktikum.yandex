@@ -1,8 +1,8 @@
 enum Events {
-    CDM,
-    CDU,
-    INIT,
-    RENDER
+    CDM='CDM',
+    CDU='CDU',
+    INIT='INIT',
+    RENDER='RENDER'
 }
 
 export default Events;
