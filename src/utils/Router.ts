@@ -7,6 +7,8 @@ class Router {
     private readonly _selector: string;
     private _currentRoute: Route;
     private _default: Route | null;
+    private _onRouteCallback: () => void;
+    private _unprotectedPaths: `/${string}`[];
 
     constructor(selector: string) {
         if (this._instance) {
@@ -16,6 +18,11 @@ class Router {
         this._routes = [];
         this._default = null;
         this._selector = selector;
+    }
+
+    public setUnprotectedPaths(paths: `/${string}`[]) {
+        this._unprotectedPaths = paths;
+        return this;
     }
 
     use(pathname: string, component: typeof Block, props: object = {}) {
@@ -36,6 +43,11 @@ class Router {
         this._onRoute(window.location.pathname);
     }
 
+    public onRoute(callback: () => void) {
+        this._onRouteCallback = callback;
+        return this;
+    }
+
     _onRoute(pathname: string) {
 
         let route = this._routes.find(route => route.match(pathname));
@@ -52,11 +64,15 @@ class Router {
         }
         this._currentRoute = route;
 
+        if (!this._unprotectedPaths.includes(pathname as `/${string}`)) {
+            this._onRouteCallback();
+        }
+
         route.render();
     }
 
     go(pathname: string) {
-        console.log('pathname', pathname);
+        console.log('go', pathname);
         history.pushState({}, '', pathname);
         this._onRoute(pathname);
     }

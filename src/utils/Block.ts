@@ -108,7 +108,6 @@ class Block<Props extends Record<string, any> = unknown> {
     }
 
     compile(template) {
-        console.log('template', template);
         const element = document.createElement('template');
         element.innerHTML = template;
         this._components.forEach(item => {
@@ -127,7 +126,6 @@ class Block<Props extends Record<string, any> = unknown> {
     setProps(newProps) {
         if (JSON.stringify(newProps) !== JSON.stringify(this.props)) {
             Object.assign(this.props, newProps);
-            console.log('this.props', this.props);
             this._eventBus.emit(Events.CDU, newProps);
         }
     }

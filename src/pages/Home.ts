@@ -6,6 +6,7 @@ import MessageForm from '../components/MessageForm/MessageForm';
 import Block from '../utils/Block';
 import store, {UPDATED} from '../utils/Store';
 import Link from '../components/Link/Link';
+import {DEFAULT_AVATAR} from '../config/config';
 
 const messageList = new MessageList({messages});
 const chatList = new Chats({chats});
@@ -17,6 +18,10 @@ const link = new Link({
 });
 
 function getTemplate(user) {
+    let {avatar, firstName} = user;
+    if (!avatar) {
+        avatar = DEFAULT_AVATAR;
+    }
     return `<nav class="chat__navigation">
                         <div class="chat__profile">
                             <div id="link"></div>
@@ -27,8 +32,8 @@ function getTemplate(user) {
                     <div class="preview">
                         <div class="preview__header">
                             <div class="user">
-                                <img class="user__avatar" src=${user.avatar}/>
-                                <span class="user__name">${user.firstName}</span>
+                                <img class="user__avatar" src=${avatar}/>
+                                <span class="user__name">${firstName}</span>
                             </div>
                             <button class="button menu">
                                 <div class="dot"></div>

@@ -26,8 +26,8 @@ class AuthController {
                 if (!res.reason || res.reason === 'User already in system') {
                     console.log('inside if');
                     authApi.getUser().then(res => {
-                        console.log('save to store', res);
                         store.set('user', res);
+                        localStorage.setItem('user', JSON.stringify(res));
                         router.go('/messenger');
                     });
                 }
@@ -35,11 +35,24 @@ class AuthController {
             .catch(error => console.log(error));
     }
 
+    public checkAuth() {
+        authApi.getUser().then(res => {
+            if (res.reason) {
+                throw new Error('error');
+            }
+            store.set('user', res);
+        }).catch(error => {
+            console.log(error);
+            router.go('/');
+        });
+    }
+
     public logout() {
         authApi.logout()
             .then(res => {
                 console.log('save to store!!!', res);
                 store.set('user', {});
+                localStorage.removeItem('user');
                 router.go('/');
             })
             .catch(error => console.log(error));

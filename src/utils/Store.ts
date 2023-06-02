@@ -13,7 +13,7 @@ class Store extends EventBus {
     }
 
     private state = {
-        user: {}
+        user: JSON.parse(<string>localStorage.getItem('user')) || {}
     };
 
     getState(): StateType {
@@ -22,6 +22,7 @@ class Store extends EventBus {
 
     public set(path: string, value: unknown) {
         set(this.state, path, value);
+        localStorage.setItem('user', JSON.stringify(value));
 
         // метод EventBus
         this.emit(UPDATED);

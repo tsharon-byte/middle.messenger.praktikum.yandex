@@ -3,6 +3,7 @@ import store, {UPDATED} from '../utils/Store';
 import Button from '../components/Button/Button';
 import AuthController from '../controller/AuthController';
 import Link from '../components/Link/Link';
+import {DEFAULT_AVATAR} from '../config/config';
 
 
 const authController = new AuthController();
@@ -12,7 +13,7 @@ const button = new Button({
     events: {
         'click': (event) => {
             event.preventDefault();
-            console.log('click2');
+            console.log('click3');
             authController.logout();
         }
     }
@@ -36,30 +37,14 @@ const linkChangePassword = new Link({
     children: 'Изменить пароль'
 });
 
-class Settings extends Block {
-    constructor() {
-        super('section', {
-            attrs: {
-                'class': 'settings'
-            },
-            button,
-            link,
-            linkChangeProfile,
-            linkChangePassword
-        });
-        store.on(UPDATED, () => {
-            this.setProps({user: store.getState().user || {}});
-        });
-    }
+const mockString = '-';
 
-    render() {
-        const user: UserType | NonNullable<unknown> = this.props.user || {};
-        const mockString = '-';
-        const template = `<div id="link"></div>
+function getTemplate(user) {
+    return `<div id="link"></div>
                     <div class="settings__content">
                         <div class="settings__header">
-                            <img class="settings__avatar" src=${user.avatar}/>
-                            <div class="settings__name">${user.name || mockString}</div>
+                            <img class="settings__avatar" src=${user.avatar || DEFAULT_AVATAR}/>
+                            <div class="settings__name">${user.firstName || mockString}</div>
                         </div>
                         <form class="settings__main" name="settings">
                             <div class="settings__field">
@@ -93,6 +78,27 @@ class Settings extends Block {
                             <div class="settings__link"><div id="button"></div></div>
                         </div>
                     </div>`;
+}
+
+class Settings extends Block {
+    constructor() {
+        super('section', {
+            attrs: {
+                'class': 'settings'
+            },
+            button,
+            link,
+            linkChangeProfile,
+            linkChangePassword
+        });
+        store.on(UPDATED, () => {
+            this.setProps({user: store.getState().user});
+        });
+    }
+
+    render() {
+        const user: UserType | NonNullable<unknown> = this.props.user || {};
+        const template = getTemplate(user);
         return this.compile(template);
     }
 }
