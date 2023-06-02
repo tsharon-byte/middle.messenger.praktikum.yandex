@@ -6,12 +6,14 @@ class Block<Props extends Record<string, any> = unknown> {
     private readonly _eventBus: EventBus;
     private _el: HTMLElement;
     private readonly _tag: string;
-    private readonly _components: Props[];
+    private _components: Props[];
+    protected propsAndComponents: Props;
 
     constructor(tag = 'div', propsAndComponents: any = {}) {
         this._tag = tag;
         const {props, components} = this.extractPropsAndComponents(propsAndComponents);
         this.props = props;
+        this.propsAndComponents = propsAndComponents;
         this._components = components;
         this._eventBus = new EventBus();
         this._addEventListeners = this._addEventListeners.bind(this);
@@ -81,8 +83,12 @@ class Block<Props extends Record<string, any> = unknown> {
         this._eventBus.on(Events.RENDER, this._render);
     }
 
-    // eslint-disable-next-line @typescript-eslint/no-empty-function
     _componentDidMount(): void {
+        this.componentDidMount();
+    }
+
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
+    componentDidMount(): void {
     }
 
     dispatchComponentDidMount(): void {
@@ -123,7 +129,13 @@ class Block<Props extends Record<string, any> = unknown> {
         return this._el;
     }
 
+    setComponents(components) {
+        console.log('setComponents', components);
+        this._components = components;
+    }
+
     setProps(newProps) {
+        console.log('setProps');
         if (JSON.stringify(newProps) !== JSON.stringify(this.props)) {
             Object.assign(this.props, newProps);
             this._eventBus.emit(Events.CDU, newProps);

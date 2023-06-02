@@ -24,10 +24,8 @@ class AuthController {
             .then(res => {
                 console.log('result', res);
                 if (!res.reason || res.reason === 'User already in system') {
-                    console.log('inside if');
                     authApi.getUser().then(res => {
                         store.set('user', res);
-                        localStorage.setItem('user', JSON.stringify(res));
                         router.go('/messenger');
                     });
                 }

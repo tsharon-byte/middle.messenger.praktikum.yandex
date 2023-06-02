@@ -1,13 +1,19 @@
 import ChatApi from '../api/ChatsApi';
+import store from '../utils/Store';
 
 class ChatController {
 
     public create(data) {
-        return ChatApi.create(data).then(data => console.log('save to store', data));
+        return ChatApi.create(data).then(data => {
+            console.log('save to store', data);
+        });
     }
 
-    public request() {
-        return ChatApi.request().then(data => console.log('save to store', data));
+    public getAll() {
+        return ChatApi.getAll().then(data => {
+            console.log('save to store', data);
+            store.set('chats', data);
+        });
     }
 
     public removeChat(chatId: number) {
@@ -19,4 +25,4 @@ class ChatController {
     }
 }
 
-export default ChatController;
+export default new ChatController();

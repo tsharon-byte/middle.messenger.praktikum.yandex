@@ -31,6 +31,7 @@ class Route {
         if (this._root) {
             this._root.innerHTML = '';
             this._root.appendChild(this._block.getElement());
+            this._block.dispatchComponentDidMount();
         } else {
             console.error('error: can\'t add element to element with selector ' + this._props.selector);
         }

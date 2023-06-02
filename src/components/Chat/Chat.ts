@@ -1,4 +1,5 @@
 import Block from '../../utils/Block';
+import {DEFAULT_AVATAR} from '../../config/config';
 
 class Chat extends Block {
     constructor(props: ChatType) {
@@ -13,17 +14,17 @@ class Chat extends Block {
     }
 
     render() {
-        const {name, avatar, lastMessage, time, unreadMessages} = this.props;
-        const unread = unreadMessages > 0
-            ? `<span class="chat__unread-messages">${unreadMessages}</span>`
+        const {title, avatar, last_message, time, unread_count} = this.props;
+        const unread = unread_count > 0
+            ? `<span class="chat__unread-messages">${unread_count}</span>`
             : '';
-        const template = `<img class="chat__avatar" src=${avatar}/>
+        const template = `<img class="chat__avatar" src=${avatar || DEFAULT_AVATAR}/>
                                   <div class="chat__content">
-                                        <span class="chat__name">${name}</span>
-                                        <span class="chat__last-message">${lastMessage}</span>
+                                        <span class="chat__name">${title}</span>
+                                        <span class="chat__last-message">${last_message || ''}</span>
                                   </div>
                                   <div class="chat__right-part">
-                                        <time class="chat__time">${time}</time>                                  
+                                        <time class="chat__time">${time || ''}</time>                                  
                                         ${unread}                               
                                   </div>`;
         return this.compile(template);

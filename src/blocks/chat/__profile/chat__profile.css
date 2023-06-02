@@ -2,7 +2,7 @@
     min-height: 56px;
     display: flex;
     align-items: center;
-    justify-content: end;
+    justify-content: space-between;
     font-size: 12px;
     line-height: 12px;
     color: var(--secondaryText);
