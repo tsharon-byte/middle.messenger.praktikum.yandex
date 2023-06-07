@@ -1,5 +1,6 @@
 type ButtonProps = {
     className: string,
     text?: string,
-    events?: object
+    events?: object,
+    children?: string
 }

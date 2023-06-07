@@ -130,12 +130,10 @@ class Block<Props extends Record<string, any> = unknown> {
     }
 
     setComponents(components) {
-        console.log('setComponents', components);
         this._components = components;
     }
 
     setProps(newProps) {
-        console.log('setProps');
         if (JSON.stringify(newProps) !== JSON.stringify(this.props)) {
             Object.assign(this.props, newProps);
             this._eventBus.emit(Events.CDU, newProps);

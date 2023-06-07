@@ -17,7 +17,7 @@ const link = new Link({
 
 class LoginForm extends Block {
     constructor() {
-        const button = new Button({className: 'button form__button', text: 'Войти'});
+        const button = new Button({className: 'button form__button', children: 'Войти'});
         super('form', {
             attrs: {'class': 'form', 'name': FORM_NAME, 'novalidate': true},
             events: {

@@ -5,16 +5,14 @@ import Input from '../Input/Input';
 import UserController from '../../controller/UserController';
 
 const FORM_NAME = 'changePasswordForm';
-const button = new Button({className: 'button form__button', text: 'Сохранить'});
-
-const userController = new UserController();
+const button = new Button({className: 'button form__button', children: 'Сохранить'});
 
 class ChangePasswordForm extends Block {
     constructor() {
         super('form', {
             attrs: {'class': 'settings__main', 'name': FORM_NAME, 'novalidate': true},
             events: {
-                'submit': (event) => handleSubmit(event, FORM_NAME, button, userController.changeUserPassword)
+                'submit': (event) => handleSubmit(event, FORM_NAME, button, UserController.changeUserPassword)
             },
             button,
             oldPasswordInput: new Input({

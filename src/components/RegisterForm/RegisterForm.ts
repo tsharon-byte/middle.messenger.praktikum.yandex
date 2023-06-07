@@ -17,7 +17,7 @@ const link = new Link({
 
 class RegisterForm extends Block {
     constructor() {
-        const button = new Button({className: 'button form__button', text: 'Зарегистрироваться'});
+        const button = new Button({className: 'button form__button', children: 'Зарегистрироваться'});
         super('form', {
             attrs: {'class': 'form', 'name': FORM_NAME, 'novalidate': true},
             events: {

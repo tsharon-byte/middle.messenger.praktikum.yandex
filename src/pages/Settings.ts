@@ -9,11 +9,10 @@ import {DEFAULT_AVATAR} from '../config/config';
 const authController = new AuthController();
 const button = new Button({
     className: 'link',
-    text: 'Выйти',
+    children: 'Выйти',
     events: {
         'click': (event) => {
             event.preventDefault();
-            console.log('click3');
             authController.logout();
         }
     }

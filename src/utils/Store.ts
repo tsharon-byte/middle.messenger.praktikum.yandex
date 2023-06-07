@@ -25,7 +25,6 @@ class Store extends EventBus {
     }
 
     public set(path: string, value: unknown) {
-        console.log('set', path, value);
         set(this.state, path, value);
         localStorage.setItem(path, JSON.stringify(value));
 

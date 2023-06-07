@@ -3,7 +3,6 @@ import {router} from '../../router';
 
 function handleClick(event, href) {
     event.preventDefault();
-    console.log('handleClick');
     router.go(href);
 }
 

@@ -10,9 +10,7 @@ const FORM_NAME = 'changeProfileForm';
 const mockString = '-';
 const current = localStorage.getItem('id') || '1';
 const currentItem: ChatType = chats.find(item => item.id === current);
-const button = new Button({className: 'button form__button', text: 'Сохранить'});
-
-const userController = new UserController();
+const button = new Button({className: 'button form__button', children: 'Сохранить'});
 
 function getTemplate(user) {
     return `<div class="settings__field">
@@ -44,11 +42,10 @@ function getTemplate(user) {
 
 class ChangeProfileForm extends Block {
     constructor(user) {
-        console.log(user, 'ChangeProfileForm user');
         super('form', {
             attrs: {'class': 'settings__main', 'name': FORM_NAME, 'novalidate': true},
             events: {
-                'submit': (event) => handleSubmit(event, FORM_NAME, button, userController.changeUserProfile)
+                'submit': (event) => handleSubmit(event, FORM_NAME, button, UserController.changeUserProfile)
             },
             button,
             loginInput: new Input({

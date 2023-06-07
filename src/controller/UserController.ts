@@ -11,18 +11,20 @@ class UserController {
             oldPassword: data.old_password,
             newPassword: data.new_password
         }).then(res => {
-            console.log('result', res);
             router.go('/settings');
         });
     }
 
     public changeUserProfile(data: UserDataType) {
         return userApi.changeUserProfile(data).then(res => {
-            console.log('save to store', res);
             store.set('user', res);
             router.go('/settings');
         });
     }
+
+    public searchForUserByLogin(login: string) {
+        return userApi.searchForUserByLogin(login);
+    }
 }
 
-export default UserController;
+export default new UserController();

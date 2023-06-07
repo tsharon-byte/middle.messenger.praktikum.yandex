@@ -7,10 +7,8 @@ const authApi = new AuthApi();
 class AuthController {
     public signup(data: SignupType) {
         authApi.signup(data).then(res => {
-            console.log('save to store', res);
             if (!res.reason) {
                 authApi.getUser().then(res => {
-                    console.log('save to store', res);
                     store.set('user', res);
                     router.go('/messenger');
                 });
@@ -22,7 +20,6 @@ class AuthController {
     public signin(data: SignupType) {
         authApi.signin(data)
             .then(res => {
-                console.log('result', res);
                 if (!res.reason || res.reason === 'User already in system') {
                     authApi.getUser().then(res => {
                         store.set('user', res);
@@ -48,7 +45,6 @@ class AuthController {
     public logout() {
         authApi.logout()
             .then(res => {
-                console.log('save to store!!!', res);
                 store.set('user', {});
                 localStorage.removeItem('user');
                 router.go('/');

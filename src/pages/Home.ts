@@ -9,8 +9,9 @@ import {DEFAULT_AVATAR} from '../config/config';
 import Popup from '../components/Popup/Popup';
 import AddChatForm from '../components/AddChatForm/AddChatForm';
 import Button from '../components/Button/Button';
-import {ADD_CHAT_MODAL_NAME} from '../config/constant';
+import {ADD_CHAT_MODAL_NAME, ADD_USER_MODAL_NAME} from '../config/constant';
 import ChatController from '../controller/ChatController';
+import AddUserForm from '../components/AddUserForm/AddUserForm';
 
 const messageList = new MessageList({messages});
 const chatList = new Chats({chats: []});
@@ -23,7 +24,8 @@ const link = new Link({
 });
 
 function getTemplate(user) {
-    let {avatar, firstName} = user;
+    let {avatar} = user;
+    const {firstName} = user;
     if (!avatar) {
         avatar = DEFAULT_AVATAR;
     }
@@ -41,35 +43,62 @@ function getTemplate(user) {
                                 <img class="user__avatar" src=${avatar}/>
                                 <span class="user__name">${firstName}</span>
                             </div>
-                            <button class="button menu">
-                                <div class="dot"></div>
-                                <div class="dot"></div>
-                                <div class="dot"></div>
-                            </button>
+                            <div class="dropdown">
+                                <button class="button dropdown__menu">
+                                    <div class="dot"></div>
+                                    <div class="dot"></div>
+                                    <div class="dot"></div>
+                                </button>
+                                <ul class="dropdown__content">
+                                    <li class="dropdown__item" id="addUser">
+                                    </li>
+                                    <li class="dropdown__item" id="removeUser">
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
                         <div class="preview__main">
                         <div id="messages"></div>
                         </div>
                        <div id="messageForm"></div>
                     </div>
-<div id="modal"></div>`;
+<div id="modal"></div><div id="addUserModal"></div>`;
 }
 
 class Home extends Block {
     private chats: Chats;
 
     constructor() {
-        console.log('Home constructor');
         super('section', {
             attrs: {
                 'class': 'chat'
             },
             link,
             modal: new Popup({children: new AddChatForm(), name: ADD_CHAT_MODAL_NAME}),
+            addUserModal: new Popup({children: new AddUserForm(), name: ADD_USER_MODAL_NAME}),
             chats: chatList,
+            addUser: new Button({
+                className: 'dropdown__item',
+                children: '<div class="dropdown__add"></div><span>Добавить пользователя</span>',
+                events: {
+                    'click': () => {
+                        store.set(ADD_USER_MODAL_NAME, true);
+                    }
+                }
+            }),
+            removeUser: new Button({
+                className: 'dropdown__item',
+                children: '<div class="dropdown__remove"></div><span>Удалить пользователя</span>',
+                events: {
+                    'click': () => {
+                        console.log('removeUser');
+                    }
+                }
+            }),
             createChat: new Button({
                 className: '',
-                text: 'Создать чат', events: {
+                children: 'Создать чат',
+                events: {
                     'click': () => {
                         store.set(ADD_CHAT_MODAL_NAME, true);
                     }
@@ -87,12 +116,10 @@ class Home extends Block {
     }
 
     componentDidMount() {
-        console.log('componentDidMount Home');
         ChatController.getAll();
     }
 
     render() {
-        console.log('render Home');
         const user: UserType | NonNullable<unknown> = this.props.user || {};
         const template = getTemplate(user);
         return this.compile(template);

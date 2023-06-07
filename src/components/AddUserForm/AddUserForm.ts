@@ -5,34 +5,41 @@ import {handleSubmit, onInput} from '../../utils/validation';
 import chatController from '../../controller/ChatController';
 import store from '../../utils/Store';
 import {ADD_CHAT_MODAL_NAME} from '../../config/constant';
+import UserController from '../../controller/UserController';
 
-const FORM_NAME = 'addChatPopupForm';
+const FORM_NAME = 'addUserPopupForm';
 const button = new Button({className: 'button form__button', children: 'Добавить'});
 
-const title = new Input({
+const login = new Input({
     className: 'input',
-    placeholder: 'Заголовок',
-    name: 'title',
+    placeholder: 'Логин',
+    name: 'login',
     minlength: '1',
     maxlength: '20',
     pattern: '[a-zA-Z\\-_0-9]{1,20}',
     required: true,
     events: {
-        'input': (event) => onInput(event, 'title', button, FORM_NAME)
+        'input': (event) => onInput(event, 'login', button, FORM_NAME)
     }
 });
 
 function handleSubmitCallback(data) {
-    chatController.create(data)
-        .then(() => {
-            chatController.getAll();
-        })
+    const login = data.login;
+    const chatId = JSON.parse(<string>localStorage.getItem('chat'));
+    UserController.searchForUserByLogin(login).then(result => {
+        const users: [] = result.map(item => item.id);
+        chatController.addUser({
+            users,
+            chatId
+        });
+    }
+    )
         .then(() => {
             store.set(ADD_CHAT_MODAL_NAME, false);
         });
 }
 
-class AddChatForm extends Block {
+class AddUserForm extends Block {
     constructor() {
 
         super('form', {
@@ -45,17 +52,17 @@ class AddChatForm extends Block {
             events: {
                 'submit': (event) => handleSubmit(event, FORM_NAME, button, handleSubmitCallback)
             },
-            title,
+            login,
             button
         });
     }
 
     render() {
-        const template = `<h2 class="form__title">Создать чат</h2>
-                    <input id="title">
+        const template = `<h2 class="form__title">Добавить пользователя</h2>
+                    <input id="login">
                     <button id="button"></button>`;
         return this.compile(template);
     }
 }
 
-export default AddChatForm;
+export default AddUserForm;

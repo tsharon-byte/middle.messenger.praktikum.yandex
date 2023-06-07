@@ -2,8 +2,13 @@ import Block from '../../utils/Block';
 import Input from '../Input/Input';
 import {handleSubmit, onInput} from '../../utils/validation';
 import Button from '../Button/Button';
+import ChatController from '../../controller/ChatController';
 
 const FORM_NAME = 'sendMessageForm';
+
+function handleMessageSubmit(data) {
+    ChatController.sendMessage(data);
+}
 
 class MessageForm extends Block {
     constructor() {
@@ -13,7 +18,7 @@ class MessageForm extends Block {
             events: {
                 //TODO: possibly to use WebSockets here
                 // eslint-disable-next-line @typescript-eslint/no-empty-function
-                'submit': (event) => handleSubmit(event, FORM_NAME, button, () => {})
+                'submit': (event) => handleSubmit(event, FORM_NAME, button, handleMessageSubmit)
             },
             button,
             messageInput: new Input({

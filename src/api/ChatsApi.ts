@@ -9,6 +9,10 @@ class ChatsApi extends BaseApi {
         return this.post('/', getOptions(data));
     }
 
+    public getToken(id: unknown) {
+        return this.post(`/token/${id}`, getOptions());
+    }
+
     public getAll() {
         return this.get('/', getOptions());
     }

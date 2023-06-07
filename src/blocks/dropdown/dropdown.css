@@ -1,0 +1,77 @@
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown__menu {
+    background: #F5F5F5;
+    background-size: cover;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.dropdown__content {
+    display: none;
+    position: absolute;
+    right: 0;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 14px;
+    color: var(--primary-text);
+}
+
+/* Links inside the dropdown */
+.dropdown__content .dropdown__item {
+    color: black;
+    text-decoration: none;
+    width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    padding: 15px;
+    gap: 15px;
+    align-items: center;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown__content .dropdown__item:hover {
+    background-color: var(--primary);
+    color: var(--primary-text);
+}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown__content {
+    display: block;
+}
+
+/* Change the background color of the dropdown button when the dropdown content is shown */
+.dropdown:hover .dropdown__menu {
+    background-color: var(--primary-text);
+}
+
+.dropdown__add {
+    background-image: url("../../images/add-user.svg");
+    background-size: cover;
+    min-width: 22px;
+    min-height: 22px;
+}
+.dropdown__remove{
+    background-image: url("../../images/remove-user.svg");
+    background-size: cover;
+    min-width: 22px;
+    min-height: 22px;
+}

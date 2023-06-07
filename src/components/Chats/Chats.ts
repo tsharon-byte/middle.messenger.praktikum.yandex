@@ -6,7 +6,7 @@ function getTemplate(chats) {
 }
 
 const onClick = (id) => {
-    console.log('click', id);
+    localStorage.setItem('chat', id);
 };
 
 class Chats extends Block {

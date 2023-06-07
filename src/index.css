@@ -41,7 +41,7 @@
 @import url(blocks/preview/__input/preview__input.css);
 @import url(blocks/preview/__enter/preview__enter.css);
 @import url(blocks/preview/__add/preview__add.css);
-@import url(blocks/menu/menu.css);
+@import url(blocks/dropdown/dropdown.css);
 @import url(blocks/dot/dot.css);
 @import url(blocks/user/user.css);
 @import url(blocks/user/__name/user__name.css);
