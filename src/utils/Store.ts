@@ -1,24 +1,33 @@
 import EventBus from './EventBus';
 import set from './set';
-import {ADD_CHAT_MODAL_NAME} from '../config/constant';
+import {ADD_CHAT_MODAL_NAME, ADD_USER_MODAL_NAME, CURRENT_CHAT_NAME, REMOVE_USER_MODAL_NAME} from '../config/constant';
 
 export const UPDATED = 'updated';
 type StateType = {
-    chats?: [];
-    user: UserDataType | NonNullable<unknown>,
-    [ADD_CHAT_MODAL_NAME]: boolean
+    chats?: ChatType[];
+    user: UserType | NonNullable<unknown>,
+    [ADD_CHAT_MODAL_NAME]: boolean,
+    [ADD_USER_MODAL_NAME]: boolean,
+    [REMOVE_USER_MODAL_NAME]: boolean,
+    [CURRENT_CHAT_NAME]: number|undefined
 }
 
 class Store extends EventBus {
+    private state: StateType;
+
     constructor() {
         super();
         console.log('Store constructor');
+        this.state = {
+            user: JSON.parse(<string>localStorage.getItem('user')) || {},
+            [ADD_CHAT_MODAL_NAME]: JSON.parse(<string>localStorage.getItem(ADD_CHAT_MODAL_NAME)) || false,
+            [ADD_USER_MODAL_NAME]: JSON.parse(<string>localStorage.getItem(ADD_USER_MODAL_NAME)) || false,
+            [REMOVE_USER_MODAL_NAME]: JSON.parse(<string>localStorage.getItem(REMOVE_USER_MODAL_NAME)) || false,
+            chats: [],
+            [CURRENT_CHAT_NAME]: JSON.parse(<string>localStorage.getItem(CURRENT_CHAT_NAME))
+        };
     }
 
-    private state = {
-        user: JSON.parse(<string>localStorage.getItem('user')) || {},
-        [ADD_CHAT_MODAL_NAME]: JSON.parse(<string>localStorage.getItem(ADD_CHAT_MODAL_NAME)) || false
-    };
 
     getState(): StateType {
         return this.state;

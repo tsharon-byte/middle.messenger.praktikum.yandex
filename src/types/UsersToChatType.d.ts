@@ -2,5 +2,5 @@ type UsersToChatType = {
     users: [
         number
     ],
-    chatId: number
+    chatId: number | undefined
 }

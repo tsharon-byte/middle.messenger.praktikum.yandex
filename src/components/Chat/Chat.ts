@@ -1,9 +1,11 @@
 import Block from '../../utils/Block';
 import {DEFAULT_AVATAR} from '../../config/config';
+import {CURRENT_CHAT_NAME} from '../../config/constant';
+import store from '../../utils/Store';
 
 class Chat extends Block {
     constructor(props: ChatType) {
-        const currentIx = localStorage.getItem('id') || '1';
+        const currentIx = store.getState()[CURRENT_CHAT_NAME];
         const {id = '1'} = props;
         super('li', {
             ...props, attrs: {

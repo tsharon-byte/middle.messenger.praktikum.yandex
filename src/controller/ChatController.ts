@@ -1,5 +1,6 @@
 import ChatApi from '../api/ChatsApi';
 import store from '../utils/Store';
+import {CURRENT_CHAT_NAME} from '../config/constant';
 
 class ChatController {
     constructor() {
@@ -13,48 +14,50 @@ class ChatController {
     }
 
     public sendMessage(data) {
-        const id = JSON.parse(<string>localStorage.getItem('chat'));
-        ChatApi.getToken(id).then(result => {
-            const token = result.token;
-            const user = store.getState().user.id;
-            const url = `wss://ya-praktikum.tech/ws/chats/${user}/${id}/${token}`;
-            const socket = new WebSocket(url);
-            socket.addEventListener('open', () => {
-                console.log('Соединение установлено');
+        const id = store.getState()[CURRENT_CHAT_NAME];
+        if (id) {
+            ChatApi.getToken(id).then(result => {
+                const token = result.token;
+                const user = store.getState().user.id;
+                const url = `wss://ya-praktikum.tech/ws/chats/${user}/${id}/${token}`;
+                const socket = new WebSocket(url);
+                socket.addEventListener('open', () => {
+                    console.log('Соединение установлено');
 
-                socket.send(JSON.stringify({
-                    content: data.message,
-                    type: 'message',
-                }));
+                    socket.send(JSON.stringify({
+                        content: data.message,
+                        type: 'message',
+                    }));
+                });
+
+                socket.addEventListener('close', event => {
+                    if (event.wasClean) {
+                        console.log('Соединение закрыто чисто');
+                    } else {
+                        console.log('Обрыв соединения');
+                    }
+
+                    console.log(`Код: ${event.code} | Причина: ${event.reason}`);
+                });
+
+                socket.addEventListener('message', event => {
+                    console.log('Получены данные', event.data);
+                });
+
+                socket.addEventListener('error', event => {
+                    console.log('Ошибка', event.message);
+                });
             });
-
-            socket.addEventListener('close', event => {
-                if (event.wasClean) {
-                    console.log('Соединение закрыто чисто');
-                } else {
-                    console.log('Обрыв соединения');
-                }
-
-                console.log(`Код: ${event.code} | Причина: ${event.reason}`);
-            });
-
-            socket.addEventListener('message', event => {
-                console.log('Получены данные', event.data);
-            });
-
-            socket.addEventListener('error', event => {
-                console.log('Ошибка', event.message);
-            });
-        });
+        }
     }
 
     public getAll() {
         return ChatApi.getAll().then(chats => {
             store.set('chats', chats);
             if (chats.length > 0) {
-                localStorage.setItem('chat', chats[0].id);
+                store.set(CURRENT_CHAT_NAME, chats[0].id);
             } else {
-                localStorage.removeItem('chat');
+                store.set(CURRENT_CHAT_NAME, undefined);
             }
         });
     }

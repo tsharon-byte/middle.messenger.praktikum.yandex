@@ -1,7 +1,8 @@
-import {chats} from '../utils/mockData';
 import Block from '../utils/Block';
 import ChangePasswordForm from '../components/ChangePasswordForm/ChangePasswordForm';
 import Link from '../components/Link/Link';
+import store from '../utils/Store';
+import {DEFAULT_AVATAR} from '../config/config';
 
 const link = new Link({
     href: '/messenger',
@@ -21,14 +22,13 @@ class ChangePassword extends Block {
     }
 
     render() {
-        const current = localStorage.getItem('id') || '1';
-        const currentItem: ChatType = chats.find(item => item.id === current);
+        const user = store.getState().user || {};
         const mockString = '-';
         const template = `<div id="link"></div>
                           <div class="settings__content">
                             <div class="settings__header">
-                              <img class="settings__avatar" src=${currentItem.avatar}/>
-                              <div class="settings__name">${currentItem.name || mockString}</div>
+                              <img class="settings__avatar" src=${user.avatar || DEFAULT_AVATAR}/>
+                              <div class="settings__name">${user.firstName || mockString}</div>
                             </div>
                             <form id="changePasswordForm"></form>
                           </div>`;

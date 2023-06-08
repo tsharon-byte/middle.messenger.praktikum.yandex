@@ -1,5 +1,4 @@
 import Block from '../../utils/Block';
-import {chats} from '../../utils/mockData';
 import Button from '../Button/Button';
 import Input from '../Input/Input';
 import {handleSubmit, onInput} from '../../utils/validation';
@@ -8,8 +7,6 @@ import store, {UPDATED} from '../../utils/Store';
 
 const FORM_NAME = 'changeProfileForm';
 const mockString = '-';
-const current = localStorage.getItem('id') || '1';
-const currentItem: ChatType = chats.find(item => item.id === current);
 const button = new Button({className: 'button form__button', children: 'Сохранить'});
 
 function getTemplate(user) {
@@ -100,7 +97,7 @@ class ChangeProfileForm extends Block {
                 containerClassName: 'form__input',
                 placeholder: 'Имя в чате',
                 name: 'display_name',
-                pattern: '^[А-ЯA-Z]{1}[a-zА-Яа-яA-Z\\-]*',
+                pattern: '.*',//'^[А-ЯA-Z]{1}[a-zА-Яа-яA-Z\\-]*',
                 value: user.displayName || mockString,
                 events: {
                     'input': (event) => onInput(event, 'second_name', button, FORM_NAME)

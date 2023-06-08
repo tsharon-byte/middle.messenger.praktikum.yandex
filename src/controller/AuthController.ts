@@ -44,9 +44,8 @@ class AuthController {
 
     public logout() {
         authApi.logout()
-            .then(res => {
+            .then(() => {
                 store.set('user', {});
-                localStorage.removeItem('user');
                 router.go('/');
             })
             .catch(error => console.log(error));

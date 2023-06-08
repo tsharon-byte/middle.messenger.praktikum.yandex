@@ -9,7 +9,7 @@ import {DEFAULT_AVATAR} from '../config/config';
 import Popup from '../components/Popup/Popup';
 import AddChatForm from '../components/AddChatForm/AddChatForm';
 import Button from '../components/Button/Button';
-import {ADD_CHAT_MODAL_NAME, ADD_USER_MODAL_NAME, REMOVE_USER_MODAL_NAME} from '../config/constant';
+import {ADD_CHAT_MODAL_NAME, ADD_USER_MODAL_NAME, CURRENT_CHAT_NAME, REMOVE_USER_MODAL_NAME} from '../config/constant';
 import ChatController from '../controller/ChatController';
 import AddUserForm from '../components/AddUserForm/AddUserForm';
 import RemoveUserForm from '../components/RemoveUserForm/RemoveUserForm';
@@ -24,9 +24,9 @@ const link = new Link({
     children: '<span>Профиль</span>\n' + '<span class="chat__button"></span>'
 });
 
-function getTemplate(user) {
-    let {avatar} = user;
-    const {firstName} = user;
+function getTemplate(chat) {
+    let {avatar} = chat;
+    const {title} = chat;
     if (!avatar) {
         avatar = DEFAULT_AVATAR;
     }
@@ -42,7 +42,7 @@ function getTemplate(user) {
                         <div class="preview__header">
                             <div class="user">
                                 <img class="user__avatar" src=${avatar}/>
-                                <span class="user__name">${firstName}</span>
+                                <span class="user__name">${title}</span>
                             </div>
                             <div class="dropdown">
                                 <button class="button dropdown__menu">
@@ -113,7 +113,7 @@ class Home extends Block {
         });
         store.on(UPDATED, () => {
             this.setProps({
-                user: store.getState().user,
+                chat: store.getState().chats.find(item => item.id === store.getState()[CURRENT_CHAT_NAME]),
             });
             this.propsAndComponents.chats.setProps({chats: store.getState().chats});
         });
@@ -124,8 +124,9 @@ class Home extends Block {
     }
 
     render() {
-        const user: UserType | NonNullable<unknown> = this.props.user || {};
-        const template = getTemplate(user);
+        const chat = this.props.chat || {};
+        console.log('chat', chat);
+        const template = getTemplate(chat);
         return this.compile(template);
     }
 }

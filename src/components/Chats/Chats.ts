@@ -1,12 +1,14 @@
 import Block from '../../utils/Block';
 import Chat from '../Chat/Chat';
+import {CURRENT_CHAT_NAME} from '../../config/constant';
+import store from '../../utils/Store';
 
 function getTemplate(chats) {
     return chats.map(item => `<li id="${'chat_' + item.id}">${item.id}</li>`).join('');
 }
 
 const onClick = (id) => {
-    localStorage.setItem('chat', id);
+    store.set(CURRENT_CHAT_NAME, id);
 };
 
 class Chats extends Block {
