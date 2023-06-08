@@ -9,9 +9,10 @@ import {DEFAULT_AVATAR} from '../config/config';
 import Popup from '../components/Popup/Popup';
 import AddChatForm from '../components/AddChatForm/AddChatForm';
 import Button from '../components/Button/Button';
-import {ADD_CHAT_MODAL_NAME, ADD_USER_MODAL_NAME} from '../config/constant';
+import {ADD_CHAT_MODAL_NAME, ADD_USER_MODAL_NAME, REMOVE_USER_MODAL_NAME} from '../config/constant';
 import ChatController from '../controller/ChatController';
 import AddUserForm from '../components/AddUserForm/AddUserForm';
+import RemoveUserForm from '../components/RemoveUserForm/RemoveUserForm';
 
 const messageList = new MessageList({messages});
 const chatList = new Chats({chats: []});
@@ -62,7 +63,9 @@ function getTemplate(user) {
                         </div>
                        <div id="messageForm"></div>
                     </div>
-<div id="modal"></div><div id="addUserModal"></div>`;
+<div id="modal"></div>
+<div id="addUserModal"></div>
+<div id="removeUserModal"></div>`;
 }
 
 class Home extends Block {
@@ -76,6 +79,7 @@ class Home extends Block {
             link,
             modal: new Popup({children: new AddChatForm(), name: ADD_CHAT_MODAL_NAME}),
             addUserModal: new Popup({children: new AddUserForm(), name: ADD_USER_MODAL_NAME}),
+            removeUserModal: new Popup({children: new RemoveUserForm(), name: REMOVE_USER_MODAL_NAME}),
             chats: chatList,
             addUser: new Button({
                 className: 'dropdown__item',
@@ -91,7 +95,7 @@ class Home extends Block {
                 children: '<div class="dropdown__remove"></div><span>Удалить пользователя</span>',
                 events: {
                     'click': () => {
-                        console.log('removeUser');
+                        store.set(REMOVE_USER_MODAL_NAME, true);
                     }
                 }
             }),

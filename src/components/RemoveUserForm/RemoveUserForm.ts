@@ -4,11 +4,11 @@ import Input from '../Input/Input';
 import {handleSubmit, onInput} from '../../utils/validation';
 import chatController from '../../controller/ChatController';
 import store from '../../utils/Store';
-import {ADD_USER_MODAL_NAME} from '../../config/constant';
+import {REMOVE_USER_MODAL_NAME} from '../../config/constant';
 import UserController from '../../controller/UserController';
 
-const FORM_NAME = 'addUserPopupForm';
-const button = new Button({className: 'button form__button', children: 'Добавить'});
+const FORM_NAME = 'removeUserPopupForm';
+const button = new Button({className: 'button form__button', children: 'Удалить'});
 
 const login = new Input({
     className: 'input',
@@ -25,21 +25,21 @@ const login = new Input({
 
 function handleSubmitCallback(data) {
     const login = data.login;
-    const chatId = JSON.parse(<string>localStorage.getItem('chat'));
+    const chatId = <number>JSON.parse(<string>localStorage.getItem('chat'));
     UserController.searchForUserByLogin(login).then(result => {
         const users: number[] = result.map(item => item.id);
-        chatController.addUser({
+        chatController.removeUser({
             users,
             chatId
         });
     }
     )
         .then(() => {
-            store.set(ADD_USER_MODAL_NAME, false);
+            store.set(REMOVE_USER_MODAL_NAME, false);
         });
 }
 
-class AddUserForm extends Block {
+class RemoveUserForm extends Block {
     constructor() {
 
         super('form', {
@@ -58,11 +58,11 @@ class AddUserForm extends Block {
     }
 
     render() {
-        const template = `<h2 class="form__title">Добавить пользователя</h2>
+        const template = `<h2 class="form__title">Удалить пользователя</h2>
                     <input id="login">
                     <button id="button"></button>`;
         return this.compile(template);
     }
 }
 
-export default AddUserForm;
+export default RemoveUserForm;

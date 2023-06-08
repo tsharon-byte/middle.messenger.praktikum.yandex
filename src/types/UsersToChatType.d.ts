@@ -1,6 +1,6 @@
-type UsersToChatType={
+type UsersToChatType = {
     users: [
-        0
+        number
     ],
-    chatId: 0
+    chatId: number
 }

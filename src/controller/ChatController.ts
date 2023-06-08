@@ -67,6 +67,10 @@ class ChatController {
         return ChatApi.addUsersToChat(data).then(data => console.log('add user to chat result', data));
     }
 
+    public removeUser(data: UsersToChatType) {
+        return ChatApi.removeUsersFromChat(data).then(data => console.log('removeUser result', data));
+    }
+
     public requestChatUsers(chatId: number) {
         return ChatApi.requestChatUsers(chatId).then(data => console.log('save to store', data));
     }

@@ -58,7 +58,7 @@ class ChatsApi extends BaseApi {
         return this.put('/users', getOptions(data));
     }
 
-    public deleteUsersFromChat(data: UsersToChatType) {
+    public removeUsersFromChat(data: UsersToChatType) {
         return this.delete('/users', getOptions(data));
     }
 
