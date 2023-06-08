@@ -51,6 +51,46 @@ class ChatController {
         }
     }
 
+    public getAllMessages(): [] {
+        const id = store.getState()[CURRENT_CHAT_NAME];
+        console.log('receive all messages here by current chat ID', id);
+        if (id) {
+            ChatApi.getToken(id).then(result => {
+                const token = result.token;
+                const user = store.getState().user.id;
+                const url = `wss://ya-praktikum.tech/ws/chats/${user}/${id}/${token}`;
+                const socket = new WebSocket(url);
+                socket.addEventListener('open', () => {
+                    console.log('Соединение установлено');
+
+                    socket.send(JSON.stringify({
+                        content: '0',
+                        type: 'get old',
+                    }));
+                });
+
+                socket.addEventListener('close', event => {
+                    if (event.wasClean) {
+                        console.log('Соединение закрыто чисто');
+                    } else {
+                        console.log('Обрыв соединения');
+                    }
+
+                    console.log(`Код: ${event.code} | Причина: ${event.reason}`);
+                });
+
+                socket.addEventListener('message', event => {
+                    console.log('Получены данные', event.data);
+                    return event.data;
+                });
+
+                socket.addEventListener('error', event => {
+                    console.log('Ошибка', event.message);
+                });
+            });
+        }
+    }
+
     public getAll() {
         return ChatApi.getAll().then(chats => {
             store.set('chats', chats);

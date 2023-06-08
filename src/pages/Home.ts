@@ -1,5 +1,4 @@
 import Chats from '../components/Chats/Chats';
-import messages from '../utils/messages';
 import MessageList from '../components/MessageList/MessageList';
 import MessageForm from '../components/MessageForm/MessageForm';
 import Block from '../utils/Block';
@@ -14,7 +13,7 @@ import ChatController from '../controller/ChatController';
 import AddUserForm from '../components/AddUserForm/AddUserForm';
 import RemoveUserForm from '../components/RemoveUserForm/RemoveUserForm';
 
-const messageList = new MessageList({messages});
+const messageList = new MessageList({messages: []});
 const chatList = new Chats({chats: []});
 const messageForm = new MessageForm();
 
@@ -59,9 +58,9 @@ function getTemplate(chat) {
                             </div>
                         </div>
                         <div class="preview__main">
-                        <div id="messages"></div>
+                            <div id="messages"></div>
                         </div>
-                       <div id="messageForm"></div>
+                        <div id="messageForm"></div>
                     </div>
 <div id="modal"></div>
 <div id="addUserModal"></div>

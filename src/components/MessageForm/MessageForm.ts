@@ -16,8 +16,6 @@ class MessageForm extends Block {
         super('form', {
             attrs: {'class': 'preview__footer', 'name': FORM_NAME, 'novalidate': true},
             events: {
-                //TODO: possibly to use WebSockets here
-                // eslint-disable-next-line @typescript-eslint/no-empty-function
                 'submit': (event) => handleSubmit(event, FORM_NAME, button, handleMessageSubmit)
             },
             button,
