@@ -1,9 +1,7 @@
+import store from '../../utils/Store';
 import Block from '../../utils/Block';
 import './MessageList.css';
 import Message from '../Message/Message';
-import store, {UPDATED} from '../../utils/store';
-import {CURRENT_CHAT_NAME} from '../../config/constant';
-import ChatController from '../../controller/ChatController';
 
 
 function getTemplate(messages = []) {
@@ -15,6 +13,8 @@ function getTemplate(messages = []) {
 class MessageList extends Block {
 
     constructor(props) {
+        console.log('MessageList constructor', props);
+        const userId = store.getState().user.id;
         const propsWithMessages = {};
         const onClick = (id) => {
             console.log('click', id);
@@ -22,6 +22,7 @@ class MessageList extends Block {
         for (const item of props.messages) {
             propsWithMessages[`${'message_' + item.id}`] = new Message({
                 ...item,
+                isMine: item.user_id === userId,
                 events: {'click': () => onClick(item.id)}
             });
         }
@@ -31,22 +32,10 @@ class MessageList extends Block {
                 'class': 'message-list'
             }
         });
-        store.on(UPDATED, () => {
-            const chatId = store.getState()[CURRENT_CHAT_NAME];
-            console.log('receive all messages here by current chat ID', chatId);
-            this.setProps({
-                messages: ChatController.getAllMessages()
-            });
-        });
-    }
-
-    componentDidMount() {
-        super.componentDidMount();this.setProps({
-            messages: ChatController.getAllMessages()
-        });
     }
 
     render() {
+        console.log('render', this);
         const template = getTemplate(this.props.messages);
         return this.compile(template);
     }

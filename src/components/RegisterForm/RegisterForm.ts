@@ -2,12 +2,10 @@ import Block from '../../utils/Block';
 import Button from '../Button/Button';
 import Input from '../Input/Input';
 import {checkPassword, handleSubmit, onInput} from '../../utils/validation';
-import AuthController from '../../controller/AuthController';
+import authController from '../../controller/AuthController';
 import Link from '../Link/Link';
 
 const FORM_NAME = 'registerForm';
-
-const authController = new AuthController();
 
 const link = new Link({
     href: '/',

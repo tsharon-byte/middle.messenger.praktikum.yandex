@@ -1,6 +1,12 @@
 import EventBus from './EventBus';
 import set from './set';
-import {ADD_CHAT_MODAL_NAME, ADD_USER_MODAL_NAME, CURRENT_CHAT_NAME, REMOVE_USER_MODAL_NAME} from '../config/constant';
+import {
+    ADD_CHAT_MODAL_NAME,
+    ADD_USER_MODAL_NAME,
+    MESSAGES_NAME,
+    REMOVE_CHAT_MODAL_NAME,
+    REMOVE_USER_MODAL_NAME
+} from '../config/constant';
 
 export const UPDATED = 'updated';
 type StateType = {
@@ -9,7 +15,9 @@ type StateType = {
     [ADD_CHAT_MODAL_NAME]: boolean,
     [ADD_USER_MODAL_NAME]: boolean,
     [REMOVE_USER_MODAL_NAME]: boolean,
-    [CURRENT_CHAT_NAME]: number|undefined
+    [REMOVE_CHAT_MODAL_NAME]: boolean | undefined,
+    [MESSAGES_NAME]: [],
+    chat: number | undefined
 }
 
 class Store extends EventBus {
@@ -23,8 +31,10 @@ class Store extends EventBus {
             [ADD_CHAT_MODAL_NAME]: JSON.parse(<string>localStorage.getItem(ADD_CHAT_MODAL_NAME)) || false,
             [ADD_USER_MODAL_NAME]: JSON.parse(<string>localStorage.getItem(ADD_USER_MODAL_NAME)) || false,
             [REMOVE_USER_MODAL_NAME]: JSON.parse(<string>localStorage.getItem(REMOVE_USER_MODAL_NAME)) || false,
-            chats: [],
-            [CURRENT_CHAT_NAME]: JSON.parse(<string>localStorage.getItem(CURRENT_CHAT_NAME))
+            chats: JSON.parse(<string>localStorage.getItem('chats')) || [],
+            [REMOVE_CHAT_MODAL_NAME]: JSON.parse(<string>localStorage.getItem(REMOVE_CHAT_MODAL_NAME)),
+            [MESSAGES_NAME]: JSON.parse(<string>localStorage.getItem(MESSAGES_NAME)) || [],
+            chat: JSON.parse(<string>localStorage.getItem('chat')) || undefined,
         };
     }
 
@@ -34,6 +44,7 @@ class Store extends EventBus {
     }
 
     public set(path: string, value: unknown) {
+        console.log('set', path, value);
         set(this.state, path, value);
         localStorage.setItem(path, JSON.stringify(value));
 

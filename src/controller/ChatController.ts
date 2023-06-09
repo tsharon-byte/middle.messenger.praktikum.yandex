@@ -1,6 +1,5 @@
 import ChatApi from '../api/ChatsApi';
 import store from '../utils/Store';
-import {CURRENT_CHAT_NAME} from '../config/constant';
 
 class ChatController {
     constructor() {
@@ -13,97 +12,14 @@ class ChatController {
         });
     }
 
-    public sendMessage(data) {
-        const id = store.getState()[CURRENT_CHAT_NAME];
-        if (id) {
-            ChatApi.getToken(id).then(result => {
-                const token = result.token;
-                const user = store.getState().user.id;
-                const url = `wss://ya-praktikum.tech/ws/chats/${user}/${id}/${token}`;
-                const socket = new WebSocket(url);
-                socket.addEventListener('open', () => {
-                    console.log('Соединение установлено');
-
-                    socket.send(JSON.stringify({
-                        content: data.message,
-                        type: 'message',
-                    }));
-                });
-
-                socket.addEventListener('close', event => {
-                    if (event.wasClean) {
-                        console.log('Соединение закрыто чисто');
-                    } else {
-                        console.log('Обрыв соединения');
-                    }
-
-                    console.log(`Код: ${event.code} | Причина: ${event.reason}`);
-                });
-
-                socket.addEventListener('message', event => {
-                    console.log('Получены данные', event.data);
-                });
-
-                socket.addEventListener('error', event => {
-                    console.log('Ошибка', event.message);
-                });
-            });
-        }
-    }
-
-    public getAllMessages(): [] {
-        const id = store.getState()[CURRENT_CHAT_NAME];
-        console.log('receive all messages here by current chat ID', id);
-        if (id) {
-            ChatApi.getToken(id).then(result => {
-                const token = result.token;
-                const user = store.getState().user.id;
-                const url = `wss://ya-praktikum.tech/ws/chats/${user}/${id}/${token}`;
-                const socket = new WebSocket(url);
-                socket.addEventListener('open', () => {
-                    console.log('Соединение установлено');
-
-                    socket.send(JSON.stringify({
-                        content: '0',
-                        type: 'get old',
-                    }));
-                });
-
-                socket.addEventListener('close', event => {
-                    if (event.wasClean) {
-                        console.log('Соединение закрыто чисто');
-                    } else {
-                        console.log('Обрыв соединения');
-                    }
-
-                    console.log(`Код: ${event.code} | Причина: ${event.reason}`);
-                });
-
-                socket.addEventListener('message', event => {
-                    console.log('Получены данные', event.data);
-                    return event.data;
-                });
-
-                socket.addEventListener('error', event => {
-                    console.log('Ошибка', event.message);
-                });
-            });
-        }
-    }
-
     public getAll() {
         return ChatApi.getAll().then(chats => {
             store.set('chats', chats);
-            if (chats.length > 0) {
-                store.set(CURRENT_CHAT_NAME, chats[0].id);
-            } else {
-                store.set(CURRENT_CHAT_NAME, undefined);
-            }
         });
     }
 
     public removeChat(chatId: number) {
-        return ChatApi.removeChat(chatId).then(data => console.log('save to store', data));
+        return ChatApi.removeChat(chatId);
     }
 
     public addUser(data: UsersToChatType) {
@@ -116,6 +32,10 @@ class ChatController {
 
     public requestChatUsers(chatId: number) {
         return ChatApi.requestChatUsers(chatId).then(data => console.log('save to store', data));
+    }
+
+    public requestMessageToken(chatId: number) {
+        return ChatApi.getToken(chatId);
     }
 }
 

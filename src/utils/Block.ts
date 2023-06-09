@@ -119,7 +119,9 @@ class Block<Props extends Record<string, any> = unknown> {
         this._components.forEach(item => {
             const key = Object.keys(item)[0];
             const stub = element.content.querySelector('#' + key);
-            stub.replaceWith(item[key].getElement());
+            if (stub) {
+                stub.replaceWith(item[key].getElement());
+            }
             item[key].dispatchComponentDidMount();
         });
         return element.content;

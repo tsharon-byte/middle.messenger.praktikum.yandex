@@ -1,8 +1,9 @@
 import Block from '../../utils/Block';
 import './Message.css';
+import {timeTransformer} from '../../utils/timeTransformer';
 
 class Message extends Block {
-    constructor(props:MessageType) {
+    constructor(props: MessageType) {
         const cssClass = `message ${props.isMine ? 'message_type_mine' : ''}`;
         super('li', {
             ...props, attrs: {
@@ -14,10 +15,10 @@ class Message extends Block {
 
     render() {
         const template =
-            `<div>${this.props.text}</div>
+            `<div>${this.props.content}</div>
              <div class="message__footer">
                 ${this.props.isMine ? '<div class="status"></div>' : ''}
-                <span>${this.props.time}</span>
+                <span>${timeTransformer(this.props.time)}</span>
              </div>`;
         return this.compile(template);
     }

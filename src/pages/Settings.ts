@@ -1,12 +1,10 @@
 import Block from '../utils/Block';
 import store, {UPDATED} from '../utils/Store';
 import Button from '../components/Button/Button';
-import AuthController from '../controller/AuthController';
+import authController from '../controller/AuthController';
 import Link from '../components/Link/Link';
 import {DEFAULT_AVATAR} from '../config/config';
 
-
-const authController = new AuthController();
 const button = new Button({
     className: 'link',
     children: 'Выйти',

@@ -7,11 +7,8 @@ import Home from './pages/Home';
 import ChangePassword from './pages/ChangePassword';
 import ChangeProfile from './pages/ChangeProfile';
 import {router} from './router';
-import AuthController from './controller/AuthController';
+import authController from './controller/AuthController';
 
-const authController = new AuthController();
-
-// Можно обновиться на /user и получить сразу пользователя
 router
     .setUnprotectedPaths(['/', '/sign-up'])
     .onRoute(authController.checkAuth)

@@ -8,14 +8,17 @@ import {DEFAULT_AVATAR} from '../config/config';
 import Popup from '../components/Popup/Popup';
 import AddChatForm from '../components/AddChatForm/AddChatForm';
 import Button from '../components/Button/Button';
-import {ADD_CHAT_MODAL_NAME, ADD_USER_MODAL_NAME, CURRENT_CHAT_NAME, REMOVE_USER_MODAL_NAME} from '../config/constant';
+import {
+    ADD_CHAT_MODAL_NAME,
+    ADD_USER_MODAL_NAME,
+    REMOVE_CHAT_MODAL_NAME,
+    REMOVE_USER_MODAL_NAME
+} from '../config/constant';
 import ChatController from '../controller/ChatController';
 import AddUserForm from '../components/AddUserForm/AddUserForm';
 import RemoveUserForm from '../components/RemoveUserForm/RemoveUserForm';
-
-const messageList = new MessageList({messages: []});
-const chatList = new Chats({chats: []});
-const messageForm = new MessageForm();
+import RemoveChatForm from '../components/RemoveChatForm/RemoveChatForm';
+import messageController from '../controller/MessageController';
 
 const link = new Link({
     href: '/settings',
@@ -23,21 +26,22 @@ const link = new Link({
     children: '<span>Профиль</span>\n' + '<span class="chat__button"></span>'
 });
 
-function getTemplate(chat) {
-    let {avatar} = chat;
-    const {title} = chat;
-    if (!avatar) {
-        avatar = DEFAULT_AVATAR;
-    }
-    return `<nav class="chat__navigation">
-                        <div class="chat__profile">
-                            <button id="createChat">Создать чат</button>
-                            <div id="link"></div>
+function getPreview(chat) {
+
+    let preview = `<div class="preview">
+                        <div class="preview__header">
                         </div>
-                        <input class="search" type="text" placeholder="Поиск"/>
-                        <div id="chats"></div>
-                    </nav>
-                    <div class="preview">
+                        <div class="preview__stub">
+                        Выберите чат чтобы отправить сообщение
+                        </div>
+                    </div>`;
+    if (chat) {
+        let {avatar} = chat;
+        const {title} = chat;
+        if (!avatar) {
+            avatar = DEFAULT_AVATAR;
+        }
+        preview = `<div class="preview">
                         <div class="preview__header">
                             <div class="user">
                                 <img class="user__avatar" src=${avatar}/>
@@ -54,6 +58,8 @@ function getTemplate(chat) {
                                     </li>
                                     <li class="dropdown__item" id="removeUser">
                                     </li>
+                                    <li class="dropdown__item" id="removeChat">
+                                    </li>
                                 </ul>
                             </div>
                         </div>
@@ -61,14 +67,30 @@ function getTemplate(chat) {
                             <div id="messages"></div>
                         </div>
                         <div id="messageForm"></div>
-                    </div>
+                    </div>`;
+    }
+    return preview;
+}
+
+function getTemplate(chat) {
+    const preview = getPreview(chat);
+    return `<nav class="chat__navigation">
+                        <div class="chat__profile">
+                            <button id="createChat">Создать чат</button>
+                            <div id="link"></div>
+                        </div>
+                        <input class="search" type="text" placeholder="Поиск"/>
+                        <div id="chats"></div>
+                    </nav>
+                    ${preview}
 <div id="modal"></div>
 <div id="addUserModal"></div>
-<div id="removeUserModal"></div>`;
+<div id="removeUserModal"></div>
+<div id="removeChatModal"></div>`;
 }
 
 class Home extends Block {
-    private chats: Chats;
+    //private chats: Chats;
 
     constructor() {
         super('section', {
@@ -79,7 +101,8 @@ class Home extends Block {
             modal: new Popup({children: new AddChatForm(), name: ADD_CHAT_MODAL_NAME}),
             addUserModal: new Popup({children: new AddUserForm(), name: ADD_USER_MODAL_NAME}),
             removeUserModal: new Popup({children: new RemoveUserForm(), name: REMOVE_USER_MODAL_NAME}),
-            chats: chatList,
+            removeChatModal: new Popup({children: new RemoveChatForm(), name: REMOVE_CHAT_MODAL_NAME}),
+            chats: new Chats({chats: store.getState().chats}),
             addUser: new Button({
                 className: 'dropdown__item',
                 children: '<div class="dropdown__add"></div><span>Добавить пользователя</span>',
@@ -98,6 +121,15 @@ class Home extends Block {
                     }
                 }
             }),
+            removeChat: new Button({
+                className: 'dropdown__item',
+                children: '<div class="dropdown__remove"></div><span>Удалить чат</span>',
+                events: {
+                    'click': () => {
+                        store.set(REMOVE_CHAT_MODAL_NAME, true);
+                    }
+                }
+            }),
             createChat: new Button({
                 className: '',
                 children: 'Создать чат',
@@ -107,23 +139,35 @@ class Home extends Block {
                     }
                 }
             }),
-            messages: messageList,
-            messageForm: messageForm
+            messages: new MessageList({messages: store.getState().messages}),
+            messageForm: new MessageForm()
         });
         store.on(UPDATED, () => {
             this.setProps({
-                chat: store.getState().chats.find(item => item.id === store.getState()[CURRENT_CHAT_NAME]),
+                chat: store.getState().chats.find(item => item.id === store.getState().chat),
             });
             this.propsAndComponents.chats.setProps({chats: store.getState().chats});
+            this.propsAndComponents.messages.setProps({messages: store.getState().messages});
         });
     }
 
     componentDidMount() {
         ChatController.getAll();
+        if (this.props.chat) {
+            ChatController.requestMessageToken(this.props.chat).then(result => {
+                const token = result.token;
+                messageController.connect({
+                    userId: store.getState().user.id,
+                    chatId: this.props.chat,
+                    token
+                });
+                messageController.getMessages({offset: 0});
+            });
+        }
     }
 
     render() {
-        const chat = this.props.chat || {};
+        const chat = this.props.chat;
         console.log('chat', chat);
         const template = getTemplate(chat);
         return this.compile(template);

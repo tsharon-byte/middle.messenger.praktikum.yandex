@@ -4,7 +4,7 @@ import Input from '../Input/Input';
 import {handleSubmit, onInput} from '../../utils/validation';
 import chatController from '../../controller/ChatController';
 import store from '../../utils/Store';
-import {ADD_USER_MODAL_NAME, CURRENT_CHAT_NAME} from '../../config/constant';
+import {ADD_USER_MODAL_NAME} from '../../config/constant';
 import UserController from '../../controller/UserController';
 
 const FORM_NAME = 'addUserPopupForm';
@@ -25,7 +25,7 @@ const login = new Input({
 
 function handleSubmitCallback(data) {
     const login = data.login;
-    const chatId = store.getState()[CURRENT_CHAT_NAME];
+    const chatId = store.getState().chat;
     UserController.searchForUserByLogin(login).then(result => {
         const users: number[] = result.map(item => item.id);
         chatController.addUser({

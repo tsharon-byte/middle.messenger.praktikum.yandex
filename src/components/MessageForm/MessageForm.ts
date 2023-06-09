@@ -2,12 +2,12 @@ import Block from '../../utils/Block';
 import Input from '../Input/Input';
 import {handleSubmit, onInput} from '../../utils/validation';
 import Button from '../Button/Button';
-import ChatController from '../../controller/ChatController';
+import messageController from '../../controller/MessageController';
 
 const FORM_NAME = 'sendMessageForm';
 
 function handleMessageSubmit(data) {
-    ChatController.sendMessage(data);
+    messageController.sendMessage(data.message);
 }
 
 class MessageForm extends Block {

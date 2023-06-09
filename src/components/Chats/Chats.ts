@@ -1,14 +1,26 @@
 import Block from '../../utils/Block';
 import Chat from '../Chat/Chat';
-import {CURRENT_CHAT_NAME} from '../../config/constant';
 import store from '../../utils/Store';
+import ChatController from '../../controller/ChatController';
+import messageController from '../../controller/MessageController';
 
 function getTemplate(chats) {
     return chats.map(item => `<li id="${'chat_' + item.id}">${item.id}</li>`).join('');
 }
 
 const onClick = (id) => {
-    store.set(CURRENT_CHAT_NAME, id);
+    messageController.leave();
+    store.set('chat', id);
+    console.log(onClick, id);
+    ChatController.requestMessageToken(id).then(result => {
+        const token = result.token;
+        messageController.connect({
+            userId: store.getState().user.id,
+            chatId: id,
+            token
+        });
+        messageController.getMessages({offset: 0});
+    });
 };
 
 class Chats extends Block {

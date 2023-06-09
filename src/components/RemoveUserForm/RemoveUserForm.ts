@@ -4,7 +4,7 @@ import Input from '../Input/Input';
 import {handleSubmit, onInput} from '../../utils/validation';
 import chatController from '../../controller/ChatController';
 import store from '../../utils/Store';
-import {CURRENT_CHAT_NAME, REMOVE_USER_MODAL_NAME} from '../../config/constant';
+import {REMOVE_USER_MODAL_NAME} from '../../config/constant';
 import UserController from '../../controller/UserController';
 
 const FORM_NAME = 'removeUserPopupForm';
@@ -25,7 +25,7 @@ const login = new Input({
 
 function handleSubmitCallback(data) {
     const login = data.login;
-    const chatId = store.getState()[CURRENT_CHAT_NAME];
+    const chatId = store.getState().chat;
     if (login && chatId) {
         UserController.searchForUserByLogin(login).then(result => {
             const users: number[] = result.map(item => item.id);
