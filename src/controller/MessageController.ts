@@ -48,7 +48,7 @@ class MessageController {
                 store.set('messages', data);
             }
         } else {
-            console.log('Непредвиденная ситуация, необходимо обработать отдельно');
+            console.log('Непредвиденная ситуация, необходимо обработать отдельно', data);
         }
     }
 
@@ -77,7 +77,6 @@ class MessageController {
     }
 
     public connect(options: WebSocketConnectType) {
-        console.log('MC connect');
         this._userId = options.userId;
         this._chatId = options.chatId;
         this._token = options.token;
@@ -96,7 +95,6 @@ class MessageController {
     }
 
     public leave() {
-        console.log('MC leave');
         clearInterval(this._ping);
         if (this._ws) {
             this._ws.close();

@@ -168,7 +168,6 @@ class Home extends Block {
 
     render() {
         const chat = this.props.chat;
-        console.log('chat', chat);
         const template = getTemplate(chat);
         return this.compile(template);
     }

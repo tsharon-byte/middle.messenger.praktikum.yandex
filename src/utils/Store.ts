@@ -25,7 +25,6 @@ class Store extends EventBus {
 
     constructor() {
         super();
-        console.log('Store constructor');
         this.state = {
             user: JSON.parse(<string>localStorage.getItem('user')) || {},
             [ADD_CHAT_MODAL_NAME]: JSON.parse(<string>localStorage.getItem(ADD_CHAT_MODAL_NAME)) || false,
@@ -44,7 +43,6 @@ class Store extends EventBus {
     }
 
     public set(path: string, value: unknown) {
-        console.log('set', path, value);
         set(this.state, path, value);
         localStorage.setItem(path, JSON.stringify(value));
 

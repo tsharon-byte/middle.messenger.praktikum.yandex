@@ -11,7 +11,6 @@ function getTemplate(chats) {
 const onClick = (id) => {
     messageController.leave();
     store.set('chat', id);
-    console.log(onClick, id);
     ChatController.requestMessageToken(id).then(result => {
         const token = result.token;
         messageController.connect({

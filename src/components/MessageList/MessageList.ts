@@ -10,15 +10,15 @@ function getTemplate(messages = []) {
     }).join('');
 }
 
+const onClick = (id) => {
+    console.log('click', id);
+};
+
 class MessageList extends Block {
 
     constructor(props) {
-        console.log('MessageList constructor', props);
         const userId = store.getState().user.id;
         const propsWithMessages = {};
-        const onClick = (id) => {
-            console.log('click', id);
-        };
         for (const item of props.messages) {
             propsWithMessages[`${'message_' + item.id}`] = new Message({
                 ...item,
@@ -34,8 +34,25 @@ class MessageList extends Block {
         });
     }
 
+    setProps(newProps) {
+        const messages = newProps.messages || [];
+        const propsWithMessages = [];
+        const userId = store.getState().user.id;
+        for (const item of messages) {
+
+            propsWithMessages.push({
+                [`${'message_' + item.id}`]: new Message({
+                    ...item,
+                    isMine: item.user_id === userId,
+                    events: {'click': () => onClick(item.id)}
+                })
+            });
+        }
+        super.setComponents(propsWithMessages);
+        super.setProps(newProps);
+    }
+
     render() {
-        console.log('render', this);
         const template = getTemplate(this.props.messages);
         return this.compile(template);
     }

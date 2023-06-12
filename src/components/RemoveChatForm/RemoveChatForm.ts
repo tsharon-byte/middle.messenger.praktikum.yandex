@@ -10,7 +10,6 @@ const button = new Button({className: 'button form__button', children: 'Удал
 
 function handleSubmitCallback(data) {
     const chatId = store.getState().chat;
-    console.log(chatId, 'chatId');
     if (chatId) {
         chatController.removeChat(chatId).then((result) => {
             if (result.reason) {
