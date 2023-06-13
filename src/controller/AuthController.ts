@@ -1,6 +1,7 @@
 import AuthApi from '../api/AuthApi';
 import {router} from '../router';
 import store from '../utils/Store';
+import {handleError} from '../utils/handleError';
 
 const authApi = new AuthApi();
 
@@ -14,7 +15,7 @@ class AuthController {
                 });
             }
 
-        });
+        }).catch(handleError);
     }
 
     public signin(data: SignupType) {
@@ -27,28 +28,31 @@ class AuthController {
                     });
                 }
             })
-            .catch(error => console.log(error));
+            .catch(handleError);
     }
 
     public checkAuth() {
-        authApi.getUser().then(res => {
-            if (res.reason) {
-                throw new Error('error');
-            }
-            store.set('user', res);
-        }).catch(error => {
-            console.log(error);
-            router.go('/');
-        });
+        if (!store.getState().user || !store.getState().user.id) {
+            authApi.getUser().then(res => {
+                if (res.reason) {
+                    throw new Error('error');
+                }
+                store.set('user', res);
+            }).catch(error => {
+                console.log(error);
+                router.go('/');
+            });
+        }
     }
 
     public logout() {
         authApi.logout()
             .then(() => {
-                store.set('user', {});
+                localStorage.clear();
+                store.setToDefault();
                 router.go('/');
             })
-            .catch(error => console.log(error));
+            .catch(handleError);
     }
 }
 

@@ -8,6 +8,7 @@ const FORM_NAME = 'sendMessageForm';
 
 function handleMessageSubmit(data) {
     messageController.sendMessage(data.message);
+    messageController.getMessages({offset: 0});
 }
 
 class MessageForm extends Block {

@@ -3,7 +3,9 @@ import store, {UPDATED} from '../utils/Store';
 import Button from '../components/Button/Button';
 import authController from '../controller/AuthController';
 import Link from '../components/Link/Link';
-import {DEFAULT_AVATAR} from '../config/config';
+import Popup from '../components/Popup/Popup';
+import {CHANGE_AVATAR_MODAL_NAME, transformAvatar} from '../config/constant';
+import ChangeAvatarForm from '../components/ChangeAvatarForm/ChangeAvatarForm';
 
 const button = new Button({
     className: 'link',
@@ -12,6 +14,17 @@ const button = new Button({
         'click': (event) => {
             event.preventDefault();
             authController.logout();
+        }
+    }
+});
+const changeAvatarButton = new Button({
+    className: 'settings__avatar_btn',
+    children: 'Поменять аватар',
+    events: {
+        'click': (event) => {
+            event.preventDefault();
+            console.log('changeAvatarButton', 'click');
+            store.set(CHANGE_AVATAR_MODAL_NAME, true);
         }
     }
 });
@@ -40,7 +53,10 @@ function getTemplate(user) {
     return `<div id="link"></div>
                     <div class="settings__content">
                         <div class="settings__header">
-                            <img class="settings__avatar" src=${user.avatar || DEFAULT_AVATAR}/>
+                            <div class="settings__avatar-container">
+                                <img class="settings__avatar" src=${transformAvatar(user.avatar)}>
+                                <button id="changeAvatarButton"></button>
+                            </div>
                             <div class="settings__name">${user.firstName || mockString}</div>
                         </div>
                         <form class="settings__main" name="settings">
@@ -74,7 +90,7 @@ function getTemplate(user) {
                             <div class="settings__link"><div id="linkChangePassword"></div></div>
                             <div class="settings__link"><div id="button"></div></div>
                         </div>
-                    </div>`;
+                    </div><div id="changeAvatarModal"></div>`;
 }
 
 class Settings extends Block {
@@ -86,7 +102,9 @@ class Settings extends Block {
             button,
             link,
             linkChangeProfile,
-            linkChangePassword
+            linkChangePassword,
+            changeAvatarButton,
+            changeAvatarModal: new Popup({children: new ChangeAvatarForm(), name: CHANGE_AVATAR_MODAL_NAME}),
         });
         store.on(UPDATED, () => {
             this.setProps({user: store.getState().user});

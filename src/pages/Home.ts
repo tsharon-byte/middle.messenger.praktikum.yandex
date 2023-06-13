@@ -4,7 +4,6 @@ import MessageForm from '../components/MessageForm/MessageForm';
 import Block from '../utils/Block';
 import store, {UPDATED} from '../utils/Store';
 import Link from '../components/Link/Link';
-import {DEFAULT_AVATAR} from '../config/config';
 import Popup from '../components/Popup/Popup';
 import AddChatForm from '../components/AddChatForm/AddChatForm';
 import Button from '../components/Button/Button';
@@ -12,7 +11,8 @@ import {
     ADD_CHAT_MODAL_NAME,
     ADD_USER_MODAL_NAME,
     REMOVE_CHAT_MODAL_NAME,
-    REMOVE_USER_MODAL_NAME
+    REMOVE_USER_MODAL_NAME,
+    transformAvatar
 } from '../config/constant';
 import ChatController from '../controller/ChatController';
 import AddUserForm from '../components/AddUserForm/AddUserForm';
@@ -36,15 +36,11 @@ function getPreview(chat) {
                         </div>
                     </div>`;
     if (chat) {
-        let {avatar} = chat;
-        const {title} = chat;
-        if (!avatar) {
-            avatar = DEFAULT_AVATAR;
-        }
+        const {title, avatar} = chat;
         preview = `<div class="preview">
                         <div class="preview__header">
                             <div class="user">
-                                <img class="user__avatar" src=${avatar}/>
+                                <img class="user__avatar" src=${transformAvatar(avatar)} >
                                 <span class="user__name">${title}</span>
                             </div>
                             <div class="dropdown">

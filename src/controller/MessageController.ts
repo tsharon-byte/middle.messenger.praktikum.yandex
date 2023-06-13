@@ -1,4 +1,5 @@
 import store from '../utils/Store';
+import {handleError} from '../utils/handleError';
 
 const HOST_WS = 'wss://ya-praktikum.tech/ws';
 
@@ -40,15 +41,19 @@ class MessageController {
     }
 
     private _handleMessage(evt: MessageEvent) {
-        const data = JSON.parse(evt.data);
-        if (Array.isArray(data)) {
-            if (!data.length) {
-                store.set('messages', []);
+        try {
+            const data = JSON.parse(evt.data);
+            if (Array.isArray(data)) {
+                if (!data.length) {
+                    store.set('messages', []);
+                } else {
+                    store.set('messages', data);
+                }
             } else {
-                store.set('messages', data);
+                console.log('Непредвиденная ситуация, необходимо обработать отдельно', data);
             }
-        } else {
-            console.log('Непредвиденная ситуация, необходимо обработать отдельно', data);
+        } catch (error) {
+            handleError(error);
         }
     }
 
@@ -85,7 +90,6 @@ class MessageController {
     }
 
     public getMessages(options: WebSocketGetType) {
-        console.log('MC getMessages', this._ws.readyState);
         if (this._ws.readyState) {
             this._ws.send(JSON.stringify({
                 content: options.offset.toString(),

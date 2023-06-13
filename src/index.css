@@ -17,6 +17,7 @@
 @import url(blocks/form/__link/form__link.css);
 @import url(blocks/form/__footer/form__footer.css);
 @import url(blocks/form/__button/form__button.css);
+@import url(blocks/form/__file/form__file.css);
 @import url(blocks/error/error.css);
 @import url(blocks/error/__header/error__header.css);
 @import url(blocks/error/__link/error__link.css);
@@ -51,6 +52,8 @@
 @import url(blocks/settings/settings.css);
 @import url(blocks/settings/__content/settings__content.css);
 @import url(blocks/settings/__avatar/settings__avatar.css);
+@import url(blocks/settings/__avatar-container/settings__avatar-container.css);
+@import url(blocks/settings/__avatar_btn/settings__avatar_btn.css);
 @import url(blocks/settings/__name/settings__name.css);
 @import url(blocks/settings/__field/settings__field.css);
 @import url(blocks/settings/__link/settings__link.css);
@@ -58,6 +61,7 @@
 @import url(blocks/settings/__button/settings__button.css);
 @import url(blocks/settings/__input/settings__input.css);
 @import url(blocks/settings/__label/settings__label.css);
+@import url(blocks/settings/__main/.settings__main.css);
 @import url(blocks/preview/__main/preview__main.css);
 @import url(blocks/status/status.css);
 @import url(blocks/form/__input/form__input.css);

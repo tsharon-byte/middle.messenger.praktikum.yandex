@@ -5,7 +5,9 @@
   "scripts": {
     "start": "parcel build index.html && node src/server.js",
     "serve": "parcel index.html --open",
-    "build": "parcel build index.html"
+    "build": "parcel build index.html",
+    "lint": "eslint ./src",
+    "stylelint": "stylelint **/*.css"
   },
   "repository": {
     "type": "git",

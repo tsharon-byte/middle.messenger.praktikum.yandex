@@ -1,7 +1,7 @@
 import Block from '../../utils/Block';
-import {DEFAULT_AVATAR} from '../../config/config';
 import store from '../../utils/Store';
 import {timeTransformer} from '../../utils/timeTransformer';
+import {transformAvatar} from '../../config/constant';
 
 class Chat extends Block {
     constructor(props: ChatType) {
@@ -21,7 +21,7 @@ class Chat extends Block {
             ? `<span class="chat__unread-messages">${unread_count}</span>`
             : '';
         const content = lastMessage && lastMessage.content ? lastMessage.content : '';
-        const template = `<img class="chat__avatar" src=${avatar || DEFAULT_AVATAR}/>
+        const template = `<img class="chat__avatar" src=${transformAvatar(avatar)}>
                                   <div class="chat__content">
                                         <span class="chat__name">${title}</span>
                                         <span class="chat__last-message">${content}</span>

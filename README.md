@@ -103,5 +103,3 @@ Typescript доступен в Parcel 'из коробки', поэтому сп
 Доступное API описано тут: [Swagger](https://ya-praktikum.tech/api/v2/swagger/)
 
 ### Этап 10: Подключаю WebSocket для работы с real-time сообщениями.
-
-### Этап 11: Добавляю защиту от XSS и DOS.

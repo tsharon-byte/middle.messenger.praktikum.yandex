@@ -2,7 +2,7 @@ import Block from '../utils/Block';
 import ChangeProfileForm from '../components/ChangeProfileForm/ChangeProfileForm';
 import Link from '../components/Link/Link';
 import store, {UPDATED} from '../utils/Store';
-import {DEFAULT_AVATAR} from '../config/config';
+import {transformAvatar} from '../config/constant';
 
 const link = new Link({
     href: '/messenger',
@@ -16,7 +16,7 @@ function getTemplate(user) {
     return `<div id="link"></div>
                     <div class="settings__content">
                         <div class="settings__header">
-                            <img class="settings__avatar" src=${user.avatar || DEFAULT_AVATAR}/>
+                            <img class="settings__avatar" src=${transformAvatar(user.avatar)}>
                             <div class="settings__name">${user.firstName || mockString}</div>
                         </div>
                         <div id="changeProfileForm"></div>

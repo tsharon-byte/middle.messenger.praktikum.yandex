@@ -5,7 +5,7 @@ import Message from '../Message/Message';
 
 
 function getTemplate(messages = []) {
-    return messages.map(item => {
+    return messages.reverse().map(item => {
         return `<li id="${'message_' + item.id}"></li>`;
     }).join('');
 }
@@ -19,11 +19,12 @@ class MessageList extends Block {
     constructor(props) {
         const userId = store.getState().user.id;
         const propsWithMessages = {};
-        for (const item of props.messages) {
-            propsWithMessages[`${'message_' + item.id}`] = new Message({
-                ...item,
-                isMine: item.user_id === userId,
-                events: {'click': () => onClick(item.id)}
+        const {messages} = props;
+        for (let i = messages.length - 1; i >= 0; i--) {
+            propsWithMessages[`${'message_' + messages[i].id}`] = new Message({
+                ...messages[i],
+                isMine: messages[i].user_id === userId,
+                events: {'click': () => onClick(messages[i].id)}
             });
         }
         super('ul', {
@@ -38,13 +39,13 @@ class MessageList extends Block {
         const messages = newProps.messages || [];
         const propsWithMessages = [];
         const userId = store.getState().user.id;
-        for (const item of messages) {
+        for (let i = messages.length - 1; i >= 0; i--) {
 
             propsWithMessages.push({
-                [`${'message_' + item.id}`]: new Message({
-                    ...item,
-                    isMine: item.user_id === userId,
-                    events: {'click': () => onClick(item.id)}
+                [`${'message_' + messages[i].id}`]: new Message({
+                    ...messages[i],
+                    isMine: messages[i].user_id === userId,
+                    events: {'click': () => onClick(messages[i].id)}
                 })
             });
         }

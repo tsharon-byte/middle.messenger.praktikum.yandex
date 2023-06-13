@@ -1,0 +1,12 @@
+.form__file {
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 16px;
+    /* or 133% */
+
+    text-align: center;
+    text-decoration-line: underline;
+
+    color: #3369F3;
+}

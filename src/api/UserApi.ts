@@ -9,9 +9,12 @@ class UserApi extends BaseApi {
         return this.put('/profile', getOptions(data));
     }
 
-    //TODO: to add binary avatar file here
-    public changeUserAvatar() {
-        return this.put('/profile/avatar', getOptions());
+    public updateAvatar(data: FormData) {
+        return this.put('/profile/avatar', {
+            headers: {},
+            withCredentials: true,
+            data,
+        });
     }
 
     public changeUserPassword(data: PasswordRequestType) {

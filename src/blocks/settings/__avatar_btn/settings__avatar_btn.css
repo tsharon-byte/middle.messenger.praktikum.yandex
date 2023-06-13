@@ -1,0 +1,23 @@
+.settings__avatar_btn {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0.8;
+    border-radius: 50%;
+    border: none;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 15px;
+    width: 130px;
+    height: 130px;
+    padding: 33px;
+    box-sizing: border-box;
+    cursor: pointer;
+    /* or 108% */
+
+    text-align: center;
+
+    color: var(--primary);
+}

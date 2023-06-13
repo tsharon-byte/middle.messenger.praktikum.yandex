@@ -11,13 +11,12 @@ const button = new Button({className: 'button form__button', children: 'Удал
 function handleSubmitCallback(data) {
     const chatId = store.getState().chat;
     if (chatId) {
-        chatController.removeChat(chatId).then((result) => {
-            if (result.reason) {
-                console.log('result', result);
-            } else {
+        chatController.removeChat(chatId)
+            .then(() => {
+                chatController.getAll();
+            }).then((result) => {
                 store.set(REMOVE_CHAT_MODAL_NAME, false);
-            }
-        }).catch(error => console.log(error));
+            }).catch(error => console.log(error));
     }
 }
 
