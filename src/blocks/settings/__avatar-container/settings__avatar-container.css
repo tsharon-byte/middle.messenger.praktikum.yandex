@@ -1,0 +1,9 @@
+.settings__avatar-container {
+    position: relative;
+}
+
+.settings__avatar-container:hover .settings__avatar_btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

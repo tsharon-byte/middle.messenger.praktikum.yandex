@@ -1,0 +1,3 @@
+type ChatsType = {
+    title: string
+}

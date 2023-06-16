@@ -1,7 +1,7 @@
 type MessageType = {
     id: string,
     time: string,
-    text: string,
+    content: string,
     isMine?: boolean,
     events?: object
 }

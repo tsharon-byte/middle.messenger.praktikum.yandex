@@ -1,0 +1,3 @@
+type WebSocketGetType = {
+    offset: number
+}

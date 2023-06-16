@@ -7,7 +7,7 @@ class Button extends Block {
     }
 
     render() {
-        const template = this.props.text ? this.props.text : '';
+        const template = this.props.children || '';
         return this.compile(template);
     }
 }

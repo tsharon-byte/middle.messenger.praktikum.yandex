@@ -2,18 +2,27 @@ import Block from '../../utils/Block';
 import Input from '../Input/Input';
 import {handleSubmit, onInput} from '../../utils/validation';
 import Button from '../Button/Button';
+import authController from '../../controller/AuthController';
+import Link from '../Link/Link';
 
 const FORM_NAME = 'loginForm';
 
+const link = new Link({
+    href: '/sign-up',
+    className: 'link form__link',
+    children: 'Нет аккаунта?'
+});
+
 class LoginForm extends Block {
     constructor() {
-        const button = new Button({className: 'button form__button', text: 'Войти'});
+        const button = new Button({className: 'button form__button', children: 'Войти'});
         super('form', {
             attrs: {'class': 'form', 'name': FORM_NAME, 'novalidate': true},
             events: {
-                'submit': (event) => handleSubmit(event, FORM_NAME, button)
+                'submit': (event) => handleSubmit(event, FORM_NAME, button, authController.signin)
             },
             button,
+            link,
             loginInput: new Input({
                 className: 'input',
                 placeholder: 'Логин',
@@ -29,6 +38,7 @@ class LoginForm extends Block {
                 className: 'input',
                 placeholder: 'Пароль',
                 name: 'password',
+                type: 'password',
                 minlength: '8',
                 maxlength: '40',
                 pattern: '^(?=.*\\d)(?=.*[A-Z])[a-zA-Z0-9]{8,40}$',
@@ -52,7 +62,7 @@ class LoginForm extends Block {
                             </div>
                             <div class="form__footer">
                                 <button id="button"></button>
-                                <a class="link form__link" href="/signup" onclick="router(event)">Нет аккаунта?</a>
+                                <div id="link"></div>
                             </div>`;
         return this.compile(template);
     }

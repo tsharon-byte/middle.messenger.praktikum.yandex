@@ -1,17 +1,19 @@
 import Events from './Events';
 import EventBus from './EventBus';
 
-abstract class Block<Props extends Record<string, any> = unknown> {
+class Block<Props extends Record<string, any> = unknown> {
     protected props: Props;
     private readonly _eventBus: EventBus;
-    private _el: HTMLElement | undefined;
+    private _el: HTMLElement;
     private readonly _tag: string;
-    private readonly _components: Props[];
+    private _components: Props[];
+    protected propsAndComponents: Props;
 
-    constructor(tag: string, propsAndComponents: any) {
+    constructor(tag = 'div', propsAndComponents: any = {}) {
         this._tag = tag;
         const {props, components} = this.extractPropsAndComponents(propsAndComponents);
         this.props = props;
+        this.propsAndComponents = propsAndComponents;
         this._components = components;
         this._eventBus = new EventBus();
         this._addEventListeners = this._addEventListeners.bind(this);
@@ -81,8 +83,12 @@ abstract class Block<Props extends Record<string, any> = unknown> {
         this._eventBus.on(Events.RENDER, this._render);
     }
 
-    // eslint-disable-next-line @typescript-eslint/no-empty-function
     _componentDidMount(): void {
+        this.componentDidMount();
+    }
+
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
+    componentDidMount(): void {
     }
 
     dispatchComponentDidMount(): void {
@@ -90,7 +96,6 @@ abstract class Block<Props extends Record<string, any> = unknown> {
     }
 
     _componentDidUpdate(newProps: any[]) {
-        console.log('CDU', this.props);
         this._eventBus.emit(Events.RENDER, {});
     }
 
@@ -114,7 +119,9 @@ abstract class Block<Props extends Record<string, any> = unknown> {
         this._components.forEach(item => {
             const key = Object.keys(item)[0];
             const stub = element.content.querySelector('#' + key);
-            stub.replaceWith(item[key].getElement());
+            if (stub) {
+                stub.replaceWith(item[key].getElement());
+            }
             item[key].dispatchComponentDidMount();
         });
         return element.content;
@@ -122,6 +129,10 @@ abstract class Block<Props extends Record<string, any> = unknown> {
 
     getElement(): HTMLElement | undefined {
         return this._el;
+    }
+
+    setComponents(components) {
+        this._components = components;
     }
 
     setProps(newProps) {
@@ -145,6 +156,14 @@ abstract class Block<Props extends Record<string, any> = unknown> {
         Object.keys(events).forEach(eventName => {
             this._el.addEventListener(eventName, events[eventName]);
         });
+    }
+
+    show(): void {
+        console.log('show');
+    }
+
+    hide(): void {
+        console.log('hide');
     }
 }
 

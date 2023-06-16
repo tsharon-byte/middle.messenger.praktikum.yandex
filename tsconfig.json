@@ -8,6 +8,10 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "sourceMap": true,
-    "strictNullChecks": true
+    "strictNullChecks": true,
+    "lib": [
+      "es2017",
+      "dom"
+    ]
   }
 }

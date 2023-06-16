@@ -2,8 +2,14 @@ import Block from '../../utils/Block';
 import Input from '../Input/Input';
 import {handleSubmit, onInput} from '../../utils/validation';
 import Button from '../Button/Button';
+import messageController from '../../controller/MessageController';
 
 const FORM_NAME = 'sendMessageForm';
+
+function handleMessageSubmit(data) {
+    messageController.sendMessage(data.message);
+    messageController.getMessages({offset: 0});
+}
 
 class MessageForm extends Block {
     constructor() {
@@ -11,7 +17,7 @@ class MessageForm extends Block {
         super('form', {
             attrs: {'class': 'preview__footer', 'name': FORM_NAME, 'novalidate': true},
             events: {
-                'submit': (event) => handleSubmit(event, FORM_NAME, button)
+                'submit': (event) => handleSubmit(event, FORM_NAME, button, handleMessageSubmit)
             },
             button,
             messageInput: new Input({
