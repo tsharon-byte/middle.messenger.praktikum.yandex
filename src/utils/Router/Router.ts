@@ -1,5 +1,5 @@
-import Route from './Route';
-import Block from './Block';
+import Route from '../Route';
+import Block from '../Block';
 
 class Router {
     private readonly _instance: Router;
@@ -36,7 +36,7 @@ class Router {
     }
 
     start() {
-        onpopstate = (event) => {
+        window.onpopstate = (event) => {
             event.preventDefault();
             this._onRoute(window.location.pathname);
         };
@@ -72,16 +72,16 @@ class Router {
     }
 
     go(pathname: string) {
-        history.pushState({}, '', pathname);
+        window.history.pushState({}, '', pathname);
         this._onRoute(pathname);
     }
 
     back() {
-        history.go(-1);
+        window.history.go(-1);
     }
 
     forward() {
-        history.go(1);
+        window.history.go(1);
     }
 }
 

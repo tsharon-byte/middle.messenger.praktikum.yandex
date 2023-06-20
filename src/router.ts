@@ -1,3 +1,4 @@
-import Router from './utils/Router';
+import Router from './utils/Router/Router';
+
 
 export const router = new Router('.content');
