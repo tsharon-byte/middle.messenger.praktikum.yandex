@@ -1,5 +1,5 @@
-import HTTPTransport from '../utils/HTTPTransport';
-import {convertKeysToCamelCase} from '../utils/keysConverter';
+import HTTPTransport from '../../utils/HTTPTransport';
+import {convertKeysToCamelCase} from '../../utils/keysConverter';
 
 const defaultHeaders = {
     'Content-type': 'application/json',

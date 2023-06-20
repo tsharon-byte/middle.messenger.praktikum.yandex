@@ -1,4 +1,4 @@
-import BaseApi, {getOptions} from './BaseApi';
+import BaseApi, {getOptions} from './BaseApi/BaseApi';
 
 class ChatsApi extends BaseApi {
     constructor() {

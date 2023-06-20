@@ -1,4 +1,4 @@
-import BaseAPI from './BaseApi';
+import BaseAPI from './BaseApi/BaseApi';
 
 class AuthApi extends BaseAPI {
     constructor() {
