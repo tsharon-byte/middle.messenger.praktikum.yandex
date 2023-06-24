@@ -19,7 +19,7 @@ const login = new Input({
     pattern: '[a-zA-Z\\-_0-9]{1,20}',
     required: true,
     events: {
-        'input': (event) => onInput(event, 'login', button, FORM_NAME)
+        'input': (event:Event) => onInput(event, 'login', button, FORM_NAME)
     }
 });
 
@@ -27,8 +27,8 @@ function handleSubmitCallback(data) {
     const login = data.login;
     const chatId = store.getState().chat;
     if (login && chatId) {
-        UserController.searchForUserByLogin(login).then(result => {
-            const users: number[] = result.map(item => item.id);
+        UserController.searchForUserByLogin(login).then((result:UserType[]) => {
+            const users: number[] = result.map((item) => item.id);
             chatController.removeUser({
                 users,
                 chatId
@@ -51,7 +51,7 @@ class RemoveUserForm extends Block {
                 novalidate: true
             },
             events: {
-                'submit': (event) => handleSubmit(event, FORM_NAME, button, handleSubmitCallback)
+                'submit': (event: Event) => handleSubmit(event, FORM_NAME, button, handleSubmitCallback)
             },
             login,
             button

@@ -12,7 +12,7 @@ const link = new Link({
 
 const mockString = '-';
 
-function getTemplate(user) {
+function getTemplate(user:UserType) {
     return `<div id="link"></div>
                     <div class="settings__content">
                         <div class="settings__header">

@@ -10,7 +10,7 @@ const link = new Link({
     children: '<button class="button settings__button"></button>'
 });
 
-function getTemplate(user) {
+function getTemplate(user:UserType) {
     return `<div id="link"></div>
                           <div class="settings__content">
                             <div class="settings__header">

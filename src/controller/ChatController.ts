@@ -7,7 +7,7 @@ class ChatController {
         this.getAll = this.getAll.bind(this);
     }
 
-    public create(data) {
+    public create(data: ChatsType) {
         return ChatApi.create(data).then(result => {
             if (!result.reason) {
                 console.log('create chat', result);

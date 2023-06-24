@@ -1,31 +1,33 @@
 import Block from './Block';
 
-export function onInput(event, name: string, submitButton: Block, form: string) {
+export function onInput(event: Event, name: string, submitButton: Block, form: string) {
     event.preventDefault();
     const formElement = document.getElementsByName(form)[0];
     const selector = '#' + name + '-error';
     const el = formElement.querySelector(selector);
-    if (event.target.validity.valid) {
-        el.textContent = '';
-        if (checkFormIsValid(form)) {
-            submitButton.removeAttributes(['disabled']);
+    if (el && event.target && (event.target as HTMLInputElement).validity) {
+        if ((event.target as HTMLInputElement).validity.valid) {
+            el.textContent = '';
+            if (checkFormIsValid(form)) {
+                submitButton.removeAttributes(['disabled']);
+            } else {
+                submitButton.addAttributes({'disabled': true});
+            }
         } else {
+            el.textContent = (event.target as HTMLInputElement).validationMessage;
             submitButton.addAttributes({'disabled': true});
         }
-    } else {
-        el.textContent = event.target.validationMessage;
-        submitButton.addAttributes({'disabled': true});
     }
 }
 
-export function checkPassword(event, form: string, pwd: string, pwd2: string, submitButton: Block) {
+export function checkPassword(event: Event, form: string, pwd: string, pwd2: string, submitButton: Block) {
     event.preventDefault();
     const formElement = document.getElementsByName(form)[0];
     const password: HTMLInputElement | null = formElement.querySelector(`[name=${pwd}]`);
     const password2: HTMLInputElement | null = formElement.querySelector(`[name=${pwd2}]`);
     const selector = '#' + pwd2 + '-error';
     const el = formElement.querySelector(selector);
-    if (password && password2 && password.value !== password2.value) {
+    if (el && password && password2 && password.value !== password2.value) {
         el.textContent = 'Пароли не совпадают';
         submitButton.addAttributes({'disabled': true});
     }
@@ -41,7 +43,7 @@ export function getFormValues(name: string): object {
     return values;
 }
 
-export function handleSubmit(event, form: string, submitButton: Block, handler) {
+export function handleSubmit(event: Event, form: string, submitButton: Block, handler:(arg0: object)=>never) {
     event.preventDefault();
     if (checkFormIsValidAndSetErrors(form)) {
         submitButton.removeAttributes(['disabled']);

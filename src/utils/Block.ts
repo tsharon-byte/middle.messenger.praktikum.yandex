@@ -95,7 +95,7 @@ class Block<Props extends Record<string, any> = unknown> {
         this._eventBus.emit(Events.CDM, {});
     }
 
-    _componentDidUpdate(newProps: any[]) {
+    _componentDidUpdate() {
         this._eventBus.emit(Events.RENDER, {});
     }
 
@@ -113,7 +113,7 @@ class Block<Props extends Record<string, any> = unknown> {
         return new DocumentFragment();
     }
 
-    compile(template) {
+    compile(template:string) {
         const element = document.createElement('template');
         element.innerHTML = template;
         this._components.forEach(item => {
@@ -131,14 +131,14 @@ class Block<Props extends Record<string, any> = unknown> {
         return this._el;
     }
 
-    setComponents(components) {
+    setComponents(components:Props[]) {
         this._components = components;
     }
 
-    setProps(newProps) {
+    setProps(newProps:object) {
         if (JSON.stringify(newProps) !== JSON.stringify(this.props)) {
             Object.assign(this.props, newProps);
-            this._eventBus.emit(Events.CDU, newProps);
+            this._eventBus.emit(Events.CDU, {});
         }
     }
 

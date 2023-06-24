@@ -20,7 +20,7 @@ type Options = {
     timeout?: number
 }
 
-function queryStringify(data) {
+function queryStringify(data:object) {
     if (typeof data !== 'object') {
         throw new Error('Data must be object');
     }

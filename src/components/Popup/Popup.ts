@@ -3,7 +3,7 @@ import store, {UPDATED} from '../../utils/Store';
 import Button from '../Button/Button';
 
 class Popup extends Block {
-    constructor({children, name}) {
+    constructor({children, name}:PopupType) {
         super('div', {
             attrs: {
                 'id': name

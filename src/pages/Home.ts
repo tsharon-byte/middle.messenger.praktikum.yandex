@@ -26,7 +26,7 @@ const link = new Link({
     children: '<span>Профиль</span>\n' + '<span class="chat__button"></span>'
 });
 
-function getPreview(chat) {
+function getPreview(chat:ChatType) {
 
     let preview = `<div class="preview">
                         <div class="preview__header">
@@ -68,7 +68,7 @@ function getPreview(chat) {
     return preview;
 }
 
-function getTemplate(chat) {
+function getTemplate(chat:ChatType) {
     const preview = getPreview(chat);
     return `<nav class="chat__navigation">
                         <div class="chat__profile">
@@ -140,7 +140,7 @@ class Home extends Block {
         });
         store.on(UPDATED, () => {
             this.setProps({
-                chat: store.getState().chats.find(item => item.id === store.getState().chat),
+                chat: store.getState().chats.find(item => +item.id === store.getState().chat),
             });
             this.propsAndComponents.chats.setProps({chats: store.getState().chats});
             this.propsAndComponents.messages.setProps({messages: store.getState().messages});

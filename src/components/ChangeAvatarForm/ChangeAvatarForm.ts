@@ -9,7 +9,7 @@ const button = new Button({className: 'button form__button', children: 'Поме
 function handleSubmitCallback(data) {
     console.log('Отправка формы', data);
     const myUserForm = document.getElementById(FORM_NAME);
-    const formData = new FormData(myUserForm);
+    const formData = new FormData(myUserForm as HTMLFormElement);
     UserController.updateAvatar(formData);
 }
 

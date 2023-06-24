@@ -8,13 +8,14 @@ import {REMOVE_CHAT_MODAL_NAME} from '../../config/constant';
 const FORM_NAME = 'removeChatPopupForm';
 const button = new Button({className: 'button form__button', children: 'Удалить'});
 
-function handleSubmitCallback(data) {
+function handleSubmitCallback() {
     const chatId = store.getState().chat;
     if (chatId) {
         chatController.removeChat(chatId)
             .then(() => {
                 chatController.getAll();
             }).then((result) => {
+                console.log('remove chat result: ', result);
                 store.set(REMOVE_CHAT_MODAL_NAME, false);
             }).catch(error => console.log(error));
     }
@@ -31,7 +32,7 @@ class RemoveChatForm extends Block {
                 novalidate: true
             },
             events: {
-                'submit': (event) => handleSubmit(event, FORM_NAME, button, handleSubmitCallback)
+                'submit': (event: Event) => handleSubmit(event, FORM_NAME, button, handleSubmitCallback)
             },
             button
         });

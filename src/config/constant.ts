@@ -8,7 +8,7 @@ export const MESSAGES_NAME = 'messages';
 
 export const RESOURCES_URL
     = 'https://ya-praktikum.tech/api/v2/resources';
-export const transformAvatar = (avatar) => {
+export const transformAvatar = (avatar:string) => {
     const result = avatar ? RESOURCES_URL + avatar : DEFAULT_AVATAR;
     console.log(result);
     return result;

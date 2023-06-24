@@ -12,7 +12,7 @@ class UserController {
         return userApi.changeUserPassword({
             oldPassword: data.old_password,
             newPassword: data.new_password
-        }).then(res => {
+        }).then(() => {
             router.go('/settings');
         }).catch(handleError);
     }

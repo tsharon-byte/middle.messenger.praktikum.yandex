@@ -17,7 +17,7 @@ class MessageForm extends Block {
         super('form', {
             attrs: {'class': 'preview__footer', 'name': FORM_NAME, 'novalidate': true},
             events: {
-                'submit': (event) => handleSubmit(event, FORM_NAME, button, handleMessageSubmit)
+                'submit': (event:Event) => handleSubmit(event, FORM_NAME, button, handleMessageSubmit)
             },
             button,
             messageInput: new Input({
@@ -27,7 +27,7 @@ class MessageForm extends Block {
                 minlength: '1',
                 pattern: '.+',
                 events: {
-                    'input': (event) => onInput(event, 'message', button, FORM_NAME)
+                    'input': (event:Event) => onInput(event, 'message', button, FORM_NAME)
                 }
             }),
         });
