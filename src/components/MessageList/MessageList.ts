@@ -5,9 +5,9 @@ import Message from '../Message/Message';
 
 
 function getTemplate(messages = []) {
-    return messages.reverse().map(item => {
+    return messages.map(item => {
         return `<li id="${'message_' + item.id}"></li>`;
-    }).join('');
+    }).reverse().join('');
 }
 
 const onClick = (id) => {
@@ -20,7 +20,7 @@ class MessageList extends Block {
         const userId = store.getState().user.id;
         const propsWithMessages = {};
         const {messages} = props;
-        for (let i = messages.length - 1; i >= 0; i--) {
+        for (let i = 0; i < messages.length; i++) {
             propsWithMessages[`${'message_' + messages[i].id}`] = new Message({
                 ...messages[i],
                 isMine: messages[i].user_id === userId,
@@ -39,7 +39,7 @@ class MessageList extends Block {
         const messages = newProps.messages || [];
         const propsWithMessages = [];
         const userId = store.getState().user.id;
-        for (let i = messages.length - 1; i >= 0; i--) {
+        for (let i = 0; i < messages.length; i++) {
 
             propsWithMessages.push({
                 [`${'message_' + messages[i].id}`]: new Message({

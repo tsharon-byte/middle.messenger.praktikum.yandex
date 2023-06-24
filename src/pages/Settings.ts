@@ -112,8 +112,7 @@ class Settings extends Block {
     }
 
     render() {
-        const user: UserType | NonNullable<unknown> = this.props.user || {};
-        const template = getTemplate(user);
+        const template = getTemplate(this.props.user || {});
         return this.compile(template);
     }
 }

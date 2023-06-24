@@ -1,5 +1,5 @@
 class EventBus {
-    private readonly _listeners: Record<string, Array<() => void>> = {};
+    private readonly _listeners: Record<string, Array<(any) => void>> = {};
 
     constructor() {
         this._listeners = {};

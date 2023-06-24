@@ -72,7 +72,9 @@ export function checkFormIsValidAndSetErrors(form: string): boolean {
             result = false;
             const selector = '#' + input.name + '-error';
             const el = formEl.querySelector(selector);
-            el.textContent = input.validationMessage;
+            if (el !== null) {
+                el.textContent = input.validationMessage;
+            }
         }
     }
     return result;

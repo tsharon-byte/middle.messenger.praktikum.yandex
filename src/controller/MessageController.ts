@@ -8,7 +8,7 @@ class MessageController {
     private _userId: number;
     private _chatId: number;
     private _token: string;
-    private _ping: number;
+    private _ping: NodeJS.Timer;
 
     constructor() {
         this._handleOpen = this._handleOpen.bind(this);
