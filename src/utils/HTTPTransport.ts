@@ -20,7 +20,7 @@ type Options = {
     timeout?: number
 }
 
-function queryStringify(data:object) {
+function queryStringify(data:Record<string, any>) {
     if (typeof data !== 'object') {
         throw new Error('Data must be object');
     }

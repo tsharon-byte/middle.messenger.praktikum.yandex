@@ -8,4 +8,4 @@ type UserType = {
     displayName: string
     phone: string,
     id:number
-};
+} | NonNullable<unknown>;

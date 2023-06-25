@@ -42,6 +42,7 @@ class ChatController {
     }
 
     public requestMessageToken(chatId: number) {
+        console.log('requestMessageToken', chatId);
         return ChatApi.getToken(chatId).then(res => res).catch(handleError);
     }
 }

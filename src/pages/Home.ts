@@ -150,11 +150,11 @@ class Home extends Block {
     componentDidMount() {
         ChatController.getAll();
         if (this.props.chat) {
-            ChatController.requestMessageToken(this.props.chat).then(result => {
+            ChatController.requestMessageToken(this.props.chat.id).then(result => {
                 const token = result.token;
                 messageController.connect({
                     userId: store.getState().user.id,
-                    chatId: this.props.chat,
+                    chatId: this.props.chat.id,
                     token
                 });
                 messageController.getMessages({offset: 0});

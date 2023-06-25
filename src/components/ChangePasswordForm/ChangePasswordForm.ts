@@ -12,7 +12,7 @@ class ChangePasswordForm extends Block {
         super('form', {
             attrs: {'class': 'settings__main', 'name': FORM_NAME, 'novalidate': true},
             events: {
-                'submit': (event) => handleSubmit(event, FORM_NAME, button, UserController.changeUserPassword)
+                'submit': (event: Event) => handleSubmit(event, FORM_NAME, button, UserController.changeUserPassword)
             },
             button,
             oldPasswordInput: new Input({
@@ -25,7 +25,7 @@ class ChangePasswordForm extends Block {
                 type: 'text',
                 pattern: '^(?=.*\\d)(?=.*[A-Z])[a-zA-Z0-9]{8,40}$',
                 events: {
-                    'input': (event) => onInput(event, 'old_password', button, FORM_NAME)
+                    'input': (event: Event) => onInput(event, 'old_password', button, FORM_NAME)
                 }
             }),
             newPasswordInput: new Input({
@@ -38,7 +38,7 @@ class ChangePasswordForm extends Block {
                 type: 'text',
                 pattern: '^(?=.*\\d)(?=.*[A-Z])[a-zA-Z0-9]{8,40}$',
                 events: {
-                    'input': (event) => onInput(event, 'new_password', button, FORM_NAME)
+                    'input': (event: Event) => onInput(event, 'new_password', button, FORM_NAME)
                 }
             }),
             newPassword2Input: new Input({
@@ -51,7 +51,7 @@ class ChangePasswordForm extends Block {
                 type: 'text',
                 pattern: '^(?=.*\\d)(?=.*[A-Z])[a-zA-Z0-9]{8,40}$',
                 events: {
-                    'input': (event) => onInput(event, 'new_password2', button, FORM_NAME)
+                    'input': (event: Event) => onInput(event, 'new_password2', button, FORM_NAME)
                 }
             }),
         });

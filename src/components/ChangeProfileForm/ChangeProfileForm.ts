@@ -9,7 +9,7 @@ const FORM_NAME = 'changeProfileForm';
 const mockString = '-';
 const button = new Button({className: 'button form__button', children: 'Сохранить'});
 
-function getTemplate(user) {
+function getTemplate() {
     return `<div class="settings__field">
                                 <label class="settings__label" for="email">Почта</label>
                                 <input id="emailInput">
@@ -38,11 +38,11 @@ function getTemplate(user) {
 }
 
 class ChangeProfileForm extends Block {
-    constructor(user) {
+    constructor(user: UserType) {
         super('form', {
             attrs: {'class': 'settings__main', 'name': FORM_NAME, 'novalidate': true},
             events: {
-                'submit': (event) => handleSubmit(event, FORM_NAME, button, UserController.changeUserProfile)
+                'submit': (event: Event) => handleSubmit(event, FORM_NAME, button, UserController.changeUserProfile)
             },
             button,
             loginInput: new Input({
@@ -55,7 +55,7 @@ class ChangeProfileForm extends Block {
                 pattern: '[a-zA-Z\\-_0-9]{3,20}',
                 value: user.login || mockString,
                 events: {
-                    'input': (event) => onInput(event, 'login', button, FORM_NAME)
+                    'input': (event: Event) => onInput(event, 'login', button, FORM_NAME)
                 }
             }),
             emailInput: new Input({
@@ -67,7 +67,7 @@ class ChangeProfileForm extends Block {
                 type: 'text',
                 value: user.email || mockString,
                 events: {
-                    'input': (event) => onInput(event, 'email', button, FORM_NAME)
+                    'input': (event: Event) => onInput(event, 'email', button, FORM_NAME)
                 }
             }),
             firstNameInput: new Input({
@@ -78,7 +78,7 @@ class ChangeProfileForm extends Block {
                 pattern: '^[А-ЯA-Z]{1}[a-zА-Яа-яA-Z\\-]*',
                 value: user.firstName || mockString,
                 events: {
-                    'input': (event) => onInput(event, 'first_name', button, FORM_NAME)
+                    'input': (event: Event) => onInput(event, 'first_name', button, FORM_NAME)
                 }
             }),
             secondNameInput: new Input({
@@ -89,7 +89,7 @@ class ChangeProfileForm extends Block {
                 pattern: '^[А-ЯA-Z]{1}[a-zА-Яа-яA-Z\\-]*',
                 value: user.secondName || mockString,
                 events: {
-                    'input': (event) => onInput(event, 'second_name', button, FORM_NAME)
+                    'input': (event: Event) => onInput(event, 'second_name', button, FORM_NAME)
                 }
             }),
             displayNameInput: new Input({
@@ -100,7 +100,7 @@ class ChangeProfileForm extends Block {
                 pattern: '.*',//'^[А-ЯA-Z]{1}[a-zА-Яа-яA-Z\\-]*',
                 value: user.displayName || mockString,
                 events: {
-                    'input': (event) => onInput(event, 'second_name', button, FORM_NAME)
+                    'input': (event: Event) => onInput(event, 'second_name', button, FORM_NAME)
                 }
             }),
             phoneInput: new Input({
@@ -113,7 +113,7 @@ class ChangeProfileForm extends Block {
                 pattern: '^\\+?[0-9]{10,15}',
                 value: user.phone || mockString,
                 events: {
-                    'input': (event) => onInput(event, 'phone', button, FORM_NAME)
+                    'input': (event:Event) => onInput(event, 'phone', button, FORM_NAME)
                 }
             }),
         });
@@ -124,8 +124,7 @@ class ChangeProfileForm extends Block {
     }
 
     render() {
-        const user: UserType | NonNullable<unknown> = this.props.user || {};
-        const template = getTemplate(user);
+        const template = getTemplate();
         return this.compile(template);
     }
 }

@@ -1,11 +1,11 @@
 class EventBus {
-    private readonly _listeners: Record<string, Array<(any) => void>> = {};
+    private readonly _listeners: Record<string, Array<(arg0: any) => void>> = {};
 
     constructor() {
         this._listeners = {};
     }
 
-    on(event: string, callback: (any) => void): void {
+    on(event: string, callback: (arg0: any) => void): void {
         if (this._listeners[event] === undefined) {
             this._listeners[event] = [];
         }

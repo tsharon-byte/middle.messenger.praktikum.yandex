@@ -6,7 +6,7 @@ import messageController from '../../controller/MessageController';
 
 const FORM_NAME = 'sendMessageForm';
 
-function handleMessageSubmit(data) {
+function handleMessageSubmit(data: {message: string}) {
     messageController.sendMessage(data.message);
     messageController.getMessages({offset: 0});
 }

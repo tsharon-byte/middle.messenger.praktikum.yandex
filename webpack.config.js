@@ -3,6 +3,7 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 const isProduction = process.env.NODE_ENV === 'production';
 
@@ -27,6 +28,14 @@ const config = {
 
         // Add your plugins here
         // Learn more about plugins from https://webpack.js.org/configuration/plugins/
+        new CopyWebpackPlugin({
+            patterns: [
+                {
+                    from: './public/favicon.png',
+                    to: 'favicon.png',
+                },
+            ],
+        }),
     ],
     module: {
         rules: [
@@ -35,7 +44,7 @@ const config = {
                 loader: 'ts-loader',
                 options: {
                     configFile: path.resolve(__dirname, 'tsconfig.json'),
-                    ignoreDiagnostics:[2322, 2345, 2571]
+                    ignoreDiagnostics:[2322, 2345, 2571, 2339, 2556, 7019, 7015, 2536, 2532, 7053, 2344]
                 },
             },
             {

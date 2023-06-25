@@ -30,7 +30,7 @@ class MessageList extends Block {
         });
     }
 
-    setProps(newProps: { messages: [] }) {
+    setProps(newProps: { messages: MessageType[] }) {
         const messages = newProps.messages || [];
         const propsWithMessages = [];
         const userId = store.getState().user.id;

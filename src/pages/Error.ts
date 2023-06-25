@@ -8,7 +8,7 @@ const link = new Link({
 });
 
 class Error extends Block {
-    constructor(props = {}) {
+    constructor(props: ErrorType = {} as ErrorType) {
         const {error = '404', description = 'Не туда попали'} = props;
         super('section', {
             error, description, attrs: {

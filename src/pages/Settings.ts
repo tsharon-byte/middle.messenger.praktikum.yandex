@@ -11,7 +11,7 @@ const button = new Button({
     className: 'link',
     children: 'Выйти',
     events: {
-        'click': (event:Event) => {
+        'click': (event: Event) => {
             event.preventDefault();
             authController.logout();
         }
@@ -21,7 +21,7 @@ const changeAvatarButton = new Button({
     className: 'settings__avatar_btn',
     children: 'Поменять аватар',
     events: {
-        'click': (event:Event) => {
+        'click': (event: Event) => {
             event.preventDefault();
             console.log('changeAvatarButton', 'click');
             store.set(CHANGE_AVATAR_MODAL_NAME, true);
@@ -49,7 +49,7 @@ const linkChangePassword = new Link({
 
 const mockString = '-';
 
-function getTemplate(user: UserType) {
+function getTemplate(user:UserType) {
     return `<div id="link"></div>
                     <div class="settings__content">
                         <div class="settings__header">
@@ -112,7 +112,7 @@ class Settings extends Block {
     }
 
     render() {
-        const template = getTemplate(this.props.user);
+        const template = getTemplate(this.props.user || {});
         return this.compile(template);
     }
 }

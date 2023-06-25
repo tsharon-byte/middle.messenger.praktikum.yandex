@@ -23,7 +23,7 @@ const login = new Input({
     }
 });
 
-function handleSubmitCallback(data) {
+function handleSubmitCallback(data: {login: string}) {
     const login = data.login;
     const chatId = store.getState().chat;
     if (login && chatId) {

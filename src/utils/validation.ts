@@ -34,7 +34,7 @@ export function checkPassword(event: Event, form: string, pwd: string, pwd2: str
 }
 
 export function getFormValues(name: string): object {
-    const values = {};
+    const values: Record<string, any> = {};
     const formEl = document.getElementsByName(name)[0];
     const inputs = formEl.querySelectorAll('input');
     for (const input of inputs) {

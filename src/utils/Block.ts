@@ -33,14 +33,14 @@ class Block<Props extends Record<string, any> = unknown> {
         this.addAttribute(props);
     }
 
-    addAttribute(props): void {
+    addAttribute(props: Props): void {
         const {attrs = {}} = props;
         Object.keys(attrs).forEach(key => {
             this._el.setAttribute(key, attrs[key]);
         });
     }
 
-    addAttributes(attrs = {}): void {
+    addAttributes(attrs: Record<string, any> = {}): void {
         Object.keys(attrs).forEach(key => {
             this._el.setAttribute(key, attrs[key]);
         });
@@ -55,7 +55,7 @@ class Block<Props extends Record<string, any> = unknown> {
     }
 
     extractPropsAndComponents(propsAndComponents: Props[]): { props: Props, components: Props[] } {
-        const props = {} as Props;
+        const props: Props = {} as Props;
         const components: Props[] = [];
         Object.keys(propsAndComponents).forEach(key => {
             if (propsAndComponents[key] instanceof Block) {
@@ -113,7 +113,7 @@ class Block<Props extends Record<string, any> = unknown> {
         return new DocumentFragment();
     }
 
-    compile(template:string) {
+    compile(template: string) {
         const element = document.createElement('template');
         element.innerHTML = template;
         this._components.forEach(item => {
@@ -131,11 +131,11 @@ class Block<Props extends Record<string, any> = unknown> {
         return this._el;
     }
 
-    setComponents(components:Props[]) {
+    setComponents(components: Props[]) {
         this._components = components;
     }
 
-    setProps(newProps:object) {
+    setProps(newProps: object) {
         if (JSON.stringify(newProps) !== JSON.stringify(this.props)) {
             Object.assign(this.props, newProps);
             this._eventBus.emit(Events.CDU, {});

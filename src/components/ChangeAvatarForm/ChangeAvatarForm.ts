@@ -6,7 +6,7 @@ import UserController from '../../controller/UserController';
 const FORM_NAME = 'changeAvatarForm';
 const button = new Button({className: 'button form__button', children: 'Поменять'});
 
-function handleSubmitCallback(data) {
+function handleSubmitCallback(data: object) {
     console.log('Отправка формы', data);
     const myUserForm = document.getElementById(FORM_NAME);
     const formData = new FormData(myUserForm as HTMLFormElement);
@@ -24,7 +24,7 @@ class ChangeAvatarForm extends Block {
                 novalidate: true
             },
             events: {
-                'submit': (event) => handleSubmit(event, FORM_NAME, button, handleSubmitCallback)
+                'submit': (event: Event) => handleSubmit(event, FORM_NAME, button, handleSubmitCallback)
             },
             button
         });
