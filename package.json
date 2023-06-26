@@ -10,7 +10,10 @@
     "serve": "webpack serve",
     "lint": "eslint ./src",
     "stylelint": "stylelint **/*.css",
-    "test": "mocha"
+    "test": "mocha",
+    "validate": "npm-run-all --parallel test lint",
+    "precommit": "npm run validate",
+    "prepush": "npm run validate"
   },
   "repository": {
     "type": "git",
@@ -58,10 +61,5 @@
   },
   "dependencies": {
     "sinon": "^15.1.2"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "npm-run-all test lint:all"
-    }
   }
 }
