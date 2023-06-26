@@ -11,10 +11,7 @@
     "serve": "webpack serve",
     "lint": "eslint ./src",
     "stylelint": "stylelint **/*.css",
-    "test": "mocha",
-    "validate": "npm-run-all --parallel test lint",
-    "precommit": "npm run validate",
-    "prepush": "npm run validate"
+    "test": "mocha"
   },
   "repository": {
     "type": "git",
