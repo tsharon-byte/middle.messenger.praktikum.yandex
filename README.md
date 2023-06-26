@@ -111,12 +111,16 @@ Typescript доступен в Parcel 'из коробки', поэтому сп
 - Добавляю конфигурационный файл `.mocharc.json`
 - Добавляю скрипт для запуска тестов: `npm run test`
 
-
-### Этап 12: Настраиваю Webpack 
+### Этап 12: Настраиваю Webpack
 
 ### Этап 13: Добавляю precommit
- - Устанавливаю Husky: `npm install husky --save-dev`
- - Устанавливаю Git хуки `npx husky install`
- - `npm set-script prepare "husky install"`
- - Устанавливаю скрипт для одновременного запуска нескольких команд `npm i npm-run-all`
- - `npx husky add .husky/pre-commit "npm test"`
+
+- Устанавливаю Husky: `npm install husky --save-dev`
+- Устанавливаю Git хуки `npx husky install`
+- `npm set-script prepare "husky install"`
+- Устанавливаю скрипт для одновременного запуска нескольких команд `npm i npm-run-all`
+- `npx husky add .husky/pre-commit "npm test"`
+
+### Этап 14: Настраиваю Docker-сборку
+
+- Добавляю Dockerfile

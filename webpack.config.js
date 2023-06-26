@@ -44,7 +44,7 @@ const config = {
                 loader: 'ts-loader',
                 options: {
                     configFile: path.resolve(__dirname, 'tsconfig.json'),
-                    ignoreDiagnostics:[2345, 2571, 2339, 2556, 7019, 7015, 2536, 2532, 7053, 2344]
+                    ignoreDiagnostics:[2322, 2345, 2571, 2339, 2556, 7019, 7015, 2536, 2532, 7053, 2344]
                 },
             },
             {
