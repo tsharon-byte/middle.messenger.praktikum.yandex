@@ -116,4 +116,7 @@ Typescript доступен в Parcel 'из коробки', поэтому сп
 
 ### Этап 13: Добавляю precommit
  - Устанавливаю Husky: `npm install husky --save-dev`
+ - Устанавливаю Git хуки `npx husky install`
+ - `npm set-script prepare "husky install"`
  - Устанавливаю скрипт для одновременного запуска нескольких команд `npm i npm-run-all`
+ - `npx husky add .husky/pre-commit "npm test"`

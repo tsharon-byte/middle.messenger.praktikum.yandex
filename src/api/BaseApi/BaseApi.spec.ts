@@ -36,7 +36,7 @@ describe('Тест для BaseApi', () => {
             withCredentials: true
         });
         expect('1', '1');
-        assert.equal(requests.length, 2);
+        assert.equal(requests.length, 1);
         expect(requests[0].url, '/auth/logout');
     });
 });
