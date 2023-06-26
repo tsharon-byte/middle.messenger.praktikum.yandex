@@ -110,3 +110,11 @@ Typescript доступен в Parcel 'из коробки', поэтому сп
   `npm i -D mocha @types/mocha chai @types/chai @babel/register @babel/preset-typescript @babel/preset-env`
 - Добавляю конфигурационный файл `.mocharc.json`
 - Добавляю скрипт для запуска тестов: `npm run test`
+
+
+### Этап 12: Настраиваю Webpack 
+
+### Этап 13: Добавляю precommit
+ - Устанавливаю Husky: `npm install husky --save-dev`
+ - Добавляю хук для Husky в package.json файл
+ - Добавляю запуск тестов и линтера перед коммитом
