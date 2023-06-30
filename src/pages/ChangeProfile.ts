@@ -1,4 +1,4 @@
-import Block from '../utils/Block';
+import Block from '../utils/Block/Block';
 import ChangeProfileForm from '../components/ChangeProfileForm/ChangeProfileForm';
 import Link from '../components/Link/Link';
 import store, {UPDATED} from '../utils/Store';

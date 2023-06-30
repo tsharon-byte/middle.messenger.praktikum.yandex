@@ -1,4 +1,4 @@
-import Block from '../utils/Block';
+import Block from '../utils/Block/Block';
 import store, {UPDATED} from '../utils/Store';
 import Button from '../components/Button/Button';
 import authController from '../controller/AuthController';

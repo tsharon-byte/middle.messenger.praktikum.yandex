@@ -1,4 +1,4 @@
-import Block from './Block';
+import Block from './Block/Block';
 
 class Route {
     private readonly _pathname: string;
@@ -32,10 +32,10 @@ class Route {
             this._root.innerHTML = '';
             this._root.appendChild(this._block.getElement());
             this._block.dispatchComponentDidMount();
+            this._block.show();
         } else {
             console.error('error: can\'t add element to element with selector ' + this._props.selector);
         }
-        this._block.show();
     }
 }
 

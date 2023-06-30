@@ -1,4 +1,4 @@
-import Block from '../../utils/Block';
+import Block from '../../utils/Block/Block';
 import {router} from '../../router';
 
 function handleClick(event: Event, href: string) {

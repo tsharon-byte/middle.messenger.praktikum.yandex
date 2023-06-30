@@ -1,5 +1,5 @@
 type ConfigType = {
-    baseUrl: string,
+    baseUrl?: string,
     path: string,
-    headers: object
+    headers?: object
 }

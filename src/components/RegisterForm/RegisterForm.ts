@@ -1,4 +1,4 @@
-import Block from '../../utils/Block';
+import Block from '../../utils/Block/Block';
 import Button from '../Button/Button';
 import Input from '../Input/Input';
 import {checkPassword, handleSubmit, onInput} from '../../utils/validation';

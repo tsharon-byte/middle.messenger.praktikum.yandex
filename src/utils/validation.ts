@@ -1,4 +1,4 @@
-import Block from './Block';
+import Block from './Block/Block';
 
 export function onInput(event: Event, name: string, submitButton: Block, form: string) {
     event.preventDefault();

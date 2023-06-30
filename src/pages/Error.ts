@@ -1,4 +1,4 @@
-import Block from '../utils/Block';
+import Block from '../utils/Block/Block';
 import Link from '../components/Link/Link';
 
 const link = new Link({

@@ -1,7 +1,7 @@
 import Chats from '../components/Chats/Chats';
 import MessageList from '../components/MessageList/MessageList';
 import MessageForm from '../components/MessageForm/MessageForm';
-import Block from '../utils/Block';
+import Block from '../utils/Block/Block';
 import store, {UPDATED} from '../utils/Store';
 import Link from '../components/Link/Link';
 import Popup from '../components/Popup/Popup';

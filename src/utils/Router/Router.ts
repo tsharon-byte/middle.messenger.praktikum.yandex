@@ -1,5 +1,5 @@
 import Route from '../Route';
-import Block from '../Block';
+import Block from '../Block/Block';
 
 class Router {
     private readonly _instance: Router;
@@ -64,7 +64,7 @@ class Router {
         }
         this._currentRoute = route;
 
-        if (!this._unprotectedPaths.includes(pathname as `/${string}`)) {
+        if (this._unprotectedPaths && !this._unprotectedPaths.includes(pathname as `/${string}`)) {
             this._onRouteCallback();
         }
 

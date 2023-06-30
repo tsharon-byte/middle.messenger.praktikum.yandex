@@ -113,7 +113,10 @@ Typescript доступен в Parcel 'из коробки', поэтому сп
 
 ### Этап 12: Настраиваю Webpack
 
-### Этап 13: Добавляю precommit
+- с помощью `npx webpack init` создаю webpack.config.js
+- прописываю скрипты для webpack в package.json
+
+### Этап 13: Добавляю pre-commit
 
 - Устанавливаю Husky: `npm install husky --save-dev`
 - Устанавливаю Git хуки `npx husky install`

@@ -1,4 +1,4 @@
-import Block from '../../utils/Block';
+import Block from '../../utils/Block/Block';
 import Button from '../Button/Button';
 import {handleSubmit} from '../../utils/validation';
 import UserController from '../../controller/UserController';

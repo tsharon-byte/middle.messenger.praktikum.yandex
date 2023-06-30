@@ -1,4 +1,4 @@
-import Block from '../../utils/Block';
+import Block from '../../utils/Block/Block';
 import store from '../../utils/Store';
 import {timeTransformer} from '../../utils/timeTransformer';
 import {transformAvatar} from '../../config/constant';

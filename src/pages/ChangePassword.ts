@@ -1,4 +1,4 @@
-import Block from '../utils/Block';
+import Block from '../utils/Block/Block';
 import ChangePasswordForm from '../components/ChangePasswordForm/ChangePasswordForm';
 import Link from '../components/Link/Link';
 import {transformAvatar} from '../config/constant';

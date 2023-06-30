@@ -1,5 +1,5 @@
 import store from '../../utils/Store';
-import Block from '../../utils/Block';
+import Block from '../../utils/Block/Block';
 import './MessageList.css';
 import Message from '../Message/Message';
 

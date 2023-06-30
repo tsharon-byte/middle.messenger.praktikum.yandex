@@ -1,5 +1,5 @@
-import Events from './Events';
-import EventBus from './EventBus';
+import Events from '../Events';
+import EventBus from '../EventBus';
 
 class Block<Props extends Record<string, any> = unknown> {
     protected props: Props;
