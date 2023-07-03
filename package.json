@@ -59,8 +59,5 @@
   },
   "engines": {
     "node": ">=12"
-  },
-  "dependencies": {
-    "npm-run-all": "1.7.0"
   }
 }
