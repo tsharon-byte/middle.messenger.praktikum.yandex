@@ -27,7 +27,7 @@ describe('Тест для BaseApi', () => {
         global.XMLHttpRequest.restore();
     });
 
-    it('первый тест', () => {
+    it('тест на EP /auth/logout', () => {
         const api = createEntity();
         api.post('/logout', {
             withCredentials: true

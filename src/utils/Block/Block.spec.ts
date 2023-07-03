@@ -17,7 +17,7 @@ const {default: Block} = proxyquire('./Block.ts', {
     }
 });
 
-describe.only('Block', () => {
+describe('Block', () => {
     class ComponentMock extends Block {
         constructor(props) {
             super('div', props);
