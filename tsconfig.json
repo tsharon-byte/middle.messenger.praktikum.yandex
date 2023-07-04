@@ -1,9 +1,8 @@
 {
   "compilerOptions": {
     "outDir": "dist",
-    "target": "es2016",
-    "declaration": false,
-    "module": "commonjs",
+    "target": "es6",
+    "module": "esnext",
     "noImplicitAny": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
@@ -12,6 +11,14 @@
     "lib": [
       "es2017",
       "dom"
-    ]
-  }
+    ],
+    "allowSyntheticDefaultImports": true
+  },
+  "include": [
+    "src/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "./src/**/*.spec.ts"
+  ]
 }

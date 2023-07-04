@@ -1,4 +1,4 @@
-import Block from '../../utils/Block';
+import Block from '../../utils/Block/Block';
 import Button from '../Button/Button';
 import Input from '../Input/Input';
 import {handleSubmit, onInput} from '../../utils/validation';
@@ -19,15 +19,15 @@ const login = new Input({
     pattern: '[a-zA-Z\\-_0-9]{1,20}',
     required: true,
     events: {
-        'input': (event) => onInput(event, 'login', button, FORM_NAME)
+        'input': (event: Event) => onInput(event, 'login', button, FORM_NAME)
     }
 });
 
-function handleSubmitCallback(data) {
+function handleSubmitCallback(data: { login: string }) {
     const login = data.login;
     const chatId = store.getState().chat;
     UserController.searchForUserByLogin(login).then(result => {
-        const users: number[] = result.map(item => item.id);
+        const users: number[] = result.map((item: UserType) => item.id);
         chatController.addUser({
             users,
             chatId
@@ -50,7 +50,7 @@ class AddUserForm extends Block {
                 novalidate: true
             },
             events: {
-                'submit': (event) => handleSubmit(event, FORM_NAME, button, handleSubmitCallback)
+                'submit': (event: Event) => handleSubmit(event, FORM_NAME, button, handleSubmitCallback)
             },
             login,
             button

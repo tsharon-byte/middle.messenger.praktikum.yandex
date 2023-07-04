@@ -7,7 +7,7 @@ class ChatController {
         this.getAll = this.getAll.bind(this);
     }
 
-    public create(data) {
+    public create(data: ChatsType) {
         return ChatApi.create(data).then(result => {
             if (!result.reason) {
                 console.log('create chat', result);
@@ -42,6 +42,7 @@ class ChatController {
     }
 
     public requestMessageToken(chatId: number) {
+        console.log('requestMessageToken', chatId);
         return ChatApi.getToken(chatId).then(res => res).catch(handleError);
     }
 }

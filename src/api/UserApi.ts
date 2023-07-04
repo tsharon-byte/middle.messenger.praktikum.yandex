@@ -1,4 +1,4 @@
-import BaseApi, {getOptions} from './BaseApi';
+import BaseApi, {getOptions} from './BaseApi/BaseApi';
 
 class UserApi extends BaseApi {
     constructor() {

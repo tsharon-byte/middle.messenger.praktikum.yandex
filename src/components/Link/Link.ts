@@ -1,7 +1,7 @@
-import Block from '../../utils/Block';
+import Block from '../../utils/Block/Block';
 import {router} from '../../router';
 
-function handleClick(event, href) {
+function handleClick(event: Event, href: string) {
     event.preventDefault();
     router.go(href);
 }
@@ -11,7 +11,7 @@ class Link extends Block {
         super('a', {
             ...rest,
             attrs: {'class': className, 'href': href},
-            events: {'click': (event) => handleClick(event, href)}
+            events: {'click': (event: Event) => handleClick(event, href)}
         });
     }
 

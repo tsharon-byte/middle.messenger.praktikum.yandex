@@ -1,5 +1,5 @@
-import HTTPTransport from '../utils/HTTPTransport';
-import {convertKeysToCamelCase} from '../utils/keysConverter';
+import HTTPTransport from '../../utils/HTTPTransport';
+import {convertKeysToCamelCase} from '../../utils/keysConverter';
 
 const defaultHeaders = {
     'Content-type': 'application/json',
@@ -12,6 +12,7 @@ const defaultBaseUrl = 'https://ya-praktikum.tech/api/v2';
 export function getOptions(data: any = undefined) {
     const options = {
         withCredentials: true,
+        data: ''
     };
     if (data) {
         options['data'] = JSON.stringify(data);
@@ -23,9 +24,9 @@ class BaseAPI {
     private _http: HTTPTransport;
     private readonly _baseUrl: string;
     private readonly _path: string;
-    private readonly _headers: { 'Content-type': string };
+    private readonly _headers: object;
 
-    constructor(config) {
+    constructor(config: ConfigType) {
         this._http = new HTTPTransport();
         this._baseUrl = config.baseUrl || defaultBaseUrl;
         this._path = config.path || '';
@@ -36,7 +37,7 @@ class BaseAPI {
         return `${this._baseUrl}${this._path}`;
     }
 
-    private handleOptions(newOptions?: Record<any, any>) {
+    private handleOptions(newOptions?: Record<any, any>): object {
         const options = newOptions || {};
         options.headers = newOptions?.headers || this._headers;
         return options;
@@ -60,22 +61,22 @@ class BaseAPI {
         return response;
     }
 
-    post(endpoint, options) {
+    post(endpoint: string, options: Record<any, any>) {
         return this._http.post(this.getPath() + endpoint, this.handleOptions(options))
             .then(this.handleResponse);
     }
 
-    get(endpoint, options) {
+    get(endpoint: string, options: Record<any, any>) {
         return this._http.get(this.getPath() + endpoint, this.handleOptions(options))
             .then(this.handleResponse);
     }
 
-    put(endpoint, options) {
+    put(endpoint: string, options: Record<any, any>) {
         return this._http.put(this.getPath() + endpoint, this.handleOptions(options))
             .then(this.handleResponse);
     }
 
-    delete(endpoint, options) {
+    delete(endpoint: string, options: Record<any, any>) {
         return this._http.delete(this.getPath() + endpoint, this.handleOptions(options))
             .then(this.handleResponse);
     }

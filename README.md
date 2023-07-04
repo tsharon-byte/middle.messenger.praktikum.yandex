@@ -103,3 +103,27 @@ Typescript доступен в Parcel 'из коробки', поэтому сп
 Доступное API описано тут: [Swagger](https://ya-praktikum.tech/api/v2/swagger/)
 
 ### Этап 10: Подключаю WebSocket для работы с real-time сообщениями.
+
+### Этап 11: Добавляю тесты для роутера, компонента, модуля отправки запросов.
+
+- Устанавливаю зависимости для разработки
+  `npm i -D mocha @types/mocha chai @types/chai @babel/register @babel/preset-typescript @babel/preset-env`
+- Добавляю конфигурационный файл `.mocharc.json`
+- Добавляю скрипт для запуска тестов: `npm run test`
+
+### Этап 12: Настраиваю Webpack
+
+- с помощью `npx webpack init` создаю webpack.config.js
+- прописываю скрипты для webpack в package.json
+
+### Этап 13: Добавляю pre-commit
+
+- Устанавливаю Husky: `npm install husky --save-dev`
+- Устанавливаю Git хуки `npx husky install`
+- `npm set-script prepare "husky install"`
+- Устанавливаю скрипт для одновременного запуска нескольких команд `npm i npm-run-all`
+- `npx husky add .husky/pre-commit "npm test"`
+
+### Этап 14: Настраиваю Docker-сборку
+
+- Добавляю Dockerfile

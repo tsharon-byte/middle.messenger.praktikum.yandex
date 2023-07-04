@@ -1,4 +1,4 @@
-export function timeTransformer(timeToTransform): string {
+export function timeTransformer(timeToTransform:string): string {
     const date = new Date(timeToTransform);
     const formatter = new Intl.DateTimeFormat('ru', {
         hour: 'numeric',

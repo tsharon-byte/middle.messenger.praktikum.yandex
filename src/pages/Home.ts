@@ -1,7 +1,7 @@
 import Chats from '../components/Chats/Chats';
 import MessageList from '../components/MessageList/MessageList';
 import MessageForm from '../components/MessageForm/MessageForm';
-import Block from '../utils/Block';
+import Block from '../utils/Block/Block';
 import store, {UPDATED} from '../utils/Store';
 import Link from '../components/Link/Link';
 import Popup from '../components/Popup/Popup';
@@ -26,7 +26,7 @@ const link = new Link({
     children: '<span>Профиль</span>\n' + '<span class="chat__button"></span>'
 });
 
-function getPreview(chat) {
+function getPreview(chat:ChatType) {
 
     let preview = `<div class="preview">
                         <div class="preview__header">
@@ -68,7 +68,7 @@ function getPreview(chat) {
     return preview;
 }
 
-function getTemplate(chat) {
+function getTemplate(chat:ChatType) {
     const preview = getPreview(chat);
     return `<nav class="chat__navigation">
                         <div class="chat__profile">
@@ -140,7 +140,7 @@ class Home extends Block {
         });
         store.on(UPDATED, () => {
             this.setProps({
-                chat: store.getState().chats.find(item => item.id === store.getState().chat),
+                chat: store.getState().chats.find(item => +item.id === store.getState().chat),
             });
             this.propsAndComponents.chats.setProps({chats: store.getState().chats});
             this.propsAndComponents.messages.setProps({messages: store.getState().messages});
@@ -150,11 +150,11 @@ class Home extends Block {
     componentDidMount() {
         ChatController.getAll();
         if (this.props.chat) {
-            ChatController.requestMessageToken(this.props.chat).then(result => {
+            ChatController.requestMessageToken(this.props.chat.id).then(result => {
                 const token = result.token;
                 messageController.connect({
                     userId: store.getState().user.id,
-                    chatId: this.props.chat,
+                    chatId: this.props.chat.id,
                     token
                 });
                 messageController.getMessages({offset: 0});

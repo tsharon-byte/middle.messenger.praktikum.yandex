@@ -1,4 +1,4 @@
-import Block from '../utils/Block';
+import Block from '../utils/Block/Block';
 import ChangePasswordForm from '../components/ChangePasswordForm/ChangePasswordForm';
 import Link from '../components/Link/Link';
 import {transformAvatar} from '../config/constant';
@@ -10,7 +10,7 @@ const link = new Link({
     children: '<button class="button settings__button"></button>'
 });
 
-function getTemplate(user) {
+function getTemplate(user:UserType) {
     return `<div id="link"></div>
                           <div class="settings__content">
                             <div class="settings__header">

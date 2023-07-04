@@ -1,4 +1,4 @@
-import Block from '../../utils/Block';
+import Block from '../../utils/Block/Block';
 import store from '../../utils/Store';
 import {timeTransformer} from '../../utils/timeTransformer';
 import {transformAvatar} from '../../config/constant';
@@ -9,7 +9,7 @@ class Chat extends Block {
         const {id} = props;
         super('li', {
             ...props, attrs: {
-                'class': `chat__message ${currentIx === id ? 'chat__message_type_active' : ''}`,
+                'class': `chat__message ${currentIx === +id ? 'chat__message_type_active' : ''}`,
                 id: `${'chat_' + id}`
             }
         });

@@ -1,4 +1,4 @@
-import Block from '../utils/Block';
+import Block from '../utils/Block/Block';
 import RegisterForm from '../components/RegisterForm/RegisterForm';
 
 class Register extends Block {

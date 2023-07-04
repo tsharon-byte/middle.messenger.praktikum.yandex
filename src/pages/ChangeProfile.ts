@@ -1,4 +1,4 @@
-import Block from '../utils/Block';
+import Block from '../utils/Block/Block';
 import ChangeProfileForm from '../components/ChangeProfileForm/ChangeProfileForm';
 import Link from '../components/Link/Link';
 import store, {UPDATED} from '../utils/Store';
@@ -12,7 +12,7 @@ const link = new Link({
 
 const mockString = '-';
 
-function getTemplate(user) {
+function getTemplate(user:UserType) {
     return `<div id="link"></div>
                     <div class="settings__content">
                         <div class="settings__header">

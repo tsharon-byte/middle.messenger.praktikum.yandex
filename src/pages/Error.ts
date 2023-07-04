@@ -1,4 +1,4 @@
-import Block from '../utils/Block';
+import Block from '../utils/Block/Block';
 import Link from '../components/Link/Link';
 
 const link = new Link({
@@ -8,7 +8,7 @@ const link = new Link({
 });
 
 class Error extends Block {
-    constructor(tag, props = {}) {
+    constructor(props: ErrorType = {} as ErrorType) {
         const {error = '404', description = 'Не туда попали'} = props;
         super('section', {
             error, description, attrs: {

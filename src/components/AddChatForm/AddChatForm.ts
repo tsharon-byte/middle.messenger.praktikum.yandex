@@ -1,4 +1,4 @@
-import Block from '../../utils/Block';
+import Block from '../../utils/Block/Block';
 import Button from '../Button/Button';
 import Input from '../Input/Input';
 import {handleSubmit, onInput} from '../../utils/validation';
@@ -18,11 +18,11 @@ const title = new Input({
     pattern: '[a-zA-Z\\-_0-9]{1,20}',
     required: true,
     events: {
-        'input': (event) => onInput(event, 'title', button, FORM_NAME)
+        'input': (event: Event) => onInput(event, 'title', button, FORM_NAME)
     }
 });
 
-function handleSubmitCallback(data) {
+function handleSubmitCallback(data: ChatsType) {
     chatController.create(data)
         .then(() => {
             chatController.getAll();
@@ -43,7 +43,7 @@ class AddChatForm extends Block {
                 novalidate: true
             },
             events: {
-                'submit': (event) => handleSubmit(event, FORM_NAME, button, handleSubmitCallback)
+                'submit': (event: Event) => handleSubmit(event, FORM_NAME, button, handleSubmitCallback)
             },
             title,
             button

@@ -1,4 +1,4 @@
-import Block from '../../utils/Block';
+import Block from '../../utils/Block/Block';
 import Input from '../Input/Input';
 import {handleSubmit, onInput} from '../../utils/validation';
 import Button from '../Button/Button';
@@ -19,7 +19,7 @@ class LoginForm extends Block {
         super('form', {
             attrs: {'class': 'form', 'name': FORM_NAME, 'novalidate': true},
             events: {
-                'submit': (event) => handleSubmit(event, FORM_NAME, button, authController.signin)
+                'submit': (event:Event) => handleSubmit(event, FORM_NAME, button, authController.signin)
             },
             button,
             link,
@@ -31,7 +31,7 @@ class LoginForm extends Block {
                 maxlength: '20',
                 pattern: '[a-zA-Z\\-_0-9]{3,20}',
                 events: {
-                    'input': (event) => onInput(event, 'login', button, FORM_NAME)
+                    'input': (event:Event) => onInput(event, 'login', button, FORM_NAME)
                 }
             }),
             passwordInput: new Input({
@@ -43,7 +43,7 @@ class LoginForm extends Block {
                 maxlength: '40',
                 pattern: '^(?=.*\\d)(?=.*[A-Z])[a-zA-Z0-9]{8,40}$',
                 events: {
-                    'input': (event) => onInput(event, 'password', button, FORM_NAME)
+                    'input': (event:Event) => onInput(event, 'password', button, FORM_NAME)
                 }
             }),
         });

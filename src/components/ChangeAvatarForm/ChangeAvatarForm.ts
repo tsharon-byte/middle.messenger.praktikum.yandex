@@ -1,4 +1,4 @@
-import Block from '../../utils/Block';
+import Block from '../../utils/Block/Block';
 import Button from '../Button/Button';
 import {handleSubmit} from '../../utils/validation';
 import UserController from '../../controller/UserController';
@@ -6,10 +6,10 @@ import UserController from '../../controller/UserController';
 const FORM_NAME = 'changeAvatarForm';
 const button = new Button({className: 'button form__button', children: 'Поменять'});
 
-function handleSubmitCallback(data) {
+function handleSubmitCallback(data: object) {
     console.log('Отправка формы', data);
     const myUserForm = document.getElementById(FORM_NAME);
-    const formData = new FormData(myUserForm);
+    const formData = new FormData(myUserForm as HTMLFormElement);
     UserController.updateAvatar(formData);
 }
 
@@ -24,7 +24,7 @@ class ChangeAvatarForm extends Block {
                 novalidate: true
             },
             events: {
-                'submit': (event) => handleSubmit(event, FORM_NAME, button, handleSubmitCallback)
+                'submit': (event: Event) => handleSubmit(event, FORM_NAME, button, handleSubmitCallback)
             },
             button
         });

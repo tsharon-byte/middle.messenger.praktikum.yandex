@@ -6,5 +6,6 @@ type UserType = {
     firstName: string,
     secondName: string,
     displayName: string
-    phone: string
-};
+    phone: string,
+    id:number
+} | NonNullable<unknown>;
